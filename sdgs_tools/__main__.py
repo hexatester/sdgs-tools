@@ -30,11 +30,14 @@ def exporter(offset: int, filename: str, outfile: str):
     if os.path.isfile(outfile):
         logger.warning(f"File output {outfile} sudah ada, membatalkan.")
         sys.exit()
-    html_to_xlsx(filename, outfile, offset+1)
+    click.echo(f"Mengeksport data dari {filename}")
+    click.echo(f"Dari baris ke {offset}")
+    click.echo(f"Menjadi {outfile}")
+    html_to_xlsx(filename, outfile, offset)
+    input("Selesai! Silahkan tutup jendela ini.")
 
 
 if __name__ == "__main__":
     click.echo(f"sdgs-tools v{__version__}")
     click.echo("Dibuat oleh https://t.me/hexatester")
     exporter()
-    input("Selesai! Silahkan tutup jendela ini.")
