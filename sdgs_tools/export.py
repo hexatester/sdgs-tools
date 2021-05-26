@@ -95,7 +95,7 @@ def add_row(ws: Worksheet, tds: List[Tag], row: int = 2):
     ws[f"AE{row}"] = tds[29].get_text()
 
 
-def html_to_xlsx(source: str, destination: str = "INDIVIDU.xlsx", offset: int = 2):
+def html_to_xlsx(source: str, destination: str, offset: int = 2):
     try:
         with open(source, "r") as sumber:
             soup = BeautifulSoup(sumber.read(), "html.parser")
