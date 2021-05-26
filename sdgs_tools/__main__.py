@@ -3,6 +3,7 @@ import logging
 import os
 import sys
 
+from sdgs_tools import __version__
 from sdgs_tools.export import html_to_xlsx
 
 LOGGING_FORMAT = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
@@ -33,4 +34,7 @@ def exporter(offset: int, filename: str, outfile: str):
 
 
 if __name__ == "__main__":
+    click.echo(f"sdgs-tools v{__version__}")
+    click.echo("Dibuat oleh https://t.me/hexatester")
     exporter()
+    input("Selesai! Silahkan tutup jendela ini.")
