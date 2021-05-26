@@ -20,8 +20,8 @@ logger = logging.getLogger(__name__)
 )
 @click.argument(
     "outfile",
-    type=click.Path(exists=False),
-    default="DATA INDIVIDU.xlsx",
+    type=click.Path(),
+    default="DATA INDIVIDU-output.xlsx",
 )
 def exporter(offset: int, filename: str, outfile: str):
     if not outfile.endswith(".xlsx"):
