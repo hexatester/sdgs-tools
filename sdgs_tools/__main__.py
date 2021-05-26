@@ -1,5 +1,7 @@
 import click
 import logging
+import os
+import sys
 
 from sdgs_tools.export import html_to_xlsx
 
@@ -8,21 +10,27 @@ LOGGING_FORMAT = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 logger = logging.getLogger(__name__)
 
 
-@click.group()
-@click.option("--debug/--no-debug", default=False)
-def cli(debug: bool):
-    logging.basicConfig(
-        level=logging.DEBUG if debug else logging.INFO,
-        format=LOGGING_FORMAT,
-    )
-    logger.debug("Mode debug aktif")
-
-
-@cli.command("export")
-@click.argument("filename")
-def exporter(filename: str):
-    html_to_xlsx(filename)
+@click.command("export")
+@click.option("--offset", default=1, type=int, help="Mulai dari baris")
+@click.argument(
+    "filename",
+    required=True,
+    type=click.Path(exists=True, file_okay=True, dir_okay=False, resolve_path=True),
+    default="DATA INDIVIDU.xls",
+)
+@click.argument(
+    "outfile",
+    type=click.Path(exists=False),
+    default="DATA INDIVIDU.xlsx",
+)
+def exporter(offset: int, filename: str, outfile: str):
+    if not outfile.endswith(".xlsx"):
+        outfile += ".xlsx"
+    if os.path.isfile(outfile):
+        logger.warning(f"File output {outfile} sudah ada, membatalkan.")
+        sys.exit()
+    html_to_xlsx(filename, outfile, offset+1)
 
 
 if __name__ == "__main__":
-    cli()
+    exporter()
