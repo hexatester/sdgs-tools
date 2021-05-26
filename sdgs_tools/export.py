@@ -1,3 +1,4 @@
+import click
 import logging
 from bs4 import BeautifulSoup, Tag
 from dateutil.parser import parse as date_parse
@@ -100,13 +101,13 @@ def html_to_xlsx(source: str, destination: str, offset: int = 2):
         with open(source, "r") as sumber:
             soup = BeautifulSoup(sumber.read(), "html.parser")
     except Exception as e:
-        logger.error(f"Gagal membuka file {source} karena {e}")
+        click.echo(f"Gagal membuka file {source} karena {e}")
     try:
         table: Tag = soup.find("table")
         data: List[Tag] = table.find_all("tr")
         data = data[1:]
     except Exception as e:
-        logger.error(
+        click.echo(
             "Format file tidak valid, silahkan download ulang dari api sdgs "
             "atau hubungi pengembang (https://t.me/hexatester)"
         )
@@ -117,9 +118,10 @@ def html_to_xlsx(source: str, destination: str, offset: int = 2):
         try:
             add_row(ws, row.find_all("td"), index + offset)
         except Exception as e:
-            logger.error(f"Gagal menambahkan data baris ke {index+1}, karena {e}")
+            click.echo(f"Gagal menambahkan data baris ke {index+1}, karena {e}")
     try:
         wb.save(destination)
     except Exception as e:
-        logger.error(f"Gagal menyimpan file karena {e}")
-    logger.info(f"Berhasil mengeksport data sebanyak {len(data)}")
+        click.echo(f"Gagal menyimpan file karena {e}")
+    else:
+        click.echo(f"Berhasil mengeksport data sebanyak {len(data)}")
