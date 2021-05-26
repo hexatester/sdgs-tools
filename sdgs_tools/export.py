@@ -1,8 +1,11 @@
+import logging
 from bs4 import BeautifulSoup, Tag
 from dateutil.parser import parse as date_parse
 from openpyxl import Workbook
 from openpyxl.worksheet.worksheet import Worksheet
 from typing import List, Tuple
+
+logger = logging.getLogger(__name__)
 
 
 def add_header(ws: Worksheet):
@@ -57,6 +60,9 @@ def rt_rw(data: str) -> Tuple[str, str]:
 
 
 def add_row(ws: Worksheet, tds: List[Tag], row: int = 2):
+    nik: str = tds[7].get_text()
+    nama: str = tds[8].get_text()
+    logger.debug(f"Menambahkan data {nik}/{nama}")
     ws[f"A{row}"] = tds[0].get_text()
     ws[f"B{row}"] = tds[1].get_text()
     ws[f"C{row}"] = tds[2].get_text()
@@ -64,8 +70,8 @@ def add_row(ws: Worksheet, tds: List[Tag], row: int = 2):
     ws[f"E{row}"] = tds[4].get_text()
     ws[f"F{row}"], ws[f"G{row}"] = rt_rw(tds[5].get_text())
     ws[f"H{row}"] = tds[6].get_text()
-    ws[f"I{row}"] = tds[7].get_text()
-    ws[f"J{row}"] = tds[8].get_text()
+    ws[f"I{row}"] = nik
+    ws[f"J{row}"] = nama
     ws[f"K{row}"] = tds[9].get_text()
     ws[f"L{row}"] = date_parse(tds[10].get_text()).date()
     ws[f"M{row}"] = tds[11].get_text()
@@ -90,14 +96,30 @@ def add_row(ws: Worksheet, tds: List[Tag], row: int = 2):
 
 
 def html_to_xlsx(source: str, destination: str = "INDIVIDU.xlsx", offset: int = 2):
-    with open(source, "r") as sumber:
-        soup = BeautifulSoup(sumber.read(), "html.parser")
-    table: Tag = soup.find("table")
-    data: List[Tag] = table.find_all("tr")
-    data = data[1:]
+    try:
+        with open(source, "r") as sumber:
+            soup = BeautifulSoup(sumber.read(), "html.parser")
+    except Exception as e:
+        logger.error(f"Gagal membuka file {source} karena {e}")
+    try:
+        table: Tag = soup.find("table")
+        data: List[Tag] = table.find_all("tr")
+        data = data[1:]
+    except Exception as e:
+        logger.error(
+            "Format file tidak valid, silahkan download ulang dari api sdgs "
+            "atau hubungi pengembang (https://t.me/hexatester)"
+        )
     wb = Workbook()
     ws = wb.active
     add_header(ws)
     for index, row in enumerate(data):
-        add_row(ws, row.find_all("td"), index + offset)
-    wb.save(destination)
+        try:
+            add_row(ws, row.find_all("td"), index + offset)
+        except Exception as e:
+            logger.error(f"Gagal menambahkan data baris ke {index+1}, karena {e}")
+    try:
+        wb.save(destination)
+    except Exception as e:
+        logger.error(f"Gagal menyimpan file karena {e}")
+    logger.info(f"Berhasil mengeksport data sebanyak {len(data)}")
