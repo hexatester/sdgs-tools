@@ -39,56 +39,59 @@ def add_header(ws: Worksheet):
     ws["AE1"] = "Ter Upload"
 
 
-def clean_prefix(data: Tuple[str, str]) -> Tuple[str, str]:
-    return data[0].strip("0"), data[1].strip("0")
-
-
 def rt_rw(data: str) -> Tuple[str, str]:
+    data = data.strip("\xa0")
     if "/" in data:
+        data = data.replace("0", "")
         return tuple(data.split("/"))  # type: ignore
     if " " in data:
+        data = data.replace("0", "")
         return tuple(data.split(" "))  # type: ignore
     if len(data) == 3 and "0" in data:
         return tuple(data.split("0"))  # type: ignore
+    elif len(data) == 4 and data.count("0") == 2:
+        res = data.split("0")
+        if len(res) == 3:
+            return (res[1], res[2])
     return data, ""
 
 
 def add_row(ws: Worksheet, tds: List[Tag], row: int = 2):
-    ws["A1"] = tds[0].get_text()
-    ws["B1"] = tds[1].get_text()
-    ws["C1"] = tds[2].get_text()
-    ws["D1"] = tds[3].get_text()
-    ws["E1"] = tds[4].get_text()
-    ws["F1"], ws["G1"] = clean_prefix(rt_rw(tds[5].get_text()))
-    ws["H1"] = tds[6].get_text()
-    ws["I1"] = tds[7].get_text()
-    ws["J1"] = tds[8].get_text()
-    ws["K1"] = tds[9].get_text()
-    ws["L1"] = date_parse(tds[10].get_text()).date()
-    ws["M1"] = tds[11].get_text()
-    ws["N1"] = tds[12].get_text()
-    ws["O1"] = tds[13].get_text()
-    ws["P1"] = tds[14].get_text()
-    ws["Q1"] = tds[15].get_text()
-    ws["R1"] = tds[16].get_text()
-    ws["S1"] = tds[17].get_text()
-    ws["T1"] = tds[18].get_text()
-    ws["U1"] = tds[19].get_text()
-    ws["V1"] = tds[20].get_text()
-    ws["W1"] = tds[21].get_text()
-    ws["X1"] = tds[22].get_text()
-    ws["Y1"] = tds[23].get_text()
-    ws["Z1"] = tds[24].get_text()
-    ws["AA1"] = tds[25].get_text()
-    ws["AB1"] = tds[26].get_text()
-    ws["AC1"] = tds[27].get_text()
-    ws["AD1"] = tds[28].get_text()
-    ws["AE1"] = tds[29].get_text()
+    ws[f"A{row}"] = tds[0].get_text()
+    ws[f"B{row}"] = tds[1].get_text()
+    ws[f"C{row}"] = tds[2].get_text()
+    ws[f"D{row}"] = tds[3].get_text()
+    ws[f"E{row}"] = tds[4].get_text()
+    ws[f"F{row}"], ws[f"G{row}"] = rt_rw(tds[5].get_text())
+    ws[f"H{row}"] = tds[6].get_text()
+    ws[f"I{row}"] = tds[7].get_text()
+    ws[f"J{row}"] = tds[8].get_text()
+    ws[f"K{row}"] = tds[9].get_text()
+    ws[f"L{row}"] = date_parse(tds[10].get_text()).date()
+    ws[f"M{row}"] = tds[11].get_text()
+    ws[f"N{row}"] = tds[12].get_text()
+    ws[f"O{row}"] = tds[13].get_text()
+    ws[f"P{row}"] = tds[14].get_text()
+    ws[f"Q{row}"] = tds[15].get_text()
+    ws[f"R{row}"] = tds[16].get_text()
+    ws[f"S{row}"] = tds[17].get_text()
+    ws[f"T{row}"] = tds[18].get_text()
+    ws[f"U{row}"] = tds[19].get_text()
+    ws[f"V{row}"] = tds[20].get_text()
+    ws[f"W{row}"] = tds[21].get_text()
+    ws[f"X{row}"] = tds[22].get_text()
+    ws[f"Y{row}"] = tds[23].get_text()
+    ws[f"Z{row}"] = tds[24].get_text()
+    ws[f"AA{row}"] = tds[25].get_text()
+    ws[f"AB{row}"] = tds[26].get_text()
+    ws[f"AC{row}"] = tds[27].get_text()
+    ws[f"AD{row}"] = tds[28].get_text()
+    ws[f"AE{row}"] = tds[29].get_text()
 
 
-def html_to_xlsx(source: str, destination: str = "INDIVIDU.xlsx"):
+def html_to_xlsx(source: str, destination: str = "INDIVIDU.xlsx", offset: int = 2):
     with open(source, "r") as sumber:
-        soup = BeautifulSoup(sumber.read(), "html.markup")
+        soup = BeautifulSoup(sumber.read(), "html.parser")
     table: Tag = soup.find("table")
     data: List[Tag] = table.find_all("tr")
     data = data[1:]
@@ -96,5 +99,5 @@ def html_to_xlsx(source: str, destination: str = "INDIVIDU.xlsx"):
     ws = wb.active
     add_header(ws)
     for index, row in enumerate(data):
-        add_row(ws, row.find_all("td"), index + 1)
+        add_row(ws, row.find_all("td"), index + offset)
     wb.save(destination)
