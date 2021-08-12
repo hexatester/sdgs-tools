@@ -383,7 +383,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7.10"
-content-hash = "907c10c2e5ae0dbc817c3c6515720f60e8291b27de7554d639faf7ea0e99a7cc"
+content-hash = "7cb788f9dc82f554f07d6eda24697422043d46e4c4a76bd057626f2619ca4f0c"
 
 [metadata.files]
 altgraph = [
