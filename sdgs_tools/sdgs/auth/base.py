@@ -8,7 +8,7 @@ class BaseAuth(BaseSdgs):
         res = self.session.get("https://dashboard-sdgs.kemendesa.go.id/")
         # AuthToken
         assert res.ok
-        url = self.__url_api("auth/token")
+        url = self.url_api("auth/token")
         data = {"username": username, "password": password}
         res = self.session.post(url, data)
         assert res.ok
