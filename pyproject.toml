@@ -13,6 +13,7 @@ python-dateutil = "^2.8.1"
 requests = "^2.26.0"
 attrs = "^21.2.0"
 cattrs = "^1.8.0"
+ujson = {version = "^4.0.2", optional = true}
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
