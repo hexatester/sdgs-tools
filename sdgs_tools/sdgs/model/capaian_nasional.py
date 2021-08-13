@@ -12,4 +12,4 @@ class Capaian:
 @attr.dataclass
 class CapaianNasional:
     perolehanNasional: Capaian
-    hariiniNasional: Capaian
+    hariIniNasional: Capaian
