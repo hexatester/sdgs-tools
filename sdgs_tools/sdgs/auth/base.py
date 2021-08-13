@@ -4,7 +4,7 @@ from . import AuthToken
 
 
 class BaseAuth(BaseSdgs):
-    def login(self, username: str, password: str) -> SdgsResponse[AuthToken]:
+    def login(self, username: str, password: str) -> AuthToken:
         res = self.session.get("https://dashboard-sdgs.kemendesa.go.id/")
         # AuthToken
         assert res.ok
@@ -14,4 +14,4 @@ class BaseAuth(BaseSdgs):
         assert res.ok
         res_data = SdgsResponse.from_str(res.text, AuthToken)
         self.session.headers.update(res_data.data.token.token_header)
-        return res_data
+        return res_data.data
