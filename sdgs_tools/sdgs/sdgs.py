@@ -4,6 +4,8 @@ from . import BaseAuth
 from .model import CapaianNasional
 from .model import Wilayah
 
+from .survey_individu import SurveyIndividu
+
 
 class Sdgs(BaseAuth):
     def __init__(
@@ -14,6 +16,11 @@ class Sdgs(BaseAuth):
     ):
         super().__init__(api_server=api_server)
         self.token = self.login(username, password)
+        self._survey_individu = SurveyIndividu(self)
+
+    @property
+    def survey_individu(self) -> SurveyIndividu:
+        return self._survey_individu
 
     def getCapaianNasional(self) -> CapaianNasional:
         return self.api_get_to_res("/dashboard/getCapaianNasional", CapaianNasional)
