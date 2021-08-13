@@ -435,6 +435,14 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "types-ujson"
+version = "0.1.1"
+description = "Typing stubs for ujson"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "typing-extensions"
 version = "3.10.0.0"
 description = "Backported and Experimental Type Hints for Python 3.5+"
@@ -486,7 +494,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7.10"
-content-hash = "be31e0058576e736c5ba9bd6d407e32d10587c54c9ecb276187636b688f6d4c5"
+content-hash = "31288cbb61664209e01a3402cd3dfecf6751e9633b0ae81d9930c5b12007ef63"
 
 [metadata.files]
 altgraph = [
@@ -731,6 +739,10 @@ types-python-dateutil = [
 types-requests = [
     {file = "types-requests-2.25.6.tar.gz", hash = "sha256:e21541c0f55c066c491a639309159556dd8c5833e49fcde929c4c47bdb0002ee"},
     {file = "types_requests-2.25.6-py3-none-any.whl", hash = "sha256:a5a305b43ea57bf64d6731f89816946a405b591eff6de28d4c0fd58422cee779"},
+]
+types-ujson = [
+    {file = "types-ujson-0.1.1.tar.gz", hash = "sha256:92042cb7a0ba0ded003642da3367aa2a7b22a7d16ce840336b50977781526ed0"},
+    {file = "types_ujson-0.1.1-py2.py3-none-any.whl", hash = "sha256:f465118573d69c1cf570144de95c11a596abee4b48cf45c9c54abf0613d8956a"},
 ]
 typing-extensions = [
     {file = "typing_extensions-3.10.0.0-py2-none-any.whl", hash = "sha256:0ac0f89795dd19de6b97debb0c6af1c70987fd80a2d62d1958f7e56fcc31b497"},
