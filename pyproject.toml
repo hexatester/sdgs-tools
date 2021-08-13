@@ -24,6 +24,7 @@ pyinstaller = "^4.5.1"
 types-python-dateutil = "^0.1.6"
 types-requests = "^2.25.6"
 types-ujson = "^0.1.1"
+weditor = "^0.6.4"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
