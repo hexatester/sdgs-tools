@@ -26,7 +26,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 name = "attrs"
 version = "21.2.0"
 description = "Classes Without Boilerplate"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
@@ -459,7 +459,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7.10"
-content-hash = "689b50f2d6c80d96bc6a155ec33bd93e490555df5d0a57f1c19d9ce7272a6b10"
+content-hash = "5feff6abb266b0412c53141ef67e0491dbe5c5a541617295579317129cabf3ba"
 
 [metadata.files]
 altgraph = [
