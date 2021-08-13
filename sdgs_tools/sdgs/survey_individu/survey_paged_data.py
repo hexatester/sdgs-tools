@@ -19,3 +19,6 @@ class SurveyPagedData:
     nokk: str
     nik: str
     nama: str
+
+    def __str__(self):
+        return f"{self.nama} [{self.nik}]"
