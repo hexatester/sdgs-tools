@@ -2,6 +2,7 @@ from requests import Response, Session
 from typing import Type, TypeVar
 
 from . import SdgsResponse
+from .utils import register_cattr_hooks
 
 T = TypeVar("T")
 
@@ -10,6 +11,7 @@ class BaseSdgs:
     def __init__(self, api_server: str = "https://sdgsdev.kemendesa.go.id/"):
         self.api_server = api_server
         self.session = Session()
+        register_cattr_hooks()
 
     def url_api(self, filename: str) -> str:
         return self.api_server + filename.lstrip("/")
