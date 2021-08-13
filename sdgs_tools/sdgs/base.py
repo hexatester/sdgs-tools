@@ -20,7 +20,19 @@ class BaseSdgs:
         return self.session.get(self.url_api(filename), *args, **kwargs)
 
     def api_post(self, filename: str, *args, **kwargs) -> Response:
-        return self.session.get(self.url_api(filename), *args, **kwargs)
+        headers = {
+            "Sec-Fetch-Dest": "empty",
+            "Sec-Fetch-Mode": "cors",
+            "Sec-Fetch-Site": "same-site",
+        }
+        if "headers" in kwargs:
+            headers.update(kwargs["headers"])
+        kwargs["headers"] = headers
+        return self.session.post(
+            self.url_api(filename),
+            *args,
+            **kwargs,
+        )
 
     def api_get_to_res(self, filename: str, cl: Type[T], *args, **kwargs) -> T:
         res_raw = self.api_get(filename, *args, **kwargs)
