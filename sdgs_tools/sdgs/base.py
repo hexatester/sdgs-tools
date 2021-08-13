@@ -1,4 +1,4 @@
-from requests import Session
+from requests import Response, Session
 
 
 class BaseSdgs(object):
@@ -8,3 +8,9 @@ class BaseSdgs(object):
 
     def __url_api(self, filename: str) -> str:
         return self.api_server + filename.lstrip("/")
+
+    def __api_get(self, filename: str, *args, **kwargs) -> Response:
+        return self.session.get(self.__url_api(filename), *args, **kwargs)
+
+    def __api_post(self, filename: str, *args, **kwargs) -> Response:
+        return self.session.get(self.__url_api(filename), *args, **kwargs)
