@@ -81,7 +81,7 @@ def export_individu(
         click.echo(f"Gagal mengeksport data individu karena {repr(e)}")
 
 
-@aplikasi.command("export-individu")
+@aplikasi.command("export-keluarga")
 @click.option(
     "--ranges", type=str, required=True, help='Baris yang diambil datanya misal "2-100"'
 )
