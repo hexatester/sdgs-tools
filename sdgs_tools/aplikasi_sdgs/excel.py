@@ -149,33 +149,30 @@ KELUARGA = {
 }
 
 KELUARGA_PENDIDIKAN = {
-    "A": "RT/RW",
-    "B": "Nomor KK",
-    "C": "Fasilitas",
-    "D": "Jarak Tempuh",
-    "E": "Waktu Tempuh",
-    "F": "Kemudahan",
-    "G": "Keterangan",
+    "A": "Nomor KK",
+    "B": "Fasilitas",
+    "C": "Jarak Tempuh",
+    "D": "Waktu Tempuh",
+    "E": "Kemudahan",
+    "F": "Keterangan",
 }
 
 KELUARGA_KESEHATAN = {
-    "A": "RT/RW",
-    "B": "Nomor KK",
-    "C": "Fasilitas",
-    "D": "Jarak Tempuh",
-    "E": "Waktu Tempuh",
-    "F": "Kemudahan",
-    "G": "Keterangan",
+    "A": "Nomor KK",
+    "B": "Fasilitas",
+    "C": "Jarak Tempuh",
+    "D": "Waktu Tempuh",
+    "E": "Kemudahan",
+    "F": "Keterangan",
 }
 
 KELUARGA_TENAGA_KESEHATAN = {
-    "A": "RT/RW",
-    "B": "Nomor KK",
-    "C": "Fasilitas",
-    "D": "Jarak Tempuh",
-    "E": "Waktu Tempuh",
-    "F": "Kemudahan",
-    "G": "Keterangan",
+    "A": "Nomor KK",
+    "B": "Fasilitas",
+    "C": "Jarak Tempuh",
+    "D": "Waktu Tempuh",
+    "E": "Kemudahan",
+    "F": "Keterangan",
 }
 
 KELUARGA_SARPRAS = {
