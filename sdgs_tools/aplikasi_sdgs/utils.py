@@ -12,9 +12,15 @@ def get_text(ui: UiObject) -> Optional[str]:
 
 def d_get_text(d: Device, resourceId: str):
     current = d(resourceId=resourceId)
+    if not current.exists:
+        d.xpath('//android.widget.ScrollView').scroll()
     if resourceId.startswith("com.kemendes.survey:id/txt"):
+        if not current.exists:
+            return None
         return current.info.get("text")
     childText = current.child(className="android.widget.TextView")
+    if not childText.exists:
+        return None
     return childText.info.get("text")
 
 

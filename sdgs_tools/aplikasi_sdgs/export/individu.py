@@ -10,6 +10,7 @@ from sdgs_tools.aplikasi_sdgs.individu import (
     get_data_disabilitas,
     get_data_pendidikan,
 )
+from sdgs_tools.aplikasi_sdgs.individu.utils import menu_to
 from sdgs_tools.utils import parse_range
 
 
@@ -51,7 +52,7 @@ def export_individu(
         form_nik.send_keys(nik)
         d.press("back")
         d(resourceId="com.kemendes.survey:id/btnCariRT").click()
-        d(text="DATA INDIVIDU").click()
+        menu_to(d, "DATA INDIVIDU")
         if not d(resourceId="com.kemendes.survey:id/txtNama").info.get("text"):
             click.echo(f"Lewati data kosong untuk rtrw {rt_rw} no kk {no_kk} nik {nik}")
             return False

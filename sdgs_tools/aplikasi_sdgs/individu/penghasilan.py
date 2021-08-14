@@ -3,6 +3,7 @@ from openpyxl.worksheet.worksheet import Worksheet
 from uiautomator2 import Device, UiObject
 
 from sdgs_tools.aplikasi_sdgs.utils import d_get_text
+from .utils import menu_to
 
 # PER BOX! resourceId
 PENGHASILAN_COL = {
@@ -17,7 +18,8 @@ PENGHASILAN_COL = {
 
 
 def get_data_penghasilan(d: Device, ws: Worksheet, nik: str, row: int):
-    d(text="PENGHASILAN").click()
+    menu_to(d, "PENGHASILAN")
+    # d(text="PENGHASILAN").click()
     box_daftar_penghasilan = d(resourceId="com.kemendes.survey:id/itemsPenghasilan")
     survey_box: UiObject = box_daftar_penghasilan.child(
         resourceId="com.kemendes.survey:id/box"
@@ -65,4 +67,5 @@ def get_data_penghasilan(d: Device, ws: Worksheet, nik: str, row: int):
         if box_content.exists:
             ws[f"G{row}"] = box_content.info.get("text")
         row += 1
+    d(className='android.widget.ScrollView').fling.vert.backward()
     return row

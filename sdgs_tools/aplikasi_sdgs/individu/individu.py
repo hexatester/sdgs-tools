@@ -2,6 +2,7 @@ from uiautomator2 import Device, UiObjectNotFoundError
 from openpyxl.worksheet.worksheet import Worksheet
 
 from sdgs_tools.aplikasi_sdgs.utils import d_get_text
+from .utils import menu_to
 
 INDIVIDU_COL = {
     "D": "com.kemendes.survey:id/txtNama",
@@ -27,7 +28,8 @@ INDIVIDU_COL = {
 
 
 def get_data_individu(d: Device, ws: Worksheet, row: int):
-    d(text="DATA INDIVIDU").click()
+    menu_to(d, "DATA INDIVIDU")
+    # d(text="DATA INDIVIDU").click()
     for col, resourceId in INDIVIDU_COL.items():
         cell = f"{col}{row}"
         try:
@@ -38,3 +40,4 @@ def get_data_individu(d: Device, ws: Worksheet, row: int):
         # Internet = Ya
         ws[f"U{row}"] = d_get_text(d, "com.kemendes.survey:id/cbAksesInternetLewat")
         ws[f"V{row}"] = d_get_text(d, "com.kemendes.survey:id/cbKecepatanInternet")
+    d(className='android.widget.ScrollView').fling.vert.backward()

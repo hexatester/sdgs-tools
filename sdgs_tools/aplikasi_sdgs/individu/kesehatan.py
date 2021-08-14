@@ -3,6 +3,7 @@ from openpyxl.worksheet.worksheet import Worksheet
 from typing import Optional
 
 from sdgs_tools.aplikasi_sdgs.utils import d_get_text
+from .utils import menu_to
 
 
 # resourceId
@@ -50,12 +51,10 @@ KESEHATAN_COL = {
 
 
 def get_data_kesehatan(d: Device, ws: Worksheet, row: int):
-    d(text="KESEHATAN").click()
+    menu_to(d, "KESEHATAN")
+    # d(text="KESEHATAN").click()
     for col, resourceId in KESEHATAN_COL.items():
-        current = d(resourceId=resourceId)
-        if not current.exists:
-            d(scrollable=True).fling.vert.forward()
-        if resourceId.startswith("com.kemendes.survey:id/txt"):
-            value = current.info.get("text")
-            if value != "Jumlah":
-                ws[f"{col}{row}"] = value
+        value = d_get_text(d, resourceId)
+        if value != "Jumlah":
+            ws[f"{col}{row}"] = value
+    d(className='android.widget.ScrollView').fling.vert.backward()
