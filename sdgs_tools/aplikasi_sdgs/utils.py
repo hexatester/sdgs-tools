@@ -24,6 +24,18 @@ def d_get_text(d: Device, resourceId: str):
     return childText.info.get("text")
 
 
+def swipe_box(d: Device, box: UiObject):
+    bounds: Dict[str, int] = box.info.get("bounds")
+    if not bounds:
+        return
+    top = bounds["top"]
+    right = bounds["right"]
+    bottom = bounds["bottom"]
+    left = bounds["left"]
+    middle = left + ((right - left) // 2)
+    d.swipe(middle, bottom, middle, top)
+
+
 def set_ws_header(ws: Worksheet, header: Dict[str, str], row: int = 1):
     for col, nama in header.items():
         ws[f"{col}{row}"] = nama.title()
