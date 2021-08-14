@@ -33,7 +33,7 @@ def export_keluarga(
     keluarga = wb["Keluarga"]
     rows = parse_range(ranges)
 
-    def make_row(row: int):
+    for row in rows:
         rt_rw = keluarga[f"A{row}"].value
         if not rt_rw:
             click.echo(
@@ -63,6 +63,7 @@ def export_keluarga(
                 no_kk,
                 row_pendidikan,
             )
+            row_pendidikan += 1
         if not skip_kesehatan:
             row_kesehatan = get_data_kesehatan(
                 d,
@@ -70,6 +71,7 @@ def export_keluarga(
                 no_kk,
                 row_kesehatan,
             )
+            row_kesehatan += 1
         if not skip_tenaga_kesehatan:
             row_tenaga_kesehatan = get_data_tenaga_kesehatan(
                 d,
@@ -77,6 +79,7 @@ def export_keluarga(
                 no_kk,
                 row_tenaga_kesehatan,
             )
+            row_tenaga_kesehatan += 1
         if not skip_sarpras:
             row_sarpras = get_data_sarpras(
                 d,
@@ -84,10 +87,9 @@ def export_keluarga(
                 no_kk,
                 row_sarpras,
             )
+            row_sarpras += 1
         if not skip_lain_lain:
             get_data_lain_lain(d, keluarga, row)
-
-    for row in rows:
-        make_row(row)
+        click.echo(f"Berhasil export data no kk {no_kk}")
 
     wb.save(filepath)
