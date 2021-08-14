@@ -11,10 +11,10 @@ def get_text(ui: UiObject) -> Optional[str]:
 
 
 def d_get_text(d: Device, resourceId: str):
+    current = d(resourceId=resourceId)
     if resourceId.startswith("com.kemendes.survey:id/txt"):
-        return d(resourceId=resourceId).info.get("text")
-    parent = d(resourceId=resourceId)
-    childText = parent.child(className="android.widget.TextView")
+        return current.info.get("text")
+    childText = current.child(className="android.widget.TextView")
     return childText.info.get("text")
 
 
