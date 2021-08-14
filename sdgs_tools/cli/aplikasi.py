@@ -92,9 +92,9 @@ def export_individu(
 @click.option("--lokasi/--no-lokasi", default=True)
 @click.option("--pendidikan/--no-pendidikan", default=True)
 @click.option("--kesehatan/--no-kesehatan", default=True)
-@click.option("--tenaga_kesehatan/--no-tenaga_kesehatan", default=True)
+@click.option("--tenaga_kesehatan/--no-tenaga-kesehatan", default=True)
 @click.option("--sarpras/--no-sarpras", default=True)
-@click.option("--lain_lain/--no-lain_lain", default=True)
+@click.option("--lain_lain/--no-lain-lain", default=True)
 @click.argument(
     "nama_file",
     type=click.Path(exists=True),
