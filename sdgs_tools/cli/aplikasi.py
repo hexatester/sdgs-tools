@@ -10,14 +10,14 @@ def aplikasi():
     pass
 
 
-@aplikasi.command("template")
+@aplikasi.command("template-individu")
 @click.argument("nama_file", type=click.Path(), default="Data INDIVIDU SDGS.xlsx")
-def template(nama_file: str):
+def template_individu(nama_file: str):
     try:
         make_template_individu(filepath=nama_file)
-        click.echo(f"Berhasil membuat template")
+        click.echo(f"Berhasil membuat template individu")
     except Exception as e:
-        click.echo(f"Gagal membuat template karena {repr(e)}")
+        click.echo(f"Gagal membuat template individu karena {repr(e)}")
 
 
 @aplikasi.command("export-individu")
