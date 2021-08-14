@@ -31,5 +31,7 @@ def export_individu(nama_file: str, ranges: Optional[str] = None, penghasilan: i
             ranges=ranges,
             row_penghasilan=penghasilan,
         )
+    except FileNotFoundError:
+        click.echo("Gagal mengeksport data karena file template tidak ditemukan")
     except Exception as e:
         click.echo(f"Gagal mengeksport data individu karena {repr(e)}")
