@@ -29,10 +29,10 @@ def export_individu(
     wb = load_workbook(filepath)
     individu = wb["Individu"]
 
-    def make_row(row: int):
+    def make_row(row: int, row_penghasilan: int):
         rt_rw = individu[f"A{row}"].value
         if not rt_rw:
-            click.echo(f"Kolom rt/rw kosong di baris {row}, membatalkan operasi")
+            click.echo(f"Kolom rt/rw kosong di baris {row}, membatalkan operasi selanjutnya")
             return False
         no_kk = individu[f"B{row}"].value
         if not no_kk:
@@ -75,11 +75,11 @@ def export_individu(
     if ranges is None:
         success: bool = True
         while success:
-            success = make_row(row_start)
+            success = make_row(row_start, row_penghasilan)
             row_start += 1
     else:
         rows = parse_range(ranges)
         rows = list(set(rows))
         for row in rows:
-            make_row(row)
+            make_row(row, row_penghasilan)
     wb.save(filepath)

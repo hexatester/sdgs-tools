@@ -98,10 +98,11 @@ INDIVIDU = {
 
 PENGHASILAN = {
     "A": "NIK",
-    "B": "Jumlah",
-    "C": "Satuan",
-    "D": "PenghasilanSetahun",
-    "E": "Diekspor",
+    "B": "Sumber",
+    "C": "Jumlah",
+    "D": "Satuan",
+    "E": "PenghasilanSetahun",
+    "F": "Diekspor",
     "F": "Status",
 }
 
