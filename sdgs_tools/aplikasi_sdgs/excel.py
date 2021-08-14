@@ -102,3 +102,11 @@ PENGHASILAN = {
 def add_header(wb: Workbook, row: int = 1):
     set_ws_header(wb["Individu"], INDIVIDU, row)
     set_ws_header(wb["Penghasilan"], PENGHASILAN, row)
+
+
+def make_template(filepath: str = "Template SDGS.xlsx", row: int = 1):
+    if not filepath.endswith(".xlsx"):
+        filepath += ".xlsx"
+    wb = Workbook()
+    add_header(wb, row)
+    wb.save(filepath)
