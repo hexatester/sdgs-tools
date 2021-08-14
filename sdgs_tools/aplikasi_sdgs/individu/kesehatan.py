@@ -1,5 +1,6 @@
-from uiautomator2 import Device
+from uiautomator2 import Device, UiObject
 from openpyxl.worksheet.worksheet import Worksheet
+from typing import Optional
 
 from sdgs_tools.aplikasi_sdgs.utils import d_get_text
 
@@ -51,4 +52,10 @@ KESEHATAN_COL = {
 def get_data_kesehatan(d: Device, ws: Worksheet, row: int):
     d(text="KESEHATAN").click()
     for col, resourceId in KESEHATAN_COL.items():
-        ws[f"{col}{row}"] = d_get_text(d, resourceId)
+        current = d(resourceId=resourceId)
+        if not current.exists:
+            d(scrollable=True).fling.vert.forward()
+        if resourceId.startswith("com.kemendes.survey:id/txt"):
+            value = current.info.get("text")
+            if value != "Jumlah":
+                ws[f"{col}{row}"] = value
