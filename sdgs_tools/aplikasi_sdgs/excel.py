@@ -3,14 +3,14 @@ from openpyxl import Workbook
 from .utils import set_ws_header
 
 INDIVIDU = {
-    "A": "RT",
-    "B": "RW",
-    "C": "Nomor KK",
-    "D": "NIK",
-    "E": "Nama",
-    "F": "Jenis Kelamin",
-    "G": "Tempat Lahir",
-    "H": "Tgl Lahir",
+    "A": "RT/RW",
+    "B": "Nomor KK",
+    "C": "NIK",
+    "D": "Nama",
+    "E": "Jenis Kelamin",
+    "F": "Tempat Lahir",
+    "G": "Tgl Lahir",
+    "H": "Usia",
     "I": "Status",
     "J": "Usia Menikah",
     "K": "Agama",

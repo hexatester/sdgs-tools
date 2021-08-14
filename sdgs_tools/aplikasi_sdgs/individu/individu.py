@@ -4,10 +4,11 @@ from openpyxl.worksheet.worksheet import Worksheet
 from sdgs_tools.aplikasi_sdgs.utils import d_get_text
 
 INDIVIDU_COL = {
-    "E": "com.kemendes.survey:id/txtNama",
-    "F": "com.kemendes.survey:id/cbJenisKelamin",
-    "G": "com.kemendes.survey:id/txtTempatLahir",
-    "H": "com.kemendes.survey:id/txtTglLahir",
+    "D": "com.kemendes.survey:id/txtNama",
+    "E": "com.kemendes.survey:id/cbJenisKelamin",
+    "F": "com.kemendes.survey:id/txtTempatLahir",
+    "G": "com.kemendes.survey:id/txtTglLahir",
+    "H": "com.kemendes.survey:id/txtUsia",
     "I": "com.kemendes.survey:id/cbStatus",
     "J": "com.kemendes.survey:id/txtUsiaSaatNikah",
     "K": "com.kemendes.survey:id/cbAgama",
