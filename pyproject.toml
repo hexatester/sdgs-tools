@@ -3,6 +3,20 @@ name = "sdgs-tools"
 version = "0.1.0"
 description = ""
 authors = ["hexatester <hexatester@protonmail.com>"]
+license = "GPL-3.0-only"
+keywords = ["sdgs", "sdgs-dashboard", "survey-sdgs", "kemendesa"]
+readme = "README.md"
+homepage = "https://github.com/hexatester/sdgs-dashboard"
+repository = "https://github.com/hexatester/sdgs-dashboard"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+]
 
 [tool.poetry.dependencies]
 python = "^3.7.10"
