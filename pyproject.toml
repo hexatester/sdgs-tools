@@ -20,14 +20,9 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.7.10"
-beautifulsoup4 = "^4.9.3"
 openpyxl = "^3.0.7"
 click = "^8.0.1"
 python-dateutil = "^2.8.1"
-requests = "^2.26.0"
-attrs = "^21.2.0"
-cattrs = "^1.8.0"
-ujson = {version = "^4.0.2", optional = true}
 uiautomator2 = "^2.16.7"
 
 [tool.poetry.dev-dependencies]
@@ -35,9 +30,6 @@ pytest = "^5.2"
 mypy = "^0.910"
 black = "^21.7b0"
 pyinstaller = "^4.5.1"
-types-python-dateutil = "^0.1.6"
-types-requests = "^2.25.6"
-types-ujson = "^0.1.1"
 weditor = "^0.6.4"
 
 [build-system]
