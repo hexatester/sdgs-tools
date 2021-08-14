@@ -51,6 +51,7 @@ def export_keluarga(
         d.press("back")
         d(resourceId="com.kemendes.survey:id/btnCariRT").click()
         menu_to(d, "LOKASI & PEMUKIMAN")
+        d(className="android.widget.ScrollView").fling.vert.backward()
         if not d(resourceId="com.kemendes.survey:id/txtNama").info.get("text"):
             click.echo(f"Lewati data kosong untuk rtrw {rt_rw} no kk {no_kk}")
             return False
