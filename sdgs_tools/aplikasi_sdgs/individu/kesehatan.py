@@ -56,4 +56,4 @@ def get_data_kesehatan(d: Device, ws: Worksheet, row: int):
         value = d_get_text(d, resourceId)
         if value != "Jumlah":
             ws[f"{col}{row}"] = value
-    d(className='android.widget.ScrollView').fling.vert.backward()
+    d(className="android.widget.ScrollView").fling.vert.backward()

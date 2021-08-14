@@ -39,4 +39,4 @@ def get_data_individu(d: Device, ws: Worksheet, row: int):
         # Internet = Ya
         ws[f"U{row}"] = d_get_text(d, "com.kemendes.survey:id/cbAksesInternetLewat")
         ws[f"V{row}"] = d_get_text(d, "com.kemendes.survey:id/cbKecepatanInternet")
-    d(className='android.widget.ScrollView').fling.vert.backward()
+    d(className="android.widget.ScrollView").fling.vert.backward()

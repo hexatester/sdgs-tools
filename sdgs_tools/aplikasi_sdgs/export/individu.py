@@ -33,7 +33,9 @@ def export_individu(
     def make_row(row: int, row_penghasilan: int):
         rt_rw = individu[f"A{row}"].value
         if not rt_rw:
-            click.echo(f"Kolom rt/rw kosong di baris {row}, membatalkan operasi selanjutnya")
+            click.echo(
+                f"Kolom rt/rw kosong di baris {row}, membatalkan operasi selanjutnya"
+            )
             return False
         no_kk = individu[f"B{row}"].value
         if not no_kk:

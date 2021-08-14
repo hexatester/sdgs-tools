@@ -28,13 +28,17 @@ def get_data_sarpras(d: Device, ws: Worksheet, no_kk: str, row: int):
             value: str = current.info.get("text")
             if isinstance(value, str):
                 ws[f"{col}{row}"] = value.lstrip(lstrp)
-        tujuan_jenis: str = survey_box.child(resourceId="com.kemendes.survey:id/txtNama").info.get("text")
+        tujuan_jenis: str = survey_box.child(
+            resourceId="com.kemendes.survey:id/txtNama"
+        ).info.get("text")
         tujuan_jenis = tujuan_jenis.lstrip("Tujuan : ")
         tujuan_jenis = tujuan_jenis.replace(" Jenis Transportasi", "")
         tujuan, jenis = tujuan_jenis.split(":")
         ws[f"C{row}"] = tujuan.strip()
         ws[f"D{row}"] = jenis.strip()
-        waktu_biaya: str = survey_box.child(resourceId="com.kemendes.survey:id/txtAlamat").info.get("text")
+        waktu_biaya: str = survey_box.child(
+            resourceId="com.kemendes.survey:id/txtAlamat"
+        ).info.get("text")
         waktu_biaya = waktu_biaya.lstrip("Waktu Tempuh :")
         waktu_biaya = waktu_biaya.replace(", Biaya", "")
         waktu, biaya = waktu_biaya.split(":")

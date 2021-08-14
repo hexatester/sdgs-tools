@@ -23,4 +23,4 @@ def get_data_disabilitas(d: Device, ws: Worksheet, row: int):
     menu_to(d, "DISABILITAS")
     for col, resourceId in DISABILITAS_COL.items():
         ws[f"{col}{row}"] = d_get_text(d, resourceId)
-    d(className='android.widget.ScrollView').fling.vert.backward()
+    d(className="android.widget.ScrollView").fling.vert.backward()

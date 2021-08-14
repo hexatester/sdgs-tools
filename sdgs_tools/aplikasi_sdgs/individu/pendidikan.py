@@ -26,4 +26,4 @@ def get_data_pendidikan(d: Device, ws: Worksheet, row: int):
     d(text="PENDIDIKAN").click()
     for col, resourceId in PENDIDIKAN_COL.items():
         ws[f"{col}{row}"] = d_get_text(d, resourceId)
-    d(className='android.widget.ScrollView').fling.vert.backward()
+    d(className="android.widget.ScrollView").fling.vert.backward()

@@ -66,5 +66,5 @@ def get_data_penghasilan(d: Device, ws: Worksheet, nik: str, row: int):
         if box_content.exists:
             ws[f"G{row}"] = box_content.info.get("text")
         row += 1
-    d(className='android.widget.ScrollView').fling.vert.backward()
+    d(className="android.widget.ScrollView").fling.vert.backward()
     return row
