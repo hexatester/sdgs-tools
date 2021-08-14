@@ -42,3 +42,4 @@ def get_data_sarpras(d: Device, ws: Worksheet, no_kk: str, row: int):
         ws[f"E{row}"] = waktu.strip()
         ws[f"F{row}"] = biaya.strip()
     d(className="android.widget.ScrollView").fling.vert.backward()
+    return row
