@@ -176,15 +176,14 @@ KELUARGA_TENAGA_KESEHATAN = {
 }
 
 KELUARGA_SARPRAS = {
-    "A": "RT/RW",
-    "B": "Nomor KK",
-    "C": "Tujuan",
-    "D": "Jenis Transportasi",
-    "E": "Transportasi Umum",
-    "F": "Waktu Tempuh",
-    "G": "Biaya",
-    "H": "Kemudahan",
-    "I": "Keterangan",
+    "A": "Nomor KK",
+    "B": "Tujuan",
+    "C": "Jenis Transportasi",
+    "D": "Transportasi Umum",
+    "E": "Waktu Tempuh",
+    "F": "Biaya",
+    "G": "Kemudahan",
+    "H": "Keterangan",
 }
 
 
