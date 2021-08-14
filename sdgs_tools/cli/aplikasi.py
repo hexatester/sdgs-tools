@@ -2,6 +2,7 @@ import click
 from typing import Optional
 
 from sdgs_tools.aplikasi_sdgs.excel import make_template_individu
+from sdgs_tools.aplikasi_sdgs.excel import make_template_keluarga
 from sdgs_tools.aplikasi_sdgs.export import export_individu as _export_individu
 
 
@@ -18,6 +19,16 @@ def template_individu(nama_file: str):
         click.echo(f"Berhasil membuat template individu")
     except Exception as e:
         click.echo(f"Gagal membuat template individu karena {repr(e)}")
+
+
+@aplikasi.command("template-keluarga")
+@click.argument("nama_file", type=click.Path(), default="Data KELUARGA SDGS.xlsx")
+def template_keluarga(nama_file: str):
+    try:
+        make_template_keluarga(filepath=nama_file)
+        click.echo(f"Berhasil membuat template keluarga")
+    except Exception as e:
+        click.echo(f"Gagal membuat template keluarga karena {repr(e)}")
 
 
 @aplikasi.command("export-individu")

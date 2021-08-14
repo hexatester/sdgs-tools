@@ -96,7 +96,7 @@ INDIVIDU = {
     "CH": "Bencana",
 }
 
-PENGHASILAN = {
+INDIVIDU_PENGHASILAN = {
     "A": "NIK",
     "B": "Sumber",
     "C": "Jumlah",
@@ -106,15 +106,113 @@ PENGHASILAN = {
     "F": "Status",
 }
 
+KELUARGA = {
+    "A": "RT/RW",
+    "B": "Nomor KK",
+    "C": "Nama",
+    "D": "Alamat",
+    "E": "No. HP",
+    "F": "No. Telepon",
+    "G": "NIK Kepala Keluarga",
+    "H": "Status Tempat Tinggal",
+    "I": "Status Lahan",
+    "J": "Luas Lantai",
+    "K": "Luas Tempat Tinggal",
+    "L": "Jenis Lantai",
+    "M": "Dinding",
+    "N": "Jendela",
+    "O": "Atap",
+    "P": "Penerangan",
+    "Q": "Memasak",
+    "R": "Sampah",
+    "S": "MCK",
+    "T": "Air Mandi",
+    "U": "Fasilitas BAB",
+    "V": "Air Minum",
+    "W": "Pembuangan Air Limbah",
+    "X": "Dibawah SUTET",
+    "Y": "Di bantaran sungai",
+    "Z": "Kondisi Rumah",
+    "AA": "Jumlah Anggota Keluarga Menggunakan Transportasi Umum",
+    "AB": "Jumlah Anggota Keluarga Menggunakan Transportasi Umum bulan sebelum",
+    "AB": "BLT",
+    "AB": "PKH",
+    "AB": "BST",
+    "AB": "Ban Pres",
+    "AB": "UMKM",
+    "AB": "Ban Pekerja",
+    "AB": "Pendidikan Anak",
+    "AB": "Ban Lainnya",
+    "AB": "Rata-rata Pengeluaran",
+}
 
-def add_header(wb: Workbook, row: int = 1):
+KELUARGA_PENDIDIKAN = {
+    "A": "RT/RW",
+    "B": "Nomor KK",
+    "C": "Fasilitas",
+    "D": "Jarak Tempuh",
+    "E": "Waktu Tempuh",
+    "F": "Kemudahan",
+    "G": "Keterangan",
+}
+
+KELUARGA_KESEHATAN = {
+    "A": "RT/RW",
+    "B": "Nomor KK",
+    "C": "Fasilitas",
+    "D": "Jarak Tempuh",
+    "E": "Waktu Tempuh",
+    "F": "Kemudahan",
+    "G": "Keterangan",
+}
+
+KELUARGA_TENAGA_KESEHATAN = {
+    "A": "RT/RW",
+    "B": "Nomor KK",
+    "C": "Fasilitas",
+    "D": "Jarak Tempuh",
+    "E": "Waktu Tempuh",
+    "F": "Kemudahan",
+    "G": "Keterangan",
+}
+
+KELUARGA_SARPRAS = {
+    "A": "RT/RW",
+    "B": "Nomor KK",
+    "C": "Tujuan",
+    "D": "Jenis Transportasi",
+    "E": "Transportasi Umum",
+    "F": "Waktu Tempuh",
+    "G": "Biaya",
+    "H": "Kemudahan",
+    "I": "Keterangan",
+}
+
+
+def add_header_individu(wb: Workbook, row: int = 1):
     set_ws_header(wb.create_sheet("Individu"), INDIVIDU, row)
-    set_ws_header(wb.create_sheet("Penghasilan"), PENGHASILAN, row)
+    set_ws_header(wb.create_sheet("Penghasilan"), INDIVIDU_PENGHASILAN, row)
+
+
+def add_header_keluarga(wb: Workbook, row: int):
+    set_ws_header(wb.create_sheet("Keluarga"), KELUARGA, row)
+    set_ws_header(wb.create_sheet("Pendidikan"), KELUARGA_PENDIDIKAN, row)
+    set_ws_header(wb.create_sheet("Kesehatan"), KELUARGA_KESEHATAN, row)
+    set_ws_header(wb.create_sheet("Tenaga Kesehatan"), KELUARGA_TENAGA_KESEHATAN, row)
+    set_ws_header(wb.create_sheet("Sarpras"), KELUARGA_SARPRAS, row)
 
 
 def make_template_individu(filepath: str = "Data INDIVIDU SDGS.xlsx", row: int = 1):
     if not filepath.endswith(".xlsx"):
         filepath += ".xlsx"
     wb = Workbook()
-    add_header(wb, row)
+    add_header_individu(wb, row)
+    wb.save(filepath)
+
+
+def make_template_keluarga(filepath: str = "Data KELUARGA SDGS.xlsx", row: int = 1):
+    if not filepath.endswith(".xlsx"):
+        filepath += ".xlsx"
+    wb = Workbook()
+    add_header_keluarga(wb, row)
     wb.save(filepath)
