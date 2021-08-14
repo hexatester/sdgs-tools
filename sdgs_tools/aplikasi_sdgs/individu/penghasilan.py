@@ -19,10 +19,9 @@ def parse_penghasilan(ws: Worksheet, box: UiObject, row: int):
         ws[f"{col}{row}"] = get_text(box.child(resourceId=resourceId))
 
 
-def get_penghasilan_individu(d: Device, wb: Workbook, nik: str, row: int):
+def get_data_penghasilan(d: Device, ws: Worksheet, nik: str, row: int):
     d(text="PENGHASILAN").click()
     box_daftar_penghasilan = d(resourceId="com.kemendes.survey:id/itemsPenghasilan")
-    ws = wb["Penghasilan"]
     for box_penghasilan in box_daftar_penghasilan.child(
         resourceId="com.kemendes.survey:id/box"
     ):
