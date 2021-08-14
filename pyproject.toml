@@ -32,6 +32,7 @@ mypy = "^0.910"
 black = "^21.7b0"
 pyinstaller = "^4.5.1"
 weditor = "^0.6.4"
+types-python-dateutil = "^0.1.6"
 
 [tool.poetry.scripts]
 sdgs-tools = 'sdgs_tools.__main__:main'
