@@ -10,7 +10,7 @@ from sdgs_tools.aplikasi_sdgs.individu import (
     get_data_disabilitas,
     get_data_pendidikan,
 )
-from sdgs_tools.aplikasi_sdgs.individu.utils import menu_to
+from sdgs_tools.aplikasi_sdgs.utils import menu_to
 from sdgs_tools.utils import parse_range
 
 

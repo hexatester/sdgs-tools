@@ -1,8 +1,7 @@
 from uiautomator2 import Device
 from openpyxl.worksheet.worksheet import Worksheet
 
-from sdgs_tools.aplikasi_sdgs.utils import d_get_text
-from .utils import menu_to
+from sdgs_tools.aplikasi_sdgs.utils import d_get_text, menu_to
 
 # resourceId
 PENDIDIKAN_COL = {

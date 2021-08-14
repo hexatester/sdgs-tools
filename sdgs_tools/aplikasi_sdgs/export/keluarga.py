@@ -10,7 +10,7 @@ from sdgs_tools.aplikasi_sdgs.keluarga import (
     get_data_sarpras,
     get_data_lain_lain,
 )
-from sdgs_tools.aplikasi_sdgs.individu.utils import menu_to
+from sdgs_tools.aplikasi_sdgs.utils import menu_to
 from sdgs_tools.utils import parse_range
 
 
