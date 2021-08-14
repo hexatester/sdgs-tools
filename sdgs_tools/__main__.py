@@ -5,15 +5,20 @@ from sdgs_tools.cli import exporter
 
 
 @click.group("sdgs-tools")
-def main():
+def cli():
     pass
 
 
-main.add_command(exporter, "exporter")
+cli.add_command(exporter, "exporter")
 
-if __name__ == "__main__":
+
+def main():
     click.echo(f"sdgs-tools v{__version__}")
     click.echo("Dibuat oleh Habib Rohman")
     click.echo("Error? pm https://t.me/hexatester")
     click.echo("Open donasi https://saweria.co/hexatester")
+    cli()
+
+
+if __name__ == "__main__":
     main()
