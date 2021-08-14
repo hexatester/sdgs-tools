@@ -17,6 +17,7 @@ def export_individu(
     filepath: str,
     ranges: str = None,
     row_penghasilan: int = 2,
+    row_start: int = 2,
     skip_individu: bool = False,
     skip_pekerjaan: bool = False,
     skip_pengasilan: bool = False,
@@ -26,24 +27,34 @@ def export_individu(
 ):
     d = Device()
     wb = load_workbook(filepath)
-    if ranges is None:
-        return
-    rows = parse_range(ranges)
-    rows = list(set(rows))
     individu = wb["Individu"]
-    for row in rows:
-        rt = individu[f"A{row}"].value
-        rw = individu[f"B{row}"].value
-        no_kk = individu[f"C{row}"].value
-        nik: str = individu[f"D{row}"].value
+
+    def make_row(row: int):
+        rt_rw = individu[f"A{row}"].value
+        if not rt_rw:
+            click.echo(f"Kolom rt/rw kosong di baris {row}, membatalkan operasi")
+            return False
+        no_kk = individu[f"B{row}"].value
+        if not no_kk:
+            click.echo(f"Kolom nomor kk kosong di baris {row}, membatalkan operasi")
+            return False
+        nik: str = individu[f"C{row}"].value
+        if not nik:
+            click.echo(f"Kolom nik kosong di baris {row}, membatalkan operasi")
+            return False
         # Input rt rw no_kk nik & Tampilkan
         form_rt_rw = d(resourceId="com.kemendes.survey:id/txtRTRW")
-        form_rt_rw.send_keys(f"{rt}/{rw}", clear=True)
+        form_rt_rw.send_keys(rt_rw)
         form_kk = d(resourceId="com.kemendes.survey:id/txtNoKK")
-        form_kk.send_keys(no_kk, clear=True)
+        form_kk.send_keys(no_kk)
         form_nik = d(resourceId="com.kemendes.survey:id/txtNIK")
-        form_nik.send_keys(no_kk, clear=True)
+        form_nik.send_keys(nik)
+        d.press("back")
         d(resourceId="com.kemendes.survey:id/btnCariRT").click()
+        d(text="DATA INDIVIDU").click()
+        if not d(resourceId="com.kemendes.survey:id/txtNama").info.get("text"):
+            click.echo(f"Lewati data kosong untuk rtrw {rt_rw} no kk {no_kk} nik {nik}")
+            return False
         if not skip_individu:
             get_data_individu(d, individu, row)
         if not skip_pekerjaan:
@@ -59,3 +70,16 @@ def export_individu(
                 d, wb["Penghasilan"], nik, row_penghasilan
             )
         click.echo(f"Eksport individu #{row} {nik} berhasil!")
+        return True
+
+    if ranges is None:
+        success: bool = True
+        while success:
+            success = make_row(row_start)
+            row_start += 1
+    else:
+        rows = parse_range(ranges)
+        rows = list(set(rows))
+        for row in rows:
+            make_row(row)
+    wb.save(filepath)

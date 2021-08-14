@@ -1,4 +1,4 @@
-from uiautomator2 import Device
+from uiautomator2 import Device, UiObjectNotFoundError
 from openpyxl.worksheet.worksheet import Worksheet
 
 from sdgs_tools.aplikasi_sdgs.utils import d_get_text
@@ -21,12 +21,20 @@ INDIVIDU_COL = {
     "R": "com.kemendes.survey:id/txtTwitter",
     "S": "com.kemendes.survey:id/txtInstagram",
     "T": "com.kemendes.survey:id/cbInternet",
-    "U": "com.kemendes.survey:id/cbAksesInternetLewat",
-    "V": "com.kemendes.survey:id/cbKecepatanInternet",
+    # "U": "com.kemendes.survey:id/cbAksesInternetLewat",
+    # "V": "com.kemendes.survey:id/cbKecepatanInternet",
 }
 
 
 def get_data_individu(d: Device, ws: Worksheet, row: int):
     d(text="DATA INDIVIDU").click()
     for col, resourceId in INDIVIDU_COL.items():
-        ws[f"{col}{row}"] = d_get_text(d, resourceId)
+        cell = f"{col}{row}"
+        try:
+            ws[cell] = d_get_text(d, resourceId)
+        except UiObjectNotFoundError:
+            continue
+    if ws[f"T{row}"].value == "Ya":
+        # Internet = Ya
+        ws[f"U{row}"] = d_get_text(d, "com.kemendes.survey:id/cbAksesInternetLewat")
+        ws[f"V{row}"] = d_get_text(d, "com.kemendes.survey:id/cbKecepatanInternet")
