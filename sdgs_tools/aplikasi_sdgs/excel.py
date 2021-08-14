@@ -6,7 +6,7 @@ INDIVIDU = {
     "A": "RT",
     "B": "RW",
     "C": "Nomor KK",
-    "C": "NIK",
+    "D": "NIK",
     "E": "Nama",
     "F": "Jenis Kelamin",
     "G": "Tempat Lahir",
@@ -100,8 +100,8 @@ PENGHASILAN = {
 
 
 def add_header(wb: Workbook, row: int = 1):
-    set_ws_header(wb["Individu"], INDIVIDU, row)
-    set_ws_header(wb["Penghasilan"], PENGHASILAN, row)
+    set_ws_header(wb.create_sheet("Individu"), INDIVIDU, row)
+    set_ws_header(wb.create_sheet("Penghasilan"), PENGHASILAN, row)
 
 
 def make_template(filepath: str = "Template SDGS.xlsx", row: int = 1):

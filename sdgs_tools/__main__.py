@@ -1,6 +1,7 @@
 import click
 
 from sdgs_tools import __version__
+from sdgs_tools.cli import aplikasi
 from sdgs_tools.cli import exporter
 
 
@@ -9,6 +10,7 @@ def cli():
     pass
 
 
+cli.add_command(aplikasi, "aplikasi")
 cli.add_command(exporter, "exporter")
 
 
