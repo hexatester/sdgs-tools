@@ -24,4 +24,11 @@ PENDIDIKAN_COL = {
 def get_data_pendidikan(d: Device, ws: Worksheet, row: int):
     d(text="PENDIDIKAN").click()
     for col, resourceId in PENDIDIKAN_COL.items():
-        ws[f"{col}{row}"] = d_get_text(d, resourceId)
+        current = d(resourceId=resourceId)
+        if not current.exists:
+            d(scrollable=True).fling.vert.forward()
+        if resourceId.startswith("com.kemendes.survey:id/txt"):
+            ws[f"{col}{row}"] = current.info.get("text")
+        else:
+            childText = current.child(className="android.widget.TextView")
+            ws[f"{col}{row}"] = childText.info.get("text")
