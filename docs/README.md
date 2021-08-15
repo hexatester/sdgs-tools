@@ -28,13 +28,21 @@ Buat Folder Baru khusus untuk file-file yang akan dipakai nanti.
 Karena alat ini tidak memiliki tampilan (hanya perintah / CLI), maka semua perintah harus dijalankan dengan cmd atau powershell. Berikut cara membuka cmd dalam folder :
 
 1. Buka Folder yang sudah disiapkan
+
    ![buka folder](img/folder.png)
+
 2. Klik / blok alamat folder
+
    ![blok alamat](img/klik-path.png)
+
 3. Ketik cmd, kemudian tekan enter
+
    ![ketik cmd](img/ketik-cmd.png)
+
 4. Maka akan muncul jendela cmd
+
    ![jendela cmd](img/jendela-cmd.jpg)
+
 5. Perintah dapat diketik dalam jendela tersebut dan tekan enter untuk menjalankannya, **PERINTAH HARUS DIMASUKKAN DENGAN BENAR SALAH SEDIKIT ALAT TIDAK DAPAT BERJALAN / ERROR**.
 
 ## Cara Install
