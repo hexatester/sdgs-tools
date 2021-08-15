@@ -5,6 +5,8 @@
 - [SDGS Tools](#sdgs-tools)
   - [Daftar Isi](#daftar-isi)
   - [Open Donasi](#open-donasi)
+  - [Penyiapan Folder](#penyiapan-folder)
+  - [Cara menjalankan perintah](#cara-menjalankan-perintah)
   - [Cara Install](#cara-install)
   - [Menyiapkan Perangkat Android](#menyiapkan-perangkat-android)
   - [Membuat Template dan Mempersiapkan Data](#membuat-template-dan-mempersiapkan-data)
@@ -17,13 +19,37 @@
 
 Alat ini membutuhkan banyak sumber daya (khususnya waktu & fikiran) dalam pembuatannya. Apabila Anda merasa terbantu dengan adanya alat ini, Anda dapat melakukan donasi di <https://saweria.co/hexatester> atau pm <https://t.me/hexatester> (untuk transfer bank). Berapapun jumlahnya tentu akan sangat membantu saya untuk membuat inovasi baru dan melanjutkan pendidikan saya, terimakasih.
 
+## Penyiapan Folder
+
+Buat Folder Baru khusus untuk file-file yang akan dipakai nanti.
+
+## Cara menjalankan perintah
+
+Karena alat ini tidak memiliki tampilan (hanya perintah / CLI), maka semua perintah harus dijalankan dengan cmd atau powershell. Berikut cara membuka cmd dalam folder :
+
+1. Buka Folder yang sudah disiapkan
+   ![buka folder](img/folder.png)
+2. Klik / blok alamat folder
+   ![blok alamat](img/klik-path.png)
+3. Ketik cmd, kemudian tekan enter
+   ![ketik cmd](img/ketik-cmd.png)
+4. Maka akan muncul jendela cmd
+   ![jendela cmd](img/jendela-cmd.jpg)
+5. Perintah dapat diketik dalam jendela tersebut dan tekan enter untuk menjalankannya, **PERINTAH HARUS DIMASUKKAN DENGAN BENAR SALAH SEDIKIT ALAT TIDAK DAPAT BERJALAN / ERROR**.
+
 ## Cara Install
 
 Penginstallan dilakukan **satu kali** untuk setiap laptop / komputer (selanjutnya disebut PC). Disarankan menggunakan pc dengan RAM minimal 4GB dengan Sistem Operasi Windows 10 atau Linux. Berikut langkah-langkahnya :
 
 1. [Download](https://androiddatahost.com/uq6us "Link Download ADB") dan [Install](https://androidmtk.com/install-minimal-adb-and-fastboot-tool "Cara Install ADB") ADB
-2. Download dan Install Python
+2. [Download](https://www.python.org/ftp/python/3.7.4/python-3.7.4-amd64.exe "Installer Python 3.7") dan [Install Python](https://www.youtube.com/watch?v=qAaEG5nGOEY "Cara Install python 3.7")
 3. Install sdgs-tools
+
+   Dengan menjalankan perintah
+
+   ```cmd
+   pip install sdgs-tools
+   ```
 
 ## Menyiapkan Perangkat Android
 
@@ -53,6 +79,8 @@ Penyiapan ini dilakukan untuk setiap perangkat yang digunakan atau terinstall ap
 6. Buka Aplikasi SDGS!
 
 ## Membuat Template dan Mempersiapkan Data
+
+Template digunakan untuk menentukan data yang akan diekspor dan tempat hasil ekspor data.
 
 ### Template Individu
 
