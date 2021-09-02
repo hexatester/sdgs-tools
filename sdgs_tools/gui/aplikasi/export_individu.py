@@ -113,20 +113,20 @@ class ExportIndividuWindow(tk.Toplevel):
         ]
         filepath = askopenfilename(filetypes=files, defaultextension=files)
         if not filepath:
-            showwarning("Gagal", "Mohon dipilih template yang benar")
+            showwarning("Gagal", "Mohon pilih template yang benar")
             return
         try:
             _export_individu(
                 filepath=filepath,
-                ranges=self.baris,
+                ranges=self.baris.get(),
                 row_penghasilan=2,
                 row_start=2,
-                skip_individu=not getattr(self, "individu", True),
-                skip_pekerjaan=not getattr(self, "pekerjaan", True),
-                skip_pengasilan=not getattr(self, "pengasilan", True),
-                skip_kesehatan=not getattr(self, "kesehatan", True),
-                skip_disabilitas=not getattr(self, "disabilitas", True),
-                skip_pendidikan=not getattr(self, "pendidikan", True),
+                skip_individu=not self.individu.get(),
+                skip_pekerjaan=not self.pekerjaan.get(),
+                skip_penghasilan=not self.penghasilan.get(),
+                skip_kesehatan=not self.kesehatan.get(),
+                skip_disabilitas=not self.disabilitas.get(),
+                skip_pendidikan=not self.pendidikan.get(),
             )
         except FileNotFoundError:
             showwarning(
