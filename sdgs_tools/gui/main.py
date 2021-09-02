@@ -11,7 +11,7 @@ from . import AplikasiTab
 class MainApp(tk.Tk):
     def __init__(self):
         super().__init__(screenName="SDGS Tools")
-        self.title("SDGS Tools")
+        self.title(f"SDGS Tools v{__version__}")
         self.sidebar = SidebarFrame(self)
         self.content = ContentFrame(self)
 
