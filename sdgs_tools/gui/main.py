@@ -6,6 +6,7 @@ from . import ContentFrame
 from . import SidebarFrame
 
 from . import AplikasiTab
+from . import DashboardTab
 
 
 class MainApp(tk.Tk):
@@ -16,7 +17,9 @@ class MainApp(tk.Tk):
         self.content = ContentFrame(self)
 
         self.aplikasi_tab = AplikasiTab(self.content)
+        self.dashboard_tab = DashboardTab(self.content)
         self.sidebar.add_button("Aplikasi", self.aplikasi_tab.tkraise)
+        self.sidebar.add_button("Dashboard", self.dashboard_tab.tkraise)
 
         self.sidebar.add_button("Tentang", self.about)
 
