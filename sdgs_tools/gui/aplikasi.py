@@ -99,10 +99,18 @@ class ExportIndividuWindow(tk.Toplevel):
             self, text="Tidak", variable=self.pendidikan, value=False
         )
         self.pendidikan_tidak.grid(row=6, column=2)
-        self.start_button = tk.Button(
-            self, text="Pilih template individu dan mulai ekspor", command=self.export
+        self.info_label = tk.Label(
+            self,
+            text="Buat template dan isi dengan rt rw, no kk, "
+            "dan nik dari data yang ingin diekspor dari aplikasi!",
         )
-        self.start_button.grid(row=7, column=0)
+        self.info_label.grid(row=7, column=0, columnspan=3)
+        self.start_button = tk.Button(
+            self,
+            text="Pilih template individu dan mulai ekspor",
+            command=self.export,
+        )
+        self.start_button.grid(row=8, column=0)
 
     def export(self):
         files = [
