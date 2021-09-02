@@ -1,7 +1,7 @@
 import logging
 import tkinter as tk
 from tkinter.filedialog import asksaveasfilename
-from tkinter.messagebox import showerror, showinfo
+from tkinter.messagebox import showerror, showinfo, showwarning
 
 import adbutils
 from uiautomator2.init import Initer
@@ -12,8 +12,23 @@ from sdgs_tools.aplikasi_sdgs.export import export_individu as _export_individu
 from sdgs_tools.aplikasi_sdgs.export import export_keluarga as _export_keluarga
 
 
+class ExportIndividuFrame(tk.Frame):
+    def __init__(self, master: tk.Frame, back):
+        super().__init__(master=master)
+        self.label_info = tk.Label(
+            self,
+            text="Eksport data individu",
+        )
+        self.label_info.grid(row=0, column=0)
+        self.back_button = tk.Button(
+            self,
+            text="Kembali",
+            command=back,
+        )
+
+
 class AplikasiTab(tk.Frame):
-    def __init__(self, master, **kw):
+    def __init__(self, master: tk.Frame, **kw):
         super().__init__(master, bg="#CCC", width=500, height=500, **kw)
         self.pack(expand=True, fill="both", side="right")
         self.label_info = tk.Label(
@@ -40,6 +55,13 @@ class AplikasiTab(tk.Frame):
             command=self.init_device,
         )
         self.init_device_button.grid(row=2, column=0)
+        self.eksport_individu = ExportIndividuFrame(master, back=self.tkraise)
+        self.init_device_button = tk.Button(
+            self,
+            text="Eksport Data Individu",
+            command=self.eksport_individu.tkraise,
+        )
+        self.init_device_button.grid(row=3, column=0)
 
     @staticmethod
     def generate_template_individu():
@@ -47,6 +69,9 @@ class AplikasiTab(tk.Frame):
             ("Excel 2010+", "*.xlsx"),
         ]
         filepath = asksaveasfilename(filetypes=files, defaultextension=files)
+        if not filepath:
+            showwarning("Nama", "mohon tentukan nama dan tempat menyimpan file")
+            return
         try:
             make_template_individu(filepath)
             showinfo("Sukses", f"Berhasil membuat template individu\n{filepath}")
@@ -59,6 +84,9 @@ class AplikasiTab(tk.Frame):
             ("Excel 2010+", "*.xlsx"),
         ]
         filepath = asksaveasfilename(filetypes=files, defaultextension=files)
+        if not filepath:
+            showwarning("Nama", "mohon tentukan nama dan tempat menyimpan file")
+            return
         try:
             make_template_keluarga(filepath)
             showinfo("Sukses", "Berhasil membuat template keluarga")
@@ -66,7 +94,7 @@ class AplikasiTab(tk.Frame):
             showerror("Error", f"Gagal membuat template keluarga karena {repr(e)}")
 
     @staticmethod
-    def init_device(self):
+    def init_device():
         for device in adbutils.adb.iter_device():
             init = Initer(device, loglevel=logging.INFO)
             init.install()
