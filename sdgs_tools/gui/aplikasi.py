@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter.filedialog import asksaveasfilename
 from tkinter.messagebox import showerror, showinfo
 
 from sdgs_tools.aplikasi_sdgs.excel import make_template_individu
@@ -16,27 +17,37 @@ class AplikasiTab(tk.Frame):
             text="Fitur ini untuk meng eksport data dari aplikasi sdgs android",
         )
         self.label_info.grid(row=0, column=0)
-        self.template_individu_label = tk.Label(
-            self, text="Nama file template individu"
-        )
-        self.template_individu_label.grid(row=1, column=0)
-        self.template_individu_nama = tk.StringVar(self, "Data INDIVIDU SDGS.xlsx")
-        self.template_individu_entry = tk.Entry(
-            self,
-            textvariable=self.template_individu_nama,
-        )
-        self.template_individu_entry.grid(row=1, column=1)
         self.template_individu_button = tk.Button(
             self,
             text="Buat Template Individu",
             command=self.generate_template_individu,
         )
-        self.template_individu_button.grid(row=1, column=2)
+        self.template_individu_button.grid(row=1, column=0)
+        self.template_keluarga_button = tk.Button(
+            self,
+            text="Buat Template Keluarga",
+            command=self.generate_template_keluarga,
+        )
+        self.template_keluarga_button.grid(row=1, column=1)
 
     def generate_template_individu(self):
-        filepath = self.template_individu_nama.get()
+        files = [
+            ("Excel 2010+", "*.xlsx"),
+        ]
+        filepath = asksaveasfilename(filetypes=files, defaultextension=files)
         try:
             make_template_individu(filepath)
             showinfo("Sukses", f"Berhasil membuat template individu\n{filepath}")
         except Exception as e:
             showerror("Error", f"Gagal membuat template individu karena {repr(e)}")
+
+    def generate_template_keluarga(self):
+        files = [
+            ("Excel 2010+", "*.xlsx"),
+        ]
+        filepath = asksaveasfilename(filetypes=files, defaultextension=files)
+        try:
+            make_template_keluarga(filepath)
+            showinfo("Sukses", "Berhasil membuat template keluarga")
+        except Exception as e:
+            showerror("Error", f"Gagal membuat template keluarga karena {repr(e)}")
