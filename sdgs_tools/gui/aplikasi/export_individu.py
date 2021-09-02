@@ -1,15 +1,8 @@
-import logging
 import tkinter as tk
-from tkinter.filedialog import asksaveasfilename
+from tkinter.filedialog import askopenfilename
 from tkinter.messagebox import showerror, showinfo, showwarning
 
-import adbutils
-from uiautomator2.init import Initer
-
-from sdgs_tools.aplikasi_sdgs.excel import make_template_individu
-from sdgs_tools.aplikasi_sdgs.excel import make_template_keluarga
 from sdgs_tools.aplikasi_sdgs.export import export_individu as _export_individu
-from sdgs_tools.aplikasi_sdgs.export import export_keluarga as _export_keluarga
 
 
 class ExportIndividuWindow(tk.Toplevel):
@@ -20,13 +13,15 @@ class ExportIndividuWindow(tk.Toplevel):
             self,
             text="Eksport data individu",
         )
-        self.label_info.grid(row=0, column=0)
+        self.label_info.grid(row=0, column=0, columnspan=3)
         # Baris
         self.baris_label = tk.Label(self, text="Baris")
         self.baris_label.grid(row=1, column=0)
         self.baris = tk.StringVar(self, "1")
         self.baris_entry = tk.Entry(self, textvariable=self.baris)
         self.baris_entry.grid(row=1, column=1)
+        self.baris_info_button = tk.Button(self, text="?", command=self.info_baris)
+        self.baris_info_button.grid(row=1, column=2)
         # Individu
         self.individu_label = tk.Label(self, text="Ekspor data individu")
         self.individu_label.grid(row=2, column=0)
@@ -116,19 +111,22 @@ class ExportIndividuWindow(tk.Toplevel):
         files = [
             ("Excel 2010+", "*.xlsx"),
         ]
-        filepath = asksaveasfilename(filetypes=files, defaultextension=files)
+        filepath = askopenfilename(filetypes=files, defaultextension=files)
+        if not filepath:
+            showwarning("Gagal", "Mohon dipilih template yang benar")
+            return
         try:
             _export_individu(
                 filepath=filepath,
                 ranges=self.baris,
                 row_penghasilan=2,
                 row_start=2,
-                skip_individu=not self.individu.get(),
-                skip_pekerjaan=not self.pekerjaan.get(),
-                skip_pengasilan=not self.pengasilan.get(),
-                skip_kesehatan=not self.kesehatan.get(),
-                skip_disabilitas=not self.disabilitas.get(),
-                skip_pendidikan=not self.pendidikan.get(),
+                skip_individu=not getattr(self, "individu", True),
+                skip_pekerjaan=not getattr(self, "pekerjaan", True),
+                skip_pengasilan=not getattr(self, "pengasilan", True),
+                skip_kesehatan=not getattr(self, "kesehatan", True),
+                skip_disabilitas=not getattr(self, "disabilitas", True),
+                skip_pendidikan=not getattr(self, "pendidikan", True),
             )
         except FileNotFoundError:
             showwarning(
@@ -143,75 +141,3 @@ class ExportIndividuWindow(tk.Toplevel):
             "Baris?",
             'Baris data dari template yang diambil datanya\nMisalnya "2-100,150-200"',
         )
-
-
-class AplikasiTab(tk.Frame):
-    def __init__(self, master: tk.Frame, **kw):
-        super().__init__(master, bg="#CCC", width=500, height=500, **kw)
-        self.pack(expand=True, fill="both", side="right")
-        self.label_info = tk.Label(
-            self,
-            text="Fitur ini untuk meng eksport data dari aplikasi sdgs android",
-        )
-        self.label_info.grid(row=0, column=0)
-        self.template_individu_button = tk.Button(
-            self,
-            text="Buat Template Individu",
-            command=self.generate_template_individu,
-        )
-        self.template_individu_button.grid(row=1, column=0)
-        self.template_keluarga_button = tk.Button(
-            self,
-            text="Buat Template Keluarga",
-            command=self.generate_template_keluarga,
-        )
-        self.template_keluarga_button.grid(row=1, column=1)
-
-        self.init_device_button = tk.Button(
-            self,
-            text="Inisiasi Perangkat Android",
-            command=self.init_device,
-        )
-        self.init_device_button.grid(row=2, column=0)
-        self.eksport_individu_button = tk.Button(
-            self,
-            text="Eksport Data Individu",
-            command=ExportIndividuWindow,
-        )
-        self.eksport_individu_button.grid(row=3, column=0)
-
-    @staticmethod
-    def generate_template_individu():
-        files = [
-            ("Excel 2010+", "*.xlsx"),
-        ]
-        filepath = asksaveasfilename(filetypes=files, defaultextension=files)
-        if not filepath:
-            showwarning("Nama", "mohon tentukan nama dan tempat menyimpan file")
-            return
-        try:
-            make_template_individu(filepath)
-            showinfo("Sukses", f"Berhasil membuat template individu\n{filepath}")
-        except Exception as e:
-            showerror("Error", f"Gagal membuat template individu karena {repr(e)}")
-
-    @staticmethod
-    def generate_template_keluarga():
-        files = [
-            ("Excel 2010+", "*.xlsx"),
-        ]
-        filepath = asksaveasfilename(filetypes=files, defaultextension=files)
-        if not filepath:
-            showwarning("Nama", "mohon tentukan nama dan tempat menyimpan file")
-            return
-        try:
-            make_template_keluarga(filepath)
-            showinfo("Sukses", "Berhasil membuat template keluarga")
-        except Exception as e:
-            showerror("Error", f"Gagal membuat template keluarga karena {repr(e)}")
-
-    @staticmethod
-    def init_device():
-        for device in adbutils.adb.iter_device():
-            init = Initer(device, loglevel=logging.INFO)
-            init.install()
