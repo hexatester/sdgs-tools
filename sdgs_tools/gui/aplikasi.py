@@ -41,7 +41,8 @@ class AplikasiTab(tk.Frame):
         )
         self.init_device_button.grid(row=2, column=0)
 
-    def generate_template_individu(self):
+    @staticmethod
+    def generate_template_individu():
         files = [
             ("Excel 2010+", "*.xlsx"),
         ]
@@ -52,7 +53,8 @@ class AplikasiTab(tk.Frame):
         except Exception as e:
             showerror("Error", f"Gagal membuat template individu karena {repr(e)}")
 
-    def generate_template_keluarga(self):
+    @staticmethod
+    def generate_template_keluarga():
         files = [
             ("Excel 2010+", "*.xlsx"),
         ]
@@ -63,6 +65,7 @@ class AplikasiTab(tk.Frame):
         except Exception as e:
             showerror("Error", f"Gagal membuat template keluarga karena {repr(e)}")
 
+    @staticmethod
     def init_device(self):
         for device in adbutils.adb.iter_device():
             init = Initer(device, loglevel=logging.INFO)
