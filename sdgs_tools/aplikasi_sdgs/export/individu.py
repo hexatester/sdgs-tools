@@ -21,7 +21,7 @@ def export_individu(
     row_start: int = 2,
     skip_individu: bool = False,
     skip_pekerjaan: bool = False,
-    skip_pengasilan: bool = False,
+    skip_penghasilan: bool = False,
     skip_kesehatan: bool = False,
     skip_disabilitas: bool = False,
     skip_pendidikan: bool = False,
@@ -68,7 +68,7 @@ def export_individu(
             get_data_disabilitas(d, individu, row)
         if not skip_pendidikan:
             get_data_pendidikan(d, individu, row)
-        if not skip_pengasilan:
+        if not skip_penghasilan:
             row_penghasilan = get_data_penghasilan(
                 d, wb["Penghasilan"], nik, row_penghasilan
             )

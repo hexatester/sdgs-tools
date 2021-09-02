@@ -70,7 +70,7 @@ def export_individu(
             row_start=2,
             skip_individu=not individu,
             skip_pekerjaan=not pekerjaan,
-            skip_pengasilan=not pengasilan,
+            skip_penghasilan=not pengasilan,
             skip_kesehatan=not kesehatan,
             skip_disabilitas=not disabilitas,
             skip_pendidikan=not pendidikan,
