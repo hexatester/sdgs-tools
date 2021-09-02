@@ -1,6 +1,8 @@
+import attr
 from typing import Dict, Union
 
 
+@attr.dataclass
 class DataWilayah:
     rt_rw: str
     desa: str

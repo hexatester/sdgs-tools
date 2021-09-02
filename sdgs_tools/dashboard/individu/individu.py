@@ -1,9 +1,11 @@
+import attr
 from datetime import date
 from typing import Dict, Optional
 
 from sdgs_tools.dashboard.utils import date_to_str
 
 
+@attr.dataclass
 class DataIndividu:
     no_kk: str
     nik: str
