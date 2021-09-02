@@ -11,6 +11,7 @@ from sdgs_tools.gui import MainApp
 def cli(ctx: click.Context):
     if ctx.invoked_subcommand is None:
         gui = MainApp()
+        click.echo("Memulai GUI...")
         gui()
 
 
