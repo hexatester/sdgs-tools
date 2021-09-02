@@ -13,6 +13,7 @@ from sdgs_tools.aplikasi_sdgs.excel import make_template_keluarga
 # from sdgs_tools.aplikasi_sdgs.export import export_keluarga as _export_keluarga
 
 from .export_individu import ExportIndividuWindow
+from .export_keluarga import ExportKeluargaWindow
 
 
 class AplikasiTab(tk.Frame):
@@ -23,7 +24,7 @@ class AplikasiTab(tk.Frame):
             self,
             text="Fitur ini untuk meng eksport data dari aplikasi sdgs android",
         )
-        self.label_info.grid(row=0, column=0)
+        self.label_info.grid(row=0, column=0, columnspan=2)
         self.template_individu_button = tk.Button(
             self,
             text="Buat Template Individu",
@@ -49,6 +50,12 @@ class AplikasiTab(tk.Frame):
             command=ExportIndividuWindow,
         )
         self.eksport_individu_button.grid(row=3, column=0)
+        self.eksport_keluarga_button = tk.Button(
+            self,
+            text="Eksport Data Keluarga",
+            command=ExportKeluargaWindow,
+        )
+        self.eksport_keluarga_button.grid(row=3, column=1)
 
     @staticmethod
     def generate_template_individu():
