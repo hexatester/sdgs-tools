@@ -12,19 +12,15 @@ from sdgs_tools.aplikasi_sdgs.export import export_individu as _export_individu
 from sdgs_tools.aplikasi_sdgs.export import export_keluarga as _export_keluarga
 
 
-class ExportIndividuFrame(tk.Frame):
-    def __init__(self, master: tk.Frame, back):
+class ExportIndividuWindow(tk.Toplevel):
+    def __init__(self, master=None):
         super().__init__(master=master)
+        self.title("Eksport Individu")
         self.label_info = tk.Label(
             self,
             text="Eksport data individu",
         )
         self.label_info.grid(row=0, column=0)
-        self.back_button = tk.Button(
-            self,
-            text="Kembali",
-            command=back,
-        )
 
 
 class AplikasiTab(tk.Frame):
@@ -55,13 +51,12 @@ class AplikasiTab(tk.Frame):
             command=self.init_device,
         )
         self.init_device_button.grid(row=2, column=0)
-        self.eksport_individu = ExportIndividuFrame(master, back=self.tkraise)
-        self.init_device_button = tk.Button(
+        self.eksport_individu_button = tk.Button(
             self,
             text="Eksport Data Individu",
-            command=self.eksport_individu.tkraise,
+            command=ExportIndividuWindow,
         )
-        self.init_device_button.grid(row=3, column=0)
+        self.eksport_individu_button.grid(row=3, column=0)
 
     @staticmethod
     def generate_template_individu():
