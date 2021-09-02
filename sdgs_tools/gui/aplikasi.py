@@ -1,6 +1,10 @@
+import logging
 import tkinter as tk
 from tkinter.filedialog import asksaveasfilename
 from tkinter.messagebox import showerror, showinfo
+
+import adbutils
+from uiautomator2.init import Initer
 
 from sdgs_tools.aplikasi_sdgs.excel import make_template_individu
 from sdgs_tools.aplikasi_sdgs.excel import make_template_keluarga
@@ -30,6 +34,13 @@ class AplikasiTab(tk.Frame):
         )
         self.template_keluarga_button.grid(row=1, column=1)
 
+        self.init_device_button = tk.Button(
+            self,
+            text="Inisiasi Perangkat Android",
+            command=self.init_device,
+        )
+        self.init_device_button.grid(row=2, column=0)
+
     def generate_template_individu(self):
         files = [
             ("Excel 2010+", "*.xlsx"),
@@ -51,3 +62,8 @@ class AplikasiTab(tk.Frame):
             showinfo("Sukses", "Berhasil membuat template keluarga")
         except Exception as e:
             showerror("Error", f"Gagal membuat template keluarga karena {repr(e)}")
+
+    def init_device(self):
+        for device in adbutils.adb.iter_device():
+            init = Initer(device, loglevel=logging.INFO)
+            init.install()
