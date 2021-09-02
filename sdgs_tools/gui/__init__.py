@@ -1,7 +1,9 @@
 from .content import ContentFrame
 from .sidebar import SidebarFrame
 
+from .aplikasi import AplikasiTab
+
 from .main import MainApp
 
 
-__all__ = ["ContentFrame", "SidebarFrame", "MainApp"]
+__all__ = ["AplikasiTab", "ContentFrame", "SidebarFrame", "MainApp"]
