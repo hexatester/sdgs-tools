@@ -3,11 +3,15 @@ import click
 from sdgs_tools import __version__
 from sdgs_tools.cli import aplikasi
 from sdgs_tools.cli import exporter
+from sdgs_tools.gui import MainApp
 
 
-@click.group("sdgs-tools")
-def cli():
-    pass
+@click.group("sdgs-tools", invoke_without_command=True)
+@click.pass_context
+def cli(ctx: click.Context):
+    if ctx.invoked_subcommand is None:
+        gui = MainApp()
+        gui()
 
 
 cli.add_command(aplikasi, "aplikasi")
