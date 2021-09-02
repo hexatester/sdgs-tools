@@ -4,6 +4,7 @@ from .pekerjaan import DataPekerjaan
 from .penghasilan import Penghasilan, DataPenghasilan
 from .wilayah import DataWilayah
 
+from .tambah import tambah_individu
 
 __all__ = [
     "DataIndividu",
@@ -12,4 +13,5 @@ __all__ = [
     "DataPenghasilan",
     "DataWilayah",
     "Penghasilan",
+    "tambah_individu",
 ]
