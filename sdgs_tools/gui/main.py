@@ -18,8 +18,8 @@ class MainApp(tk.Tk):
 
         self.aplikasi_tab = AplikasiTab(self.content)
         self.dashboard_tab = DashboardTab(self.content)
-        self.sidebar.add_button("Aplikasi", self.aplikasi_tab.tkraise)
-        self.sidebar.add_button("Dashboard", self.dashboard_tab.tkraise)
+        self.sidebar.add_button("Aplikasi SDGS", self.aplikasi_tab.tkraise)
+        self.sidebar.add_button("Dashboard SDGS", self.dashboard_tab.tkraise)
 
         self.sidebar.add_button("Tentang", self.about)
 
