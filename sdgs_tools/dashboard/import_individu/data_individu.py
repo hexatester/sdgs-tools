@@ -62,8 +62,11 @@ class DataIndividu:
     disabilitas: Disabilitas
     setahun_melahirkan: Optional[YaTidak]
     mendapat_asi: Optional[YaTidak]
+    # Pendidikan
     pendidikan_tertinggi: Pendidikan
     tahun_pendidikan: Optional[str]
+    pendidikan_diikuti: Optional[Pendidikan]
+    pelatihan_diikuti: Optional[str]
     bahasa_permukiman: str
     bahasa_formal: str
     kerja_bakti: str

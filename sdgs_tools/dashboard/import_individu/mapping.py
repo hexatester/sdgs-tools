@@ -34,6 +34,8 @@ MAPPING = {
     "I.P406": "mendapat_asi",
     "I.P501": "pendidikan_tertinggi",
     "I.P502": "tahun_pendidikan",
+    "I.P503": "pendidikan_diikuti",
+    "I.P504": "pelatihan_diikuti",
     "I.P505": "bahasa_permukiman",
     "I.P506": "bahasa_formal",
     "I.P507": "kerja_bakti",
