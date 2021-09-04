@@ -6,8 +6,8 @@ authors = ["hexatester <hexatester@protonmail.com>"]
 license = "GPL-3.0-only"
 keywords = ["sdgs", "sdgs-dashboard", "survey-sdgs", "kemendesa"]
 readme = "README.md"
-homepage = "https://github.com/hexatester/sdgs-dashboard"
-repository = "https://github.com/hexatester/sdgs-dashboard"
+homepage = "https://github.com/hexatester/sdgs-tools"
+repository = "https://github.com/hexatester/sdgs-tools"
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
