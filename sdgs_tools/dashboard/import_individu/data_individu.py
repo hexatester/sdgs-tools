@@ -1,5 +1,6 @@
 import attr
-from typing import List, Optional
+import cattr
+from typing import Any, Dict, List, Optional
 from sdgs_tools.dashboard.enums import (
     Agama,
     AksesInternet,
@@ -21,10 +22,13 @@ from . import (
     Penghasilan,
     PenyakitDiderita,
 )
+from .mapping import MAPPING
 
 
 @attr.dataclass
 class DataIndividu:
+    no_kk: str
+    nik: str
     nama: str
     jenis_kelamin: JenisKelamin
     tempat_lahir: str
@@ -74,3 +78,23 @@ class DataIndividu:
     keterbukaan_desa: Optional[KeterbukaanDesa]
     terjadi_bencana: YaTidak
     terdampak_bencana: Optional[YaTidak]
+
+    def make_data(self, desa: str, rt: str, rw: str):
+        raw_data: Dict[str, Any] = cattr.unstructure(self)
+        clean_data: Dict[str, Any] = dict()
+        for key, properti in MAPPING.items():
+            value = raw_data.get(properti)
+            if value is None:
+                continue
+            clean_data[key] = value
+        clean_data.update(
+            {
+                "desa": desa,
+                "kecamatan": desa[0:7],
+                "kota": desa[0:4],
+                "provinsi": desa[0:2],
+                "rt": rt,
+                "rw": rw,
+            }
+        )
+        return clean_data
