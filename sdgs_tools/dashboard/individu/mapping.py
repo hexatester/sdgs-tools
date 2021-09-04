@@ -1,3 +1,5 @@
+import attr
+
 MAPPING = {
     "desa": "desa",
     "I.P103": "nama",
@@ -55,3 +57,29 @@ MAPPING = {
     "rt": "rt",
     "rw": "rw",
 }
+
+
+@attr.dataclass
+class MappingIndividu:
+    no_kk: str = "A"
+    nik: str = "B"
+    nama: str = "C"
+    jenis_kelamin: str = "D"
+    tempat_lahir: str = "E"
+    tanggal_lahir: str = "F"
+    usia: str = "G"
+    status_pernikahan: str = "H"
+    agama: str = "I"
+    suku: str = "J"
+    warganegara: str = "K"
+    nomor_hp: str = "L"
+    aktif_internet: str = "M"
+    kecepatan_internet: str = "N"
+    agama_comment: str = "O"
+    akses_melalui: str = "P"
+    usia_menikah: str = "Q"
+    nomor_whatsapp: str = "R"
+    alamat_email: str = "S"
+    alamat_facebook: str = "T"
+    alamat_twitter: str = "U"
+    alamat_instagram: str = "V"
