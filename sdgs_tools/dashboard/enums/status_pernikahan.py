@@ -2,10 +2,10 @@ from enum import Enum
 from . import make_str_to_enum
 
 MAPPING = {
-    "BELUM KAWIN": "1",
-    "KAWIN": "2",
-    "CERAI HIDUP": "3",
-    "CERAI MATI": "4",
+    "Belum Kawin": "1",
+    "Kawin": "2",
+    "Cerai Hidup": "3",
+    "Cerai Mati": "4",
 }
 
 

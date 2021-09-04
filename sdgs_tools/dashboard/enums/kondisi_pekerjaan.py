@@ -2,11 +2,11 @@ from enum import Enum
 from . import make_str_to_enum
 
 MAPPING = {
-    "BERSEKOLAH": 1,
-    "IBU RUMAH TANGGA": 2,
-    "TIDAK BEKERJA": 3,
-    "SEDANG MENCARI PEKERJAAN": 4,
-    "BEKERJA": 5,
+    "Bersekolah": 1,
+    "Ibu Rumah Tangga": 2,
+    "Tidak Bekerja": 3,
+    "Sedang Mencari Pekerjaan": 4,
+    "Bekerja": 5,
 }
 
 
