@@ -4,6 +4,7 @@ from .agama import Agama
 from .akses_internet import AksesInternet
 from .jenis_kelamin import JenisKelamin
 from .kecepatan_internet import KecepatanInternet
+from .keterbukaan_desa import KeterbukaanDesa
 from .kondisi_pekerjaan import KondisiPekerjaan
 from .pekerjaan_utama import PekerjaanUtama
 from .pelayanan_desa import PelayananDesa
