@@ -4,6 +4,7 @@ from .agama import Agama
 from .jenis_kelamin import JenisKelamin
 from .kondisi_pekerjaan import KondisiPekerjaan
 from .pekerjaan_utama import PekerjaanUtama
+from .pendidikan import Pendidikan
 from .status_pernikahan import StatusPernikahan
 from .warganegara import Warganegara
 from .ya_tidak import YaTidak
@@ -14,6 +15,7 @@ __all__ = [
     "JenisKelamin",
     "KondisiPekerjaan",
     "PekerjaanUtama",
+    "Pendidikan",
     "StatusPernikahan",
     "Warganegara",
     "YaTidak",
