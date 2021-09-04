@@ -10,6 +10,7 @@ from .pekerjaan_utama import PekerjaanUtama
 from .pelayanan_desa import PelayananDesa
 from .pendidikan import Pendidikan
 from .status_pernikahan import StatusPernikahan
+from .sumber_penghasilan import SumberPenghasilan
 from .warganegara import Warganegara
 from .ya_tidak import YaTidak
 
@@ -25,6 +26,7 @@ __all__ = [
     "PelayananDesa",
     "Pendidikan",
     "StatusPernikahan",
+    "SumberPenghasilan",
     "Warganegara",
     "YaTidak",
 ]
