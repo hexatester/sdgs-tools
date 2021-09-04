@@ -1,4 +1,5 @@
 from .individu import MappingIndividu
+from .pekerjaan import MappingPekerjaan
 
 MAPPING = {
     "desa": "desa",
@@ -58,4 +59,4 @@ MAPPING = {
     "rw": "rw",
 }
 
-__all__ = ["MappingIndividu"]
+__all__ = ["MappingIndividu", "MappingPekerjaan"]
