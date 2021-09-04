@@ -90,6 +90,11 @@ class AplikasiTab(tk.Frame):
 
     @staticmethod
     def init_device():
+        perangkat = 0
         for device in adbutils.adb.iter_device():
             init = Initer(device, loglevel=logging.INFO)
             init.install()
+        else:
+            showwarning("Gagal", "Tidak ada perangkat untuk diinisiasi")
+            return
+        showinfo("Berhasil", f"Berhasil menginisiasi {perangkat} perangkat")
