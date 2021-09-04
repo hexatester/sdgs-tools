@@ -1,47 +1,42 @@
 import attr
 from typing import Dict
 
-MAPPING = {
-    "1": "rumah_sakit",
-    "2": "rumah_sakit_bersalin",
-    "3": "puskesmas_rawat_inap",
-    "4": "puskesmas_tanpa_inap",
-    "5": "puskesmas_pembantu",
-    "6": "poliklinik",
-    "7": "tempat_praktik_dokter",
-    "8": "rumah_bersalin",
-    "9": "tempat_praktik_bidan",
-    "10": "poskesdes",
-    "11": "polindes",
-    "12": "apotik",
-    "13": "toko_obat_jamu",
-    "14": "posyandu",
-    "15": "posbindu",
-    "16": "tempat_praktik_dukun",
-}
-
 
 @attr.dataclass
 class FasilitasKesehatan:
-    rumah_sakit: int
-    rumah_sakit_bersalin: int
-    puskesmas_rawat_inap: int
-    puskesmas_tanpa_inap: int
-    puskesmas_pembantu: int
-    poliklinik: int
-    tempat_praktik_dokter: int
-    rumah_bersalin: int
-    tempat_praktik_bidan: int
-    poskesdes: int
-    polindes: int
-    apotik: int
-    toko_obat_jamu: int
-    posyandu: int
-    posbindu: int
-    tempat_praktik_dukun: int
+    rumah_sakit: int = 0
+    rumah_sakit_bersalin: int = 0
+    puskesmas_rawat_inap: int = 0
+    puskesmas_tanpa_inap: int = 0
+    puskesmas_pembantu: int = 0
+    poliklinik: int = 0
+    tempat_praktik_dokter: int = 0
+    rumah_bersalin: int = 0
+    tempat_praktik_bidan: int = 0
+    poskesdes: int = 0
+    polindes: int = 0
+    apotik: int = 0
+    toko_obat_jamu: int = 0
+    posyandu: int = 0
+    posbindu: int = 0
+    tempat_praktik_dukun: int = 0
 
     def todict(self) -> Dict[str, str]:
-        data: Dict[str, str] = dict()
-        for key, name in MAPPING.items():
-            data["key"] = getattr(self, name, 0)
-        return data
+        return {
+            "1": str(self.rumah_sakit),
+            "2": str(self.rumah_sakit_bersalin),
+            "3": str(self.puskesmas_rawat_inap),
+            "4": str(self.puskesmas_tanpa_inap),
+            "5": str(self.puskesmas_pembantu),
+            "6": str(self.poliklinik),
+            "7": str(self.tempat_praktik_dokter),
+            "8": str(self.rumah_bersalin),
+            "9": str(self.tempat_praktik_bidan),
+            "10": str(self.poskesdes),
+            "11": str(self.polindes),
+            "12": str(self.apotik),
+            "13": str(self.toko_obat_jamu),
+            "14": str(self.posyandu),
+            "15": str(self.posbindu),
+            "16": str(self.tempat_praktik_dukun),
+        }
