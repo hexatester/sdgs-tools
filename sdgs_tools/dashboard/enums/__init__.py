@@ -1,5 +1,6 @@
 from .util import make_str_to_enum
 
+from .agama import Agama
 from .jenis_kelamin import JenisKelamin
 from .status_pernikahan import StatusPernikahan
 from .warganegara import Warganegara
