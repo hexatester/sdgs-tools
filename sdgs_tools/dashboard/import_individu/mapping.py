@@ -23,7 +23,7 @@ MAPPING = {
     "I.P201": "kondisi_pekerjaan",
     "I.P202": "pekerjaan_utama",
     "I.P202-Comment": "pekerjaan_utama_comment",
-    "I.P203": "jaminan_sosial_ketenagakerjaan",
+    "I.P203": "jamsos_ketenagakerjaan",
     "I.P204": "penghasilan",
     "I.P204_penghasilan": "pekerjaan_penghasilan",
     "I.P401": "penyakit_diderita",

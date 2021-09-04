@@ -1,42 +1,64 @@
 import attr
+from typing import List, Optional
+from sdgs_tools.dashboard.enums import (
+    Agama,
+    AksesInternet,
+    JenisKelamin,
+    KecepatanInternet,
+    KondisiPekerjaan,
+    PekerjaanUtama,
+    Pendidikan,
+    StatusPernikahan,
+    Warganegara,
+    YaTidak,
+)
+
+from . import (
+    Disabilitas,
+    FasilitasKesehatan,
+    Penghasilan,
+    PenyakitDiderita,
+)
 
 
 
 @attr.dataclass
 class DataIndividu:
     nama: str
-    jenis_kelamin: str
+    jenis_kelamin: JenisKelamin
     tempat_lahir: str
     tanggal_lahir: str
     usia: str
-    status_pernikahan: str
+    status_pernikahan: StatusPernikahan
     usia_menikah: str
-    agama: str
+    agama: Agama
     suku_bangsa: str
-    warga_negara: str
+    warga_negara: Warganegara
     nomor_hp: str
-    nomor_whatsapp: str
-    alamat_email: str
-    alamat_facebook: str
-    alamat_twitter: str
-    alamat_instagram: str
-    aktif_internet: str
-    akses_melalui: str
-    kecepatan_internet: str
-    kondisi_pekerjaan: str
-    pekerjaan_utama: str
-    pekerjaan_utama_comment: str
-    jaminan_sosial_ketenagakerjaan: str
-    penghasilan: str
-    pekerjaan_penghasilan: str
-    penyakit_diderita: str
-    fasilitas_kesehatan: str
-    jamsos_kesehatan: str
-    disabilitas: str
-    setahun_melahirkan: str
-    mendapat_asi: str
-    pendidikan_tertinggi: str
-    tahun_pendidikan: str
+    nomor_whatsapp: Optional[str]
+    alamat_email: Optional[str]
+    alamat_facebook: Optional[str]
+    alamat_twitter: Optional[str]
+    alamat_instagram: Optional[str]
+    aktif_internet: YaTidak
+    akses_melalui: Optional[AksesInternet]
+    kecepatan_internet: KecepatanInternet
+    # Pekerjaan
+    kondisi_pekerjaan: KondisiPekerjaan
+    pekerjaan_utama: Optional[PekerjaanUtama]
+    pekerjaan_utama_comment: Optional[str]
+    jamsos_ketenagakerjaan: Optional[YaTidak]
+    penghasilan: List[Penghasilan]
+    pekerjaan_penghasilan: Optional[str]
+    # Kesehatan
+    penyakit_diderita: PenyakitDiderita
+    fasilitas_kesehatan: FasilitasKesehatan
+    jamsos_kesehatan: YaTidak
+    disabilitas: Disabilitas
+    setahun_melahirkan: Optional[YaTidak]
+    mendapat_asi: Optional[YaTidak]
+    pendidikan_tertinggi: Pendidikan
+    tahun_pendidikan: Optional[str]
     bahasa_permukiman: str
     bahasa_formal: str
     kerja_bakti: str
@@ -46,8 +68,8 @@ class DataIndividu:
     menolong_sakit: str
     menolong_kecelakaan: str
     memperoleh_pelayanan_desa: str
-    pelayanan_desa: str
+    pelayanan_desa: YaTidak
     saran_desa: str
     keterbukaan_desa: str
-    terjadi_bencana: str
-    terdampak_bencana: str
+    terjadi_bencana: YaTidak
+    terdampak_bencana: Optional[YaTidak]

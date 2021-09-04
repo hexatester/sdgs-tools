@@ -6,6 +6,7 @@ from .jenis_kelamin import JenisKelamin
 from .kecepatan_internet import KecepatanInternet
 from .kondisi_pekerjaan import KondisiPekerjaan
 from .pekerjaan_utama import PekerjaanUtama
+from .pelayanan_desa import PelayananDesa
 from .pendidikan import Pendidikan
 from .status_pernikahan import StatusPernikahan
 from .warganegara import Warganegara
@@ -20,6 +21,7 @@ __all__ = [
     "KecepatanInternet",
     "KondisiPekerjaan",
     "PekerjaanUtama",
+    "PelayananDesa",
     "Pendidikan",
     "StatusPernikahan",
     "Warganegara",
