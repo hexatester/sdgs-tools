@@ -1,13 +1,6 @@
 import attr
+import cattr
 from typing import Dict, Optional
-
-MAPPING = {
-    "diekspor": "diekspor",
-    "jumlah": "jumlah",
-    "penghasilan": "penghasilan",
-    "sumber_penghasilan": "sumber_penghasilan",
-    # "comment": "comment",
-}
 
 
 @attr.dataclass
@@ -30,3 +23,6 @@ class Penghasilan:
                 raise ValueError("comment harus diisi jika sumber_penghasilan = other")
             data["sumber_penghasilan-Comment"] = self.comment
         return data
+
+
+cattr.register_unstructure_hook(Penghasilan, Penghasilan.todict)

@@ -1,4 +1,5 @@
 import attr
+import cattr
 from typing import Dict
 
 from sdgs_tools.dashboard.enums import YaTidak
@@ -49,3 +50,6 @@ class PenyakitDiderita:
             "18": "1" if self.lumpuh else "2",
             "19": "1" if self.lainnya else "2",
         }
+
+
+cattr.register_unstructure_hook(PenyakitDiderita, PenyakitDiderita.todict)

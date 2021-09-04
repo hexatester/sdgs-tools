@@ -1,4 +1,5 @@
 import attr
+import cattr
 from typing import Dict
 
 from sdgs_tools.dashboard.enums import YaTidak
@@ -39,3 +40,6 @@ class Disabilitas:
             "18": "2",
             "19": "2",
         }
+
+
+cattr.register_unstructure_hook(Disabilitas, Disabilitas.todict)

@@ -1,4 +1,5 @@
 import attr
+import cattr
 from typing import Dict
 
 
@@ -40,3 +41,6 @@ class FasilitasKesehatan:
             "15": str(self.posbindu),
             "16": str(self.tempat_praktik_dukun),
         }
+
+
+cattr.register_unstructure_hook(FasilitasKesehatan, FasilitasKesehatan.todict)
