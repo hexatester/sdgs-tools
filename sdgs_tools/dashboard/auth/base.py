@@ -16,3 +16,15 @@ class BaseAuth(BaseSdgs):
         res_data = SdgsResponse.from_str(res.text, AuthToken)
         self.session.headers.update(res_data.data.token.token_header)
         return res_data.data
+
+    def token_refresh(self, token: AuthToken) -> AuthToken:
+        url = self.url_api("auth/token/refresh")
+        data = {
+            "refreshToken": token.token.refresh_token,
+            "username": token.user.username,
+        }
+        res = self.session.post(url, data)
+        assert res.ok
+        res_data = SdgsResponse.from_str(res.text, AuthToken)
+        self.session.headers.update(res_data.data.token.token_header)
+        return res_data.data
