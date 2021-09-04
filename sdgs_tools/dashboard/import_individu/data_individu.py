@@ -1,0 +1,53 @@
+import attr
+
+
+
+@attr.dataclass
+class DataIndividu:
+    nama: str
+    jenis_kelamin: str
+    tempat_lahir: str
+    tanggal_lahir: str
+    usia: str
+    status_pernikahan: str
+    usia_menikah: str
+    agama: str
+    suku_bangsa: str
+    warga_negara: str
+    nomor_hp: str
+    nomor_whatsapp: str
+    alamat_email: str
+    alamat_facebook: str
+    alamat_twitter: str
+    alamat_instagram: str
+    aktif_internet: str
+    akses_melalui: str
+    kecepatan_internet: str
+    kondisi_pekerjaan: str
+    pekerjaan_utama: str
+    pekerjaan_utama_comment: str
+    jaminan_sosial_ketenagakerjaan: str
+    penghasilan: str
+    pekerjaan_penghasilan: str
+    penyakit_diderita: str
+    fasilitas_kesehatan: str
+    jamsos_kesehatan: str
+    disabilitas: str
+    setahun_melahirkan: str
+    mendapat_asi: str
+    pendidikan_tertinggi: str
+    tahun_pendidikan: str
+    bahasa_permukiman: str
+    bahasa_formal: str
+    kerja_bakti: str
+    siskamling: str
+    pesta_rakyat: str
+    menolong_kematian: str
+    menolong_sakit: str
+    menolong_kecelakaan: str
+    memperoleh_pelayanan_desa: str
+    pelayanan_desa: str
+    saran_desa: str
+    keterbukaan_desa: str
+    terjadi_bencana: str
+    terdampak_bencana: str
