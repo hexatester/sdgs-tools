@@ -2,6 +2,7 @@ from .util import make_str_to_enum
 
 from .agama import Agama
 from .akses_internet import AksesInternet
+from .diekspor import Diekspor
 from .jenis_kelamin import JenisKelamin
 from .kecepatan_internet import KecepatanInternet
 from .keterbukaan_desa import KeterbukaanDesa
@@ -19,6 +20,7 @@ __all__ = [
     "make_str_to_enum",
     "Agama",
     "AksesInternet",
+    "Diekspor",
     "JenisKelamin",
     "KecepatanInternet",
     "KondisiPekerjaan",
