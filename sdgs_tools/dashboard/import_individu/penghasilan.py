@@ -2,21 +2,24 @@ import attr
 import cattr
 from typing import Dict, Optional
 
+from sdgs_tools.dashboard.enums import Diekspor
+from sdgs_tools.dashboard.enums import SumberPenghasilan
+
 
 @attr.dataclass
 class Penghasilan:
-    diekspor: str
+    diekspor: Diekspor
     jumlah: str
     penghasilan: str
-    sumber_penghasilan: str
+    sumber_penghasilan: SumberPenghasilan
     comment: Optional[str] = None
 
     def todict(self) -> Dict[str, str]:
         data: Dict[str, str] = {
-            "diekspor": "diekspor",
-            "jumlah": "jumlah",
-            "penghasilan": "penghasilan",
-            "sumber_penghasilan": "sumber_penghasilan",
+            "diekspor": str(self.diekspor.value),
+            "jumlah": str(self.jumlah),
+            "penghasilan": str(self.penghasilan),
+            "sumber_penghasilan": str(SumberPenghasilan.value),
         }
         if self.sumber_penghasilan == "other":
             if not self.comment:
