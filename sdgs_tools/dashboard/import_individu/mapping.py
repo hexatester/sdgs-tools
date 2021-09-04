@@ -1,3 +1,4 @@
+import attr
 
 MAPPING = {
     "desa": "desa",
@@ -58,3 +59,58 @@ MAPPING = {
     "rt": "rt",
     "rw": "rw",
 }
+
+
+@attr.dataclass
+class MappingIndividu:
+    no_kk: str = "A"
+    nik: str = "B"
+    nama: str = "C"
+    jenis_kelamin: str = "D"
+    tempat_lahir: str = "E"
+    tanggal_lahir: str = "F"
+    usia: str = "G"
+    status_pernikahan: str = "H"
+    usia_menikah: str = "I"
+    agama: str = "J"
+    suku_bangsa: str = "K"
+    warga_negara: str = "L"
+    nomor_hp: str = "M"
+    nomor_whatsapp: str = "N"
+    alamat_email: str = "O"
+    alamat_facebook: str = "P"
+    alamat_twitter: str = "Q"
+    alamat_instagram: str = "R"
+    aktif_internet: str = "S"
+    akses_melalui: str = "T"
+    kecepatan_internet: str = "U"
+    kondisi_pekerjaan: str = "V"
+    pekerjaan_utama: str = "W"
+    pekerjaan_utama_comment: str = "X"
+    jamsos_ketenagakerjaan: str = "Y"
+    penghasilan: str = "Z"  # TODO Penghasilan Dari Sheet Penghasilan
+    pekerjaan_penghasilan: str = "AA"
+    penyakit_diderita: str = "AB"
+    fasilitas_kesehatan: str = "AC-AR"  # TODO Parse From Range
+    jamsos_kesehatan: str = "AS"
+    disabilitas: str = "AT" # TODO Parse Multi-Select
+    setahun_melahirkan: str = "AU"
+    mendapat_asi: str = "AV"
+    pendidikan_tertinggi: str = "AW"
+    tahun_pendidikan: str = "AX"
+    pendidikan_diikuti: str = "AY"
+    pelatihan_diikuti: str = "AZ"
+    bahasa_permukiman: str = "BA"
+    bahasa_formal: str = "BB"
+    kerja_bakti: str = "BC"
+    siskamling: str = "BD"
+    pesta_rakyat: str = "BE"
+    menolong_kematian: str = "BF"
+    menolong_sakit: str = "BG"
+    menolong_kecelakaan: str = "BH"
+    memperoleh_pelayanan_desa: str = "BI"
+    pelayanan_desa: str = "BJ"
+    saran_desa: str = "BK"
+    keterbukaan_desa: str = "BL"
+    terjadi_bencana: str = "BM"
+    terdampak_bencana: str = "BN"
