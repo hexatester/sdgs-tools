@@ -1,6 +1,8 @@
 import click
 from openpyxl import load_workbook, Workbook
-from uiautomator2 import Device
+from time import sleep
+from typing import Optional
+from uiautomator2 import connect as connect_device
 
 from sdgs_tools.aplikasi_sdgs.keluarga import (
     get_data_lokasi,
@@ -27,8 +29,16 @@ def export_keluarga(
     skip_tenaga_kesehatan: bool = False,
     skip_sarpras: bool = False,
     skip_lain_lain: bool = False,
+    device: Optional[str] = None,
 ):
-    d = Device()
+    d = connect_device(device)
+    # d.app_start("com.kemendes.survey")
+    form_rt_rw = d(resourceId="com.kemendes.survey:id/txtRTRW")
+    while not form_rt_rw.exists:
+        click.echo(
+            "Mohon aktifkan GPS, buka aplikasi SDGS, dan masuk menu Entri Survey Individu!"
+        )
+        sleep(1)
     wb = load_workbook(filepath)
     keluarga = wb["Keluarga"]
     rows = parse_range(ranges)
