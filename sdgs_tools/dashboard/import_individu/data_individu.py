@@ -5,8 +5,10 @@ from sdgs_tools.dashboard.enums import (
     AksesInternet,
     JenisKelamin,
     KecepatanInternet,
+    KeterbukaanDesa,
     KondisiPekerjaan,
     PekerjaanUtama,
+    PelayananDesa,
     Pendidikan,
     StatusPernikahan,
     Warganegara,
@@ -19,7 +21,6 @@ from . import (
     Penghasilan,
     PenyakitDiderita,
 )
-
 
 
 @attr.dataclass
@@ -67,9 +68,9 @@ class DataIndividu:
     menolong_kematian: str
     menolong_sakit: str
     menolong_kecelakaan: str
-    memperoleh_pelayanan_desa: str
-    pelayanan_desa: YaTidak
-    saran_desa: str
-    keterbukaan_desa: str
+    memperoleh_pelayanan_desa: YaTidak
+    pelayanan_desa: Optional[PelayananDesa]
+    saran_desa: YaTidak
+    keterbukaan_desa: Optional[KeterbukaanDesa]
     terjadi_bencana: YaTidak
     terdampak_bencana: Optional[YaTidak]
