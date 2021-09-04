@@ -7,4 +7,4 @@ def date_to_str(value: date) -> str:
 
 
 def register_cattr_hooks():
-    cattr.register_structure_hook(date, date_to_str)
+    cattr.register_unstructure_hook(date, date_to_str)
