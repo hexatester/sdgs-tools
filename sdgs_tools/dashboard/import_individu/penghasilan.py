@@ -45,7 +45,7 @@ class Penghasilan:
     def from_row(cls, ws: Worksheet, row: int, cols: Dict[str, str]) -> "Penghasilan":
         data: Dict[str, Any] = dict()
         for name, col in cols.items():
-            data[name] = ws[f"{col}{row}"]
+            data[name] = ws[f"{col}{row}"].value
         return cattr.structure(data, cls)
 
 
