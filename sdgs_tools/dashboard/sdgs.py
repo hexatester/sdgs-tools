@@ -17,13 +17,14 @@ class Sdgs(BaseAuth):
     def validateNik(
         self,
         nik: str,
-    ):
+    ) -> bool:
         json_data = {"nik": nik}
-        return self.api_post_to_res(
+        res = self.api_post_raw(
             "surveyIndividu/validateNik",
             str,
             json=json_data,
         )
+        return bool(res)
 
     def save_individu(self, individu: DataIndividu, rt: str, rw: str):
         data_individu = individu.make_data(desa=self.token.wilayah, rt=rt, rw=rw)
