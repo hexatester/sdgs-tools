@@ -29,7 +29,9 @@ class Sdgs(BaseAuth):
     def save_individu(self, individu: DataIndividu, rt: str, rw: str):
         data_individu = individu.make_data(desa=self.token.wilayah, rt=rt, rw=rw)
         json_data = {"jsonResult": data_individu}
-        res = self.api_post(
-            filename="",
+        res = self.api_post_raw(
+            filename="surveyIndividu/save",
+            cl=str,
             json=json_data,
         )
+        return res
