@@ -276,3 +276,12 @@ class MappingIndividu:
             individu[f"{self.disabilitas}{row}"].value
         )
         return data
+
+    def get_nik(
+        self,
+        wb: Workbook,
+        row: int,
+        individu_ws: str = "Individu",
+    ):
+        individu = wb[individu_ws]
+        return individu[f"{self.nik}{row}"].value
