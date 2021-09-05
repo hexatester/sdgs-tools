@@ -1,5 +1,6 @@
 import attr
 from datetime import datetime
+from time import time
 from typing import Dict, Optional
 
 
@@ -43,6 +44,15 @@ class Token:
     error: Optional[str]
     error_description: Optional[str]
     error_uri: Optional[str]
+    _expires_time: int = 0
+
+    def __attrs_post_init__(self) -> None:
+        now = int(time())
+        self._expires_time = now + self.expires_in
+
+    def is_valid(self, delta: int = -60) -> bool:
+        now = int(time())
+        return now >= (self._expires_time + delta)
 
     @property
     def token_header(self) -> Dict[str, str]:
