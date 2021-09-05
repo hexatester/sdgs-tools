@@ -1,4 +1,11 @@
 import attr
+from openpyxl import Workbook
+from typing import Any, Dict
+
+from sdgs_tools.utils import parse_range
+from .disabilitas import Disabilitas
+from .fasilitas_kesehatan import FasilitasKesehatan
+from .penghasilan import Penghasilan
 
 MAPPING = {
     "desa": "desa",
@@ -60,6 +67,84 @@ MAPPING = {
     "rw": "rw",
 }
 
+NORMAL_DATA = [
+    "no_kk",
+    "nik",
+    "nama",
+    "jenis_kelamin",
+    "tempat_lahir",
+    "tanggal_lahir",
+    "usia",
+    "status_pernikahan",
+    "usia_menikah",
+    "agama",
+    "suku_bangsa",
+    "warga_negara",
+    "nomor_hp",
+    "nomor_whatsapp",
+    "alamat_email",
+    "alamat_facebook",
+    "alamat_twitter",
+    "alamat_instagram",
+    "aktif_internet",
+    "akses_melalui",
+    "kecepatan_internet",
+    "kondisi_pekerjaan",
+    "pekerjaan_utama",
+    "pekerjaan_utama_comment",
+    "jamsos_ketenagakerjaan",
+    "pekerjaan_penghasilan",
+    "penyakit_diderita",
+    "jamsos_kesehatan",
+    "setahun_melahirkan",
+    "mendapat_asi",
+    "pendidikan_tertinggi",
+    "tahun_pendidikan",
+    "pendidikan_diikuti",
+    "pelatihan_diikuti",
+    "bahasa_permukiman",
+    "bahasa_formal",
+    "kerja_bakti",
+    "siskamling",
+    "pesta_rakyat",
+    "menolong_kematian",
+    "menolong_sakit",
+    "menolong_kecelakaan",
+    "memperoleh_pelayanan_desa",
+    "pelayanan_desa",
+    "saran_desa",
+    "keterbukaan_desa",
+    "terjadi_bencana",
+    "terdampak_bencana",
+]
+
+PENGHASILAN_DATA = [
+    "sumber_penghasilan",
+    "penghasilan_comment",
+    "penghasilan_jumlah",
+    "penghasilan_setahun",
+    "penghasilan_diekspor",
+]
+
+FASILITAS_KESEHATAN_DATA = [
+    "rumah_sakit",
+    "rumah_sakit_bersalin",
+    "puskesmas_rawat_inap",
+    "puskesmas_tanpa_inap",
+    "puskesmas_pembantu",
+    "poliklinik",
+    "tempat_praktik_dokter",
+    "rumah_bersalin",
+    "tempat_praktik_bidan",
+    "poskesdes",
+    "polindes",
+    "apotik",
+    "toko_obat_jamu",
+    "posyandu",
+    "posbindu",
+    "tempat_praktik_dukun",
+]
+
 
 @attr.dataclass
 class MappingIndividu:
@@ -93,7 +178,7 @@ class MappingIndividu:
     penyakit_diderita: str = "AB"
     fasilitas_kesehatan: str = "AC-AR"  # TODO Parse From Range
     jamsos_kesehatan: str = "AS"
-    disabilitas: str = "AT" # TODO Parse Multi-Select
+    disabilitas: str = "AT"  # TODO Parse Multi-Select
     setahun_melahirkan: str = "AU"
     mendapat_asi: str = "AV"
     pendidikan_tertinggi: str = "AW"
@@ -114,3 +199,80 @@ class MappingIndividu:
     keterbukaan_desa: str = "BL"
     terjadi_bencana: str = "BM"
     terdampak_bencana: str = "BN"
+    # Sheet Penghasilan
+    sumber_penghasilan: str = "A"
+    penghasilan_comment: str = "B"
+    penghasilan_jumlah: str = "C"
+    penghasilan_setahun: str = "D"
+    penghasilan_diekspor: str = "E"
+    # Fasilitas Kesehatan
+    rumah_sakit: str = "AC"
+    rumah_sakit_bersalin: str = "AD"
+    puskesmas_rawat_inap: str = "AE"
+    puskesmas_tanpa_inap: str = "AF"
+    puskesmas_pembantu: str = "AG"
+    poliklinik: str = "AH"
+    tempat_praktik_dokter: str = "AI"
+    rumah_bersalin: str = "AJ"
+    tempat_praktik_bidan: str = "AK"
+    poskesdes: str = "AL"
+    polindes: str = "AM"
+    apotik: str = "AN"
+    toko_obat_jamu: str = "AO"
+    posyandu: str = "AP"
+    posbindu: str = "AQ"
+    tempat_praktik_dukun: str = "AR"
+    _normal_cols: Dict[str, str] = attr.field(factory=dict)
+    _penghasilan_cols: Dict[str, str] = attr.field(factory=dict)
+    _fasilitas_kesehatan_cols: Dict[str, str] = attr.field(factory=dict)
+
+    def __attrs_post_init__(self):
+        # Name : Column
+        self._normal_cols: Dict[str, str] = dict()
+        for name in NORMAL_DATA:
+            col = getattr(self, name)
+            assert col
+            self._normal_cols[name] = col
+        self._penghasilan_cols: Dict[str, str] = dict()
+        for name in PENGHASILAN_DATA:
+            col = getattr(self, name)
+            assert col
+            self._penghasilan_cols[name] = col
+        self._fasilitas_kesehatan_cols: Dict[str, str] = dict()
+        for name in FASILITAS_KESEHATAN_DATA:
+            col = getattr(self, name)
+            assert col
+            self._fasilitas_kesehatan_cols[name] = col
+
+    def __call__(
+        self,
+        wb: Workbook,
+        row: int,
+        individu_ws: str = "Individu",
+        penghasilan_ws: str = "Penghasilan",
+    ) -> Dict[str, Any]:
+        data: Dict[str, Any] = dict()
+        individu = wb[individu_ws]
+        for name, col in self._normal_cols.items():
+            data[name] = individu[f"{col}{row}"].value
+        # penghasilan: str = "Z"  # TODO Penghasilan Dari Sheet Penghasilan
+        penghasilans = individu[f"{self.penghasilan}{row}"].value
+        if penghasilans:
+            data["penghasilan"] = Penghasilan.from_range(
+                ws=wb[penghasilan_ws],
+                rows=parse_range(penghasilans),
+                cols=self._penghasilan_cols,
+            )
+        else:
+            data["penghasilan"] = Penghasilan.default()
+        # fasilitas_kesehatan: str = "AC-AR"  # TODO Parse From Range
+        data["fasilitas_kesehatan"] = FasilitasKesehatan.from_row(
+            ws=individu,
+            row=row,
+            cols=self._fasilitas_kesehatan_cols,
+        )
+        # disabilitas: str = "AT"  # TODO Parse Multi-Select
+        data["disabilitas"] = Disabilitas.from_str(
+            individu[f"{self.disabilitas}{row}"].value
+        )
+        return data
