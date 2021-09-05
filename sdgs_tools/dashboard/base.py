@@ -43,3 +43,13 @@ class BaseSdgs:
         res_raw = self.api_post(filename, *args, **kwargs)
         res = SdgsResponse.from_str(res_raw.text, cl)
         return res.data
+
+    def api_post_raw(
+        self,
+        filename: str,
+        cl: Type[T],
+        *args,
+        **kwargs,
+    ) -> SdgsResponse[T]:
+        res_raw = self.api_post(filename, *args, **kwargs)
+        return SdgsResponse.from_str(res_raw.text, cl)
