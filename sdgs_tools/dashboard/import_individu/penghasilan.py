@@ -29,6 +29,23 @@ class Penghasilan:
         return data
 
     @classmethod
+    def default(
+        cls,
+        penghasilan_diekspor: Diekspor = Diekspor.TIDAK,
+        penghasilan_jumlah: str = "0",
+        penghasilan_setahun: str = "0",
+        sumber_penghasilan: SumberPenghasilan = SumberPenghasilan.LAINNYA,
+        penghasilan_comment: str = None,
+    ) -> "Penghasilan":
+        return cls(
+            penghasilan_diekspor=penghasilan_diekspor,
+            penghasilan_jumlah=penghasilan_jumlah,
+            penghasilan_setahun=penghasilan_setahun,
+            sumber_penghasilan=sumber_penghasilan,
+            penghasilan_comment=penghasilan_comment,
+        )
+
+    @classmethod
     def from_range(cls, ws: Worksheet, rows: List[int], cols: Dict[str, str]):
         results: List[Any] = list()
         for row in rows:
