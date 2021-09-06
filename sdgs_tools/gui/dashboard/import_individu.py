@@ -1,0 +1,89 @@
+import tkinter as tk
+from tkinter.filedialog import askopenfilename
+from tkinter.messagebox import showerror, showinfo, showwarning
+from typing import Optional
+
+
+from sdgs_tools.utils import parse_range
+from sdgs_tools.dashboard.sdgs import Sdgs
+from sdgs_tools.dashboard.import_individu import import_individu
+from sdgs_tools.dashboard.import_individu import MappingIndividu
+from ..form import TextForm
+
+
+class ImportIndividuWindow(tk.Toplevel):
+    def __init__(self, master=None):
+        super().__init__(master=master, width=400, height=400)
+        self.sdgs: Optional[Sdgs] = None
+        self.title("Eksport Individu")
+        self.label_info = tk.Label(
+            self,
+            text="Eksport data individu",
+        )
+        self.label_info.grid(row=0, column=0, columnspan=3)
+        # Autentikasi
+        self.username_form = TextForm(self, "Username", 1)
+        self.password_form = TextForm(self, "Password", 2)
+
+    def show_import(self):
+        # Import?
+        self.baris_form = TextForm(self, "Baris", 3)
+        self.baris_info_button = tk.Button(self, text="?", command=self.info_baris)
+        self.baris_info_button.grid(row=3, column=2)
+        self.rt_form = TextForm(self, "Rt", 4)
+        self.rw_form = TextForm(self, "Rw", 5)
+        self.info_label = tk.Label(
+            self,
+            text="Unduh template di .....",
+        )
+        self.info_label.grid(row=7, column=0, columnspan=3)
+        self.start_button = tk.Button(
+            self,
+            text="Pilih template individu dan mulai ekspor",
+            command=self.export,
+        )
+        self.start_button.grid(row=8, column=0, columnspan=3)
+
+    def login(self):
+        username: str = self.username_form.value.get()
+        password: str = self.password_form.value.get()
+        try:
+            self.sdgs = Sdgs(username, password)
+            showinfo(
+                "Sukses",
+                f"Berhasil login dengan menggunakan akun {self.sdgs.token.user}",
+            )
+            self.show_import()
+        except Exception as e:
+            showerror("Gagal", f"Gagal login, alasan: {e}")
+
+    def start_import(self):
+        files = [
+            ("Excel 2010+", "*.xlsx"),
+        ]
+        filepath = askopenfilename(filetypes=files, defaultextension=files)
+        if not filepath:
+            showwarning("Gagal", "Mohon pilih template yang benar")
+            return
+        try:
+            import_individu(
+                sdgs=self.sdgs,
+                filepath=filepath,
+                rows=parse_range(self.baris_form.value.get()),
+                rt=self.rt_form.value.get(),
+                rw=self.rw_form.value.get(),
+            )
+        except FileNotFoundError:
+            showwarning(
+                "Gagal",
+                "Gagal mengeksport data karena file template tidak ditemukan",
+            )
+        except Exception as e:
+            showerror("Error", f"Terjadi error : {e}")
+
+    @staticmethod
+    def info_baris():
+        showinfo(
+            "Baris?",
+            'Baris data dari template yang diambil datanya\nMisalnya "2-100,150-200"',
+        )
