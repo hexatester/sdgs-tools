@@ -1,4 +1,3 @@
-import click
 from ..response import SdgsResponse
 from ..base import BaseSdgs
 
@@ -27,7 +26,6 @@ class BaseAuth(BaseSdgs):
         return res_data.data
 
     def token_refresh(self, token: AuthToken) -> AuthToken:
-        click.echo("Mencoba refresh token")
         url = self.url_api("auth/token/refresh")
         data = {
             "refreshToken": token.token.refresh_token,
