@@ -77,7 +77,7 @@ class ImportIndividuWindow(tk.Toplevel):
             showerror("Gagal", "Rw harus 3 digit, misal 001")
             return
         files = [
-            ("Excel 2010+", "*.xlsx"),
+            ("Excel Macro", "*.xlsm"),
         ]
         filepath = askopenfilename(filetypes=files, defaultextension=files)
         if not filepath:
