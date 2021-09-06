@@ -22,7 +22,7 @@ class Sdgs(BaseAuth):
             json=json_data,
             ignore=True,
         )
-        return bool(res)
+        return bool(res) or res.message == "NIK Kepala Keluarga Sudah Ada"
 
     def validateNik(
         self,
