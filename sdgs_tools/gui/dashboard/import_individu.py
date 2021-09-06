@@ -13,7 +13,8 @@ from ..form import TextForm
 
 class ImportIndividuWindow(tk.Toplevel):
     def __init__(self, master=None):
-        super().__init__(master=master, width=400, height=400)
+        super().__init__(master=master)
+        self.geometry('230x250')
         self.sdgs: Optional[Sdgs] = None
         self.title("Eksport Individu")
         self.label_info = tk.Label(
@@ -24,25 +25,31 @@ class ImportIndividuWindow(tk.Toplevel):
         # Autentikasi
         self.username_form = TextForm(self, "Username", 1)
         self.password_form = TextForm(self, "Password", 2)
+        self.login_button = tk.Button(
+            self,
+            text="Login",
+            command=self.login,
+        )
+        self.login_button.grid(row=3, column=1)
 
     def show_import(self):
         # Import?
-        self.baris_form = TextForm(self, "Baris", 3)
+        self.baris_form = TextForm(self, "Baris", 5)
         self.baris_info_button = tk.Button(self, text="?", command=self.info_baris)
-        self.baris_info_button.grid(row=3, column=2)
-        self.rt_form = TextForm(self, "Rt", 4)
-        self.rw_form = TextForm(self, "Rw", 5)
+        self.baris_info_button.grid(row=5, column=2)
+        self.rt_form = TextForm(self, "Rt", 6)
+        self.rw_form = TextForm(self, "Rw", 7)
         self.info_label = tk.Label(
             self,
             text="Unduh template di .....",
         )
-        self.info_label.grid(row=7, column=0, columnspan=3)
+        self.info_label.grid(row=9, column=0, columnspan=3)
         self.start_button = tk.Button(
             self,
-            text="Pilih template individu dan mulai ekspor",
-            command=self.export,
+            text="Pilih template individu dan mulai import",
+            command=self.start_import,
         )
-        self.start_button.grid(row=8, column=0, columnspan=3)
+        self.start_button.grid(row=10, column=0, columnspan=3)
 
     def login(self):
         username: str = self.username_form.value.get()
@@ -58,6 +65,14 @@ class ImportIndividuWindow(tk.Toplevel):
             showerror("Gagal", f"Gagal login, alasan: {e}")
 
     def start_import(self):
+        rt=self.rt_form.value.get()
+        rw=self.rw_form.value.get()
+        if len(rt) != 3:
+            showerror("Gagal", "Rt harus 3 digit, misal 001")
+            return
+        if len(rw) != 3:
+            showerror("Gagal", "Rw harus 3 digit, misal 001")
+            return
         files = [
             ("Excel 2010+", "*.xlsx"),
         ]
@@ -70,8 +85,8 @@ class ImportIndividuWindow(tk.Toplevel):
                 sdgs=self.sdgs,
                 filepath=filepath,
                 rows=parse_range(self.baris_form.value.get()),
-                rt=self.rt_form.value.get(),
-                rw=self.rw_form.value.get(),
+                rt=rt,
+                rw=rw,
             )
         except FileNotFoundError:
             showwarning(
