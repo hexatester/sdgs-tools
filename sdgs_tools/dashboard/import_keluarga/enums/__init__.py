@@ -11,6 +11,7 @@ from .pembuangan_limbah_cair import PembuanganLimbahCair
 from .pembuangan_sampah import PembuanganSampah
 from .penerangan import Penerangan
 from .status_lahan import StatusLahan
+from .sumber_air_mandi import SumberAirMandi
 
 cattr.register_structure_hook(Atap, Atap.from_str)  # type: ignore
 cattr.register_structure_hook(Dinding, Dinding.from_str)  # type: ignore
@@ -23,6 +24,7 @@ cattr.register_structure_hook(PembuanganLimbahCair, PembuanganLimbahCair.from_st
 cattr.register_structure_hook(PembuanganSampah, PembuanganSampah.from_str)  # type: ignore
 cattr.register_structure_hook(Penerangan, Penerangan.from_str)  # type: ignore
 cattr.register_structure_hook(StatusLahan, StatusLahan.from_str)  # type: ignore
+cattr.register_structure_hook(SumberAirMandi, SumberAirMandi.from_str)  # type: ignore
 
 __all__ = [
     "Atap",
@@ -36,4 +38,5 @@ __all__ = [
     "PembuanganSampah",
     "Penerangan",
     "StatusLahan",
+    "SumberAirMandi",
 ]
