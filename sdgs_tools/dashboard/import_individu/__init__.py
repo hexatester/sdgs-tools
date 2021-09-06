@@ -27,7 +27,7 @@ __all__ = [
 
 
 def import_individu(
-    sdgs: Sdgs,
+    sdgs: "Sdgs",
     filepath: str,
     rows: List[int],
     rt: str,
