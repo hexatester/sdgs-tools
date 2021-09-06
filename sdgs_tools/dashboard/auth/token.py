@@ -29,6 +29,9 @@ class User:
     namaKota: Optional[str]
     namaProvinsi: Optional[str]
 
+    def __str__(self):
+        return self.nama
+
 
 @attr.dataclass
 class Token:
