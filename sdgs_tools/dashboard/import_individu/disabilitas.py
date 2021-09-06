@@ -1,5 +1,4 @@
 import attr
-import cattr
 from typing import Dict, Optional
 
 from .enums import YaTidak
@@ -66,7 +65,3 @@ class Disabilitas:
             else:
                 data[name] = YaTidak.TIDAK
         return cls(**data)
-
-
-cattr.register_unstructure_hook(Disabilitas, Disabilitas.todict)
-cattr.register_structure_hook(Disabilitas, Disabilitas.from_str)

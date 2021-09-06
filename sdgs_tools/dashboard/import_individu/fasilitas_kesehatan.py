@@ -1,5 +1,4 @@
 import attr
-import cattr
 from openpyxl.worksheet.worksheet import Worksheet
 from typing import Dict
 
@@ -43,21 +42,9 @@ class FasilitasKesehatan:
             "16": str(self.tempat_praktik_dukun),
         }
 
-    @classmethod
-    def from_row(
-        cls, ws: Worksheet, row: int, cols: Dict[str, str]
-    ) -> "FasilitasKesehatan":
-        data: Dict[str, str] = dict()
-        for nama, col in cols.items():
-            data[nama] = ws[f"{col}{row}"].value
-        return cattr.structure(data, cls)
-
     @staticmethod
     def make_row(ws: Worksheet, row: int, cols: Dict[str, str]):
         data: Dict[str, str] = dict()
         for nama, col in cols.items():
             data[nama] = ws[f"{col}{row}"].value
         return data
-
-
-cattr.register_unstructure_hook(FasilitasKesehatan, FasilitasKesehatan.todict)

@@ -245,7 +245,7 @@ class MappingIndividu:
             assert col
             self._fasilitas_kesehatan_cols[name] = col
 
-    def __call__(
+    def make_individu(
         self,
         wb: Workbook,
         row: int,

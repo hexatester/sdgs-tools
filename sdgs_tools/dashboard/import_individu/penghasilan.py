@@ -1,5 +1,4 @@
 import attr
-import cattr
 from openpyxl.worksheet.worksheet import Worksheet
 from typing import Any, Dict, List, Optional
 
@@ -47,26 +46,6 @@ class Penghasilan:
             )
         )
 
-    @classmethod
-    def from_range(cls, ws: Worksheet, rows: List[int], cols: Dict[str, str]):
-        results: List[Any] = list()
-        for row in rows:
-            results.append(
-                cls.from_row(
-                    ws=ws,
-                    row=row,
-                    cols=cols,
-                )
-            )
-        return results
-
-    @classmethod
-    def from_row(cls, ws: Worksheet, row: int, cols: Dict[str, str]) -> "Penghasilan":
-        data: Dict[str, Any] = dict()
-        for name, col in cols.items():
-            data[name] = ws[f"{col}{row}"].value
-        return cattr.structure(data, cls)
-
     @staticmethod
     def make_range(ws: Worksheet, rows: List[int], cols: Dict[str, str]):
         results: List[Any] = list()
@@ -76,6 +55,3 @@ class Penghasilan:
                 data[name] = ws[f"{col}{row}"].value
             results.append(data)
         return results
-
-
-cattr.register_unstructure_hook(Penghasilan, Penghasilan.todict)

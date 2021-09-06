@@ -16,6 +16,14 @@ from .data_individu import DataIndividu
 from .mapping import MappingIndividu
 
 
+cattr.register_structure_hook(Disabilitas, Disabilitas.from_str)
+cattr.register_structure_hook(PenyakitDiderita, PenyakitDiderita.from_str)
+
+cattr.register_unstructure_hook(Disabilitas, Disabilitas.todict)
+cattr.register_unstructure_hook(FasilitasKesehatan, FasilitasKesehatan.todict)
+cattr.register_unstructure_hook(Penghasilan, Penghasilan.todict)
+cattr.register_unstructure_hook(PenyakitDiderita, PenyakitDiderita.todict)
+
 __all__ = [
     "DataIndividu",
     "Disabilitas",
@@ -53,7 +61,7 @@ def import_individu(
             skipped += 1
             continue
         click.echo(f"Mempersiapkan data nik {nik}")
-        data = mapping(
+        data = mapping.make_individu(
             wb=wb,
             row=row,
             individu_ws="Individu",

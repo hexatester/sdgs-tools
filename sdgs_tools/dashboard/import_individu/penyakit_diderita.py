@@ -1,5 +1,4 @@
 import attr
-import cattr
 from typing import Dict, Optional
 
 from .enums import YaTidak
@@ -86,7 +85,3 @@ class PenyakitDiderita:
             else:
                 data[name] = YaTidak.TIDAK
         return data
-
-
-cattr.register_structure_hook(PenyakitDiderita, PenyakitDiderita.from_str)
-cattr.register_unstructure_hook(PenyakitDiderita, PenyakitDiderita.todict)
