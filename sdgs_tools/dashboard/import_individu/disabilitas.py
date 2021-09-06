@@ -9,7 +9,7 @@ MAPPING = {
     "Tunanetra": "tunanetra",
     "Tunarungu": "tunarungu",
     "Tunawicara": "tunawicara",
-    "Tunarungu_wicara": "tunarungu_wicara",
+    "Tunarungu Wicara": "tunarungu_wicara",
     "Tunadaksa": "tunadaksa",
     "Tunagrahita": "tunagrahita",
     "Tunalaras": "tunalaras",
@@ -56,7 +56,7 @@ class Disabilitas:
         }
 
     @classmethod
-    def from_str(cls, val: str):
+    def from_str(cls, val: str, t=None):
         if not val:
             return cls()
         data: Dict[str, YaTidak] = dict()
@@ -69,3 +69,4 @@ class Disabilitas:
 
 
 cattr.register_unstructure_hook(Disabilitas, Disabilitas.todict)
+cattr.register_structure_hook(Disabilitas, Disabilitas.from_str)
