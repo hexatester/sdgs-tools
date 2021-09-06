@@ -1,9 +1,15 @@
+import requests
 import tkinter as tk
+import webbrowser
+from tkinter.filedialog import asksaveasfile
+from tkinter.messagebox import showinfo, showwarning
 
 from .import_individu import ImportIndividuWindow
 
 
 class DashboardTab(tk.Frame):
+    TEMPLATE_INDIVIDU = "https://hexatester.github.io/sdgs-tools/Template%20Individu%20Dashboard%20SDGS%20Kemendesa.xlsx"
+
     def __init__(self, master: tk.Frame, **kw):
         super().__init__(master, bg="#CCC", width=500, height=500, **kw)
         # self.pack(expand=True, fill="both", side="right")
@@ -13,9 +19,30 @@ class DashboardTab(tk.Frame):
             text="Fitur ini untuk meng import data ke dashboard-sdgs (MASIH DALAM PENGERJAAN)",
         )
         self.label_info.grid(row=0, column=0, columnspan=2)
+        self.template_individu_button = tk.Button(
+            self,
+            text="Template Individu",
+            command=self.download_template_individu,
+        )
+        self.template_individu_button.grid(row=1, column=0)
         self.import_individu_button = tk.Button(
             self,
             text="Import Individu",
             command=ImportIndividuWindow,
         )
-        self.import_individu_button.grid(row=1, column=0)
+        self.import_individu_button.grid(row=1, column=2)
+
+    def download_template_individu(self):
+        files = [
+            ("Excel 2010+", "*.xlsx"),
+        ]
+        filepath = asksaveasfile(filetypes=files, defaultextension=files)
+        if not filepath:
+            showwarning(
+                "Gagal",
+                "Mohon tentukan nama dan lokasi file yang akan disimpan",
+            )
+        res = requests.get(self.TEMPLATE_INDIVIDU)
+        with open(filepath, "wb") as f:
+            f.write(res.content)
+        showinfo("Sukses", f"Berhasil menyimpan template di {filepath}")
