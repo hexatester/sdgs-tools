@@ -5,6 +5,29 @@ from typing import Dict
 from sdgs_tools.dashboard.enums import YaTidak
 
 
+MAPPING = {
+    "Mutaber Diare": "mutaber_diare",
+    "Demam Berdarah": "demam_berdarah",
+    "Campak": "campak",
+    "Malaria": "malaria",
+    "Flu Burung Sars": "flu_burung_sars",
+    "Covid19": "covid19",
+    "Hepatitis B": "hepatitis_b",
+    "Hepatitis E": "hepatitis_e",
+    "Difteri": "difteri",
+    "Chikungunya": "chikungunya",
+    "Leptospirosis": "leptospirosis",
+    "Kolera": "kolera",
+    "Gizi Buruk": "gizi_buruk",
+    "Jantung": "jantung",
+    "TBC Paru-Paru": "tbc_paru_paru",
+    "Kanker": "kanker",
+    "Diabetes": "diabetes",
+    "Lumpuh": "lumpuh",
+    "Lainnya": "lainnya",
+}
+
+
 @attr.dataclass
 class PenyakitDiderita:
     # P404
@@ -51,5 +74,16 @@ class PenyakitDiderita:
             "19": "1" if self.lainnya else "2",
         }
 
+    @classmethod
+    def from_str(cls, value: str, t=None):
+        data: Dict[str, YaTidak] = dict()
+        for key, name in MAPPING.items():
+            if value in key:
+                data[name] = YaTidak.YA
+            else:
+                data[name] = YaTidak.TIDAK
+        return data
 
+
+cattr.register_structure_hook(PenyakitDiderita, PenyakitDiderita.from_str)
 cattr.register_unstructure_hook(PenyakitDiderita, PenyakitDiderita.todict)
