@@ -1,6 +1,6 @@
 import attr
 import cattr
-from typing import Dict
+from typing import Dict, Optional
 
 from .enums import YaTidak
 
@@ -56,7 +56,7 @@ class Disabilitas:
         }
 
     @classmethod
-    def from_str(cls, val: str, t=None):
+    def from_str(cls, val: Optional[str], t=None) -> "Disabilitas":
         if not val:
             return cls()
         data: Dict[str, YaTidak] = dict()
