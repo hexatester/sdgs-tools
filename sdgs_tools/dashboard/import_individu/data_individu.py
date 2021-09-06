@@ -82,6 +82,12 @@ class DataIndividu:
     terjadi_bencana: YaTidak
     terdampak_bencana: Optional[YaTidak]
 
+    def __attrs_post_init(self):
+        if self.terjadi_bencana and self.terdampak_bencana is None:
+            raise ValueError(
+                "Jika Terjadi bencana mohon diisi terdampak bencana atau tidak"
+            )
+
     def make_data(self, desa: str, rt: str, rw: str):
         raw_data: Dict[str, Any] = cattr.unstructure(self)
         clean_data: Dict[str, Any] = dict()
