@@ -6,7 +6,7 @@ from . import AuthToken
 
 
 class BaseAuth(BaseSdgs):
-    def login(self, username: str, password: str) -> AuthToken:
+    def login(self, username: str, password: str, userType: str = "enumerator") -> AuthToken:
         res = self.session.get("https://dashboard-sdgs.kemendesa.go.id/")
         # AuthToken
         if not res.ok:
@@ -20,6 +20,8 @@ class BaseAuth(BaseSdgs):
         if res_data.status == 500:
             raise Exception(res_data.message)
         self.session.headers.update(res_data.data.token.token_header)
+        if res_data.data.user.userType.nama != userType:
+            raise ValueError(f"Mohon login menggunakan user bertipe {userType}")
         return res_data.data
 
     def token_refresh(self, token: AuthToken) -> AuthToken:
