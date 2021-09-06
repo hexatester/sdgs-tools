@@ -21,7 +21,7 @@ class DashboardTab(tk.Frame):
         self.label_info.grid(row=0, column=0, columnspan=2)
         self.template_individu_button = tk.Button(
             self,
-            text="Template Individu",
+            text="Buat Template Individu",
             command=self.download_template_individu,
         )
         self.template_individu_button.grid(row=1, column=0)
@@ -43,6 +43,6 @@ class DashboardTab(tk.Frame):
                 "Mohon tentukan nama dan lokasi file yang akan disimpan",
             )
         res = requests.get(self.TEMPLATE_INDIVIDU)
-        with open(filepath, "wb") as f:
+        with open(filepath.name, "wb") as f:
             f.write(res.content)
-        showinfo("Sukses", f"Berhasil menyimpan template di {filepath}")
+        showinfo("Sukses", f"Berhasil menyimpan template di {filepath.name}")
