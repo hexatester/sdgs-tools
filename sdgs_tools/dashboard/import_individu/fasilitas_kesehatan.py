@@ -52,5 +52,12 @@ class FasilitasKesehatan:
             data[nama] = ws[f"{col}{row}"].value
         return cattr.structure(data, cls)
 
+    @staticmethod
+    def make_row(ws: Worksheet, row: int, cols: Dict[str, str]):
+        data: Dict[str, str] = dict()
+        for nama, col in cols.items():
+            data[nama] = ws[f"{col}{row}"].value
+        return data
+
 
 cattr.register_unstructure_hook(FasilitasKesehatan, FasilitasKesehatan.todict)
