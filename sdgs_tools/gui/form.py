@@ -14,9 +14,9 @@ class TextForm:
         super().__init__()
         self.value = tk.StringVar(master, value, name)
         self.label = tk.Label(master, text=text)
-        self.label.pack(row=row, column=start_col)
+        self.label.grid(row=row, column=start_col)
         self.entry = tk.Entry(master, textvariable=self.value)
-        self.entry.pack(row=row + 1, column=start_col + 1)
+        self.entry.grid(row=row, column=start_col + 1)
 
     def __str__(self):
         return self.value.get()
