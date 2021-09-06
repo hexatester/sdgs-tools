@@ -23,8 +23,9 @@ class Sdgs(BaseAuth):
             "surveyIndividu/validateNik",
             str,
             json=json_data,
+            ignore=True,
         )
-        return bool(res)
+        return bool(res) or res.message == "NIK Sudah Ada"
 
     def save_individu(self, individu: DataIndividu, rt: str, rw: str):
         data_individu = individu.make_data(desa=self.token.wilayah, rt=rt, rw=rw)

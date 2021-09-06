@@ -21,9 +21,14 @@ class SdgsResponse(Generic[T]):
         return self.message == "SUCCESS"
 
     @classmethod
-    def from_str(cls, data_str: str, cl: Type[T]) -> "SdgsResponse":
+    def from_str(
+        cls,
+        data_str: str,
+        cl: Type[T],
+        ignore: bool = False,
+    ) -> "SdgsResponse":
         data: Dict[str, Any] = json.loads(data_str)
-        if data["status"] == 500:
+        if data["status"] == 500 and not ignore:
             raise Exception(data["message"])
         return cls(
             status=data["status"],

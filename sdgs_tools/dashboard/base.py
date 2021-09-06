@@ -48,8 +48,9 @@ class BaseSdgs:
         self,
         filename: str,
         cl: Type[T],
+        ignore: bool = True,
         *args,
         **kwargs,
     ) -> SdgsResponse[T]:
         res_raw = self.api_post(filename, *args, **kwargs)
-        return SdgsResponse.from_str(res_raw.text, cl)
+        return SdgsResponse.from_str(res_raw.text, cl, ignore)
