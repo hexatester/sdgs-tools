@@ -87,7 +87,8 @@ class DataIndividu:
         clean_data: Dict[str, Any] = dict()
         for key, properti in MAPPING.items():
             value = raw_data.get(properti)
-            if value is None:
+            if value in (None, "None"):
+                # TODO Improve empty value detection
                 continue
             clean_data[key] = value
         clean_data.update(
