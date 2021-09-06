@@ -37,7 +37,7 @@ class DashboardTab(tk.Frame):
             ("Excel 2010+", "*.xlsx"),
         ]
         filepath = asksaveasfile(filetypes=files, defaultextension=files)
-        if not filepath:
+        if not filepath or not filepath.name:
             showwarning(
                 "Gagal",
                 "Mohon tentukan nama dan lokasi file yang akan disimpan",
