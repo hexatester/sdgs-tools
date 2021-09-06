@@ -95,4 +95,4 @@ class SumberPenghasilan(Enum):
     SUMBANGAN = "43"
     LAINNYA = "other"
 
-    from_str = staticmethod(make_str_to_enum(MAPPING))
+    from_str = classmethod(make_str_to_enum(MAPPING, "43"))

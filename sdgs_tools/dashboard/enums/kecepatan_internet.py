@@ -13,4 +13,4 @@ class KecepatanInternet(Enum):
     SEDANG = "2"
     LAMBAT = "3"
 
-    from_str = staticmethod(make_str_to_enum(MAPPING))
+    from_str = classmethod(make_str_to_enum(MAPPING))

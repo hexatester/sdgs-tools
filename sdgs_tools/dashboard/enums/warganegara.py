@@ -10,4 +10,4 @@ class Warganegara(Enum):
     WNI = "1"
     WNA = "2"
 
-    from_str = staticmethod(make_str_to_enum(MAPPING))
+    from_str = classmethod(make_str_to_enum(MAPPING, "1"))

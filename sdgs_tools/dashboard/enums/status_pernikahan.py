@@ -15,4 +15,4 @@ class StatusPernikahan(Enum):
     CERAI_HIDUP = "3"
     CERAI_MATI = "4"
 
-    from_str = staticmethod(make_str_to_enum(MAPPING))
+    from_str = classmethod(make_str_to_enum(MAPPING, "1"))

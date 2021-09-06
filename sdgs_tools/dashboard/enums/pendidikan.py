@@ -27,4 +27,4 @@ class Pendidikan(Enum):
     PESANTREN_SEMINARI = "9"
     LAINNYA = "10"
 
-    from_str = staticmethod(make_str_to_enum(MAPPING))
+    from_str = classmethod(make_str_to_enum(MAPPING, "1"))

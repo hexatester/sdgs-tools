@@ -1,4 +1,5 @@
 from enum import Enum
+from . import make_str_to_enum
 
 MAPPING = {
     "Ya": "1",
@@ -12,3 +13,5 @@ class YaTidak(Enum):
 
     def __bool__(self):
         return self.value == self.YA
+
+    from_str = classmethod(make_str_to_enum(MAPPING, "2"))

@@ -17,4 +17,4 @@ class KondisiPekerjaan(Enum):
     SEDANG_MENCARI_PEKERJAAN = 4
     BEKERJA = 5
 
-    from_str = staticmethod(make_str_to_enum(MAPPING))
+    from_str = classmethod(make_str_to_enum(MAPPING, 3))
