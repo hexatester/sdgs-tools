@@ -18,7 +18,7 @@ class SdgsResponse(Generic[T]):
     data: T
 
     def __bool__(self):
-        return self.maessage == "SUCCESS"
+        return self.message == "SUCCESS"
 
     @classmethod
     def from_str(cls, data_str: str, cl: Type[T]) -> "SdgsResponse":
