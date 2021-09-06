@@ -41,6 +41,8 @@ def import_individu(
     skipped = 0
     success = 0
     for row in rows:
+        if row < 4:
+            raise ValueError(f"Tidak dapat memproses baris < 4")
         nik: Optional[str] = mapping.get_nik(wb, row, "Individu")
         if not nik:
             raise ValueError(f"Nik kosong di baris {row}. Membatalkan operasi!")
