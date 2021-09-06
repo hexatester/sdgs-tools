@@ -1,6 +1,6 @@
 import attr
 import cattr
-from typing import Dict
+from typing import Dict, Optional
 
 from sdgs_tools.dashboard.enums import YaTidak
 
@@ -31,51 +31,54 @@ MAPPING = {
 @attr.dataclass
 class PenyakitDiderita:
     # P404
-    mutaber_diare: YaTidak
-    demam_berdarah: YaTidak
-    campak: YaTidak
-    malaria: YaTidak
-    flu_burung_sars: YaTidak
-    covid19: YaTidak
-    hepatitis_b: YaTidak
-    hepatitis_e: YaTidak
-    difteri: YaTidak
-    chikungunya: YaTidak
-    leptospirosis: YaTidak
-    kolera: YaTidak
-    gizi_buruk: YaTidak
-    jantung: YaTidak
-    tbc_paru_paru: YaTidak
-    kanker: YaTidak
-    diabetes: YaTidak
-    lumpuh: YaTidak
-    lainnya: YaTidak
+    mutaber_diare: YaTidak = YaTidak.TIDAK
+    demam_berdarah: YaTidak = YaTidak.TIDAK
+    campak: YaTidak = YaTidak.TIDAK
+    malaria: YaTidak = YaTidak.TIDAK
+    flu_burung_sars: YaTidak = YaTidak.TIDAK
+    covid19: YaTidak = YaTidak.TIDAK
+    hepatitis_b: YaTidak = YaTidak.TIDAK
+    hepatitis_e: YaTidak = YaTidak.TIDAK
+    difteri: YaTidak = YaTidak.TIDAK
+    chikungunya: YaTidak = YaTidak.TIDAK
+    leptospirosis: YaTidak = YaTidak.TIDAK
+    kolera: YaTidak = YaTidak.TIDAK
+    gizi_buruk: YaTidak = YaTidak.TIDAK
+    jantung: YaTidak = YaTidak.TIDAK
+    tbc_paru_paru: YaTidak = YaTidak.TIDAK
+    kanker: YaTidak = YaTidak.TIDAK
+    diabetes: YaTidak = YaTidak.TIDAK
+    lumpuh: YaTidak = YaTidak.TIDAK
+    lainnya: YaTidak = YaTidak.TIDAK
 
-    def todict(self) -> Dict[str, str]:
+    @staticmethod
+    def todict(data: Dict[str, YaTidak]) -> Dict[str, str]:
         return {
-            "1": "1" if self.mutaber_diare else "2",
-            "2": "1" if self.demam_berdarah else "2",
-            "3": "1" if self.campak else "2",
-            "4": "1" if self.malaria else "2",
-            "5": "1" if self.flu_burung_sars else "2",
-            "6": "1" if self.covid19 else "2",
-            "7": "1" if self.hepatitis_b else "2",
-            "8": "1" if self.hepatitis_e else "2",
-            "9": "1" if self.difteri else "2",
-            "10": "1" if self.chikungunya else "2",
-            "11": "1" if self.leptospirosis else "2",
-            "12": "1" if self.kolera else "2",
-            "13": "1" if self.gizi_buruk else "2",
-            "14": "1" if self.jantung else "2",
-            "15": "1" if self.tbc_paru_paru else "2",
-            "16": "1" if self.kanker else "2",
-            "17": "1" if self.diabetes else "2",
-            "18": "1" if self.lumpuh else "2",
-            "19": "1" if self.lainnya else "2",
+            "1": "1" if data["mutaber_diare"] else "2",
+            "2": "1" if data["demam_berdarah"] else "2",
+            "3": "1" if data["campak"] else "2",
+            "4": "1" if data["malaria"] else "2",
+            "5": "1" if data["flu_burung_sars"] else "2",
+            "6": "1" if data["covid19"] else "2",
+            "7": "1" if data["hepatitis_b"] else "2",
+            "8": "1" if data["hepatitis_e"] else "2",
+            "9": "1" if data["difteri"] else "2",
+            "10": "1" if data["chikungunya"] else "2",
+            "11": "1" if data["leptospirosis"] else "2",
+            "12": "1" if data["kolera"] else "2",
+            "13": "1" if data["gizi_buruk"] else "2",
+            "14": "1" if data["jantung"] else "2",
+            "15": "1" if data["tbc_paru_paru"] else "2",
+            "16": "1" if data["kanker"] else "2",
+            "17": "1" if data["diabetes"] else "2",
+            "18": "1" if data["lumpuh"] else "2",
+            "19": "1" if data["lainnya"] else "2",
         }
 
     @classmethod
-    def from_str(cls, value: str, t=None):
+    def from_str(cls, value: Optional[str], t=None):
+        if not value:
+            return attr.asdict(cls())
         data: Dict[str, YaTidak] = dict()
         for key, name in MAPPING.items():
             if value in key:
