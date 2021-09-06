@@ -16,10 +16,11 @@ class ImportIndividuWindow(tk.Toplevel):
         super().__init__(master=master)
         self.geometry('230x250')
         self.sdgs: Optional[Sdgs] = None
-        self.title("Eksport Individu")
+        self.user_label: Optional[tk.Label] = None
+        self.title("Import Individu")
         self.label_info = tk.Label(
             self,
-            text="Eksport data individu",
+            text="Import data individu",
         )
         self.label_info.grid(row=0, column=0, columnspan=3)
         # Autentikasi
@@ -30,7 +31,7 @@ class ImportIndividuWindow(tk.Toplevel):
             text="Login",
             command=self.login,
         )
-        self.login_button.grid(row=3, column=1)
+        self.login_button.grid(row=3, column=2)
 
     def show_import(self):
         # Import?
@@ -60,6 +61,8 @@ class ImportIndividuWindow(tk.Toplevel):
                 "Sukses",
                 f"Berhasil login dengan menggunakan akun {self.sdgs.token.user}",
             )
+            self.user_label = tk.Label(self, text=self.sdgs.token.user)
+            self.user_label.grid(row=3, column=0, columnspan=2)
             self.show_import()
         except Exception as e:
             showerror("Gagal", f"Gagal login, alasan: {e}")
