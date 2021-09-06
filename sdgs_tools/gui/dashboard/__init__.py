@@ -8,7 +8,7 @@ from .import_individu import ImportIndividuWindow
 
 
 class DashboardTab(tk.Frame):
-    TEMPLATE_INDIVIDU = "https://hexatester.github.io/sdgs-tools/Template%20Individu%20Dashboard%20SDGS%20Kemendesa.xlsx"
+    TEMPLATE_INDIVIDU = "https://hexatester.github.io/sdgs-tools/Template%20Individu%20Dashboard%20SDGS%20Kemendesa.xlsm"
 
     def __init__(self, master: tk.Frame, **kw):
         super().__init__(master, bg="#CCC", width=500, height=500, **kw)
