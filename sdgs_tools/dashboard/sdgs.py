@@ -14,6 +14,16 @@ class Sdgs(BaseAuth):
         super().__init__(api_server=api_server)
         self.token = self.login(username, password)
 
+    def validateNikKepalaKeluarga(self, nik: str, nokk: str) -> bool:
+        json_data = {"nik": nik, "nokk": nokk}
+        res = self.api_post_raw(
+            "surveyIndividu/validateNik",
+            str,
+            json=json_data,
+            ignore=True,
+        )
+        return bool(res)
+
     def validateNik(
         self,
         nik: str,
