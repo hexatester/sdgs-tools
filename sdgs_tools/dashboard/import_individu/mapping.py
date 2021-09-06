@@ -3,7 +3,7 @@ from openpyxl import Workbook
 from typing import Any, Dict
 
 from sdgs_tools.utils import parse_range
-from .disabilitas import Disabilitas
+# from .disabilitas import Disabilitas
 from .fasilitas_kesehatan import FasilitasKesehatan
 from .penghasilan import Penghasilan
 
@@ -258,7 +258,7 @@ class MappingIndividu:
         # penghasilan: str = "Z"  # TODO Penghasilan Dari Sheet Penghasilan
         penghasilans = individu[f"{self.penghasilan}{row}"].value
         if penghasilans:
-            data["penghasilan"] = Penghasilan.from_range(
+            data["penghasilan"] = Penghasilan.make_range(
                 ws=wb[penghasilan_ws],
                 rows=parse_range(penghasilans),
                 cols=self._penghasilan_cols,
@@ -266,15 +266,13 @@ class MappingIndividu:
         else:
             data["penghasilan"] = Penghasilan.default()
         # fasilitas_kesehatan: str = "AC-AR"  # TODO Parse From Range
-        data["fasilitas_kesehatan"] = FasilitasKesehatan.from_row(
+        data["fasilitas_kesehatan"] = FasilitasKesehatan.make_row(
             ws=individu,
             row=row,
             cols=self._fasilitas_kesehatan_cols,
         )
         # disabilitas: str = "AT"  # TODO Parse Multi-Select
-        data["disabilitas"] = Disabilitas.from_str(
-            individu[f"{self.disabilitas}{row}"].value
-        )
+        data["disabilitas"] = individu[f"{self.disabilitas}{row}"].value
         return data
 
     def get_nik(
