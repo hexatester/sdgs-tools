@@ -5,6 +5,15 @@ from enum import Enum
 from typing import Any, Dict, Type, TypeVar, Union
 
 
+def str_to_date(value: Union[str, date], t=None) -> date:
+    if isinstance(value, date):
+        return value
+    return parser.parse(
+        timestr=value,
+        parserinfo=parser.parserinfo(dayfirst=False, yearfirst=True),
+    ).date()
+
+
 def date_to_str(value: date) -> str:
     return value.strftime("%Y-%m-%d")
 
@@ -17,7 +26,9 @@ def parse_datetime(text: str, t) -> datetime:
 
 
 def register_cattr_hooks():
+    cattr.register_structure_hook(date, str_to_date)
     cattr.register_structure_hook(datetime, parse_datetime)
+    cattr.register_unstructure_hook(date, date_to_str)
 
 
 E = TypeVar("E", bound=Enum)

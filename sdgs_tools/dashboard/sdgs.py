@@ -4,6 +4,7 @@ from .auth import BaseAuth
 from .import_individu import DataIndividu
 
 
+
 class Sdgs(BaseAuth):
     def __init__(
         self,

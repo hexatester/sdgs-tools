@@ -1,5 +1,6 @@
 import attr
 import cattr
+from datetime import date
 from typing import Any, Dict, List, Optional
 from .enums import (
     Agama,
@@ -32,7 +33,7 @@ class DataIndividu:
     nama: str
     jenis_kelamin: JenisKelamin
     tempat_lahir: str
-    tanggal_lahir: str
+    tanggal_lahir: date
     usia: str
     status_pernikahan: StatusPernikahan
     usia_menikah: str
