@@ -65,5 +65,15 @@ class Penghasilan:
             data[name] = ws[f"{col}{row}"].value
         return cattr.structure(data, cls)
 
+    @staticmethod
+    def make_range(ws: Worksheet, rows: List[int], cols: Dict[str, str]):
+        results: List[Any] = list()
+        for row in rows:
+            data: Dict[str, Any] = dict()
+            for name, col in cols.items():
+                data[name] = ws[f"{col}{row}"].value
+            results.append(data)
+        return results
+
 
 cattr.register_unstructure_hook(Penghasilan, Penghasilan.todict)
