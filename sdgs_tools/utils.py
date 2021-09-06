@@ -1,9 +1,11 @@
-from typing import List
+from typing import List, Union
 
 
-def parse_range(value: str) -> List[int]:
+def parse_range(value: Union[str, int]) -> List[int]:
     results: List[int] = list()
-    if value.isdigit():
+    if isinstance(value, int):
+        results.append(value)
+    elif value.isdigit():
         results.append(int(value))
     elif "," in value:
         for val in value.split(","):
