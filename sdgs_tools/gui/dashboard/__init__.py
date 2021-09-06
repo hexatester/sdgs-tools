@@ -30,7 +30,7 @@ class DashboardTab(tk.Frame):
             text="Import Individu",
             command=ImportIndividuWindow,
         )
-        self.import_individu_button.grid(row=1, column=2)
+        self.import_individu_button.grid(row=1, column=1)
 
     def download_template_individu(self):
         files = [
