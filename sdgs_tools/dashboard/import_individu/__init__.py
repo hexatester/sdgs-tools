@@ -45,6 +45,8 @@ def import_individu(
     mapping = mapping or MappingIndividu()
     click.echo(f"Membuka {filepath}")
     wb = load_workbook(filepath, read_only=True)
+    faileds: List[str] = list()
+    failed = 0
     trying = 0
     skipped = 0
     success = 0
@@ -76,13 +78,15 @@ def import_individu(
             if not res:
                 click.echo(f"Gagal menyimpan individu {nik} karena {res}")
             else:
+                click.echo(f"Berhasil mengirim data {nik}")
                 success += 1
         except Exception as e:
+            faileds.append(str(row))
             click.echo(f"Gagal menyimpan individu {nik} karena {e}")
-    else:
-        click.echo("Tidak ada data yang diimport")
-        return
+            failed += 1
     click.echo(
-        f"Berhasil mengimport data individu sebanyak {success}"
-        f"Berhasil {success}\nMencoba {trying}\nDilewati{skipped}"
+        f"Berhasil : {success}\nMencoba : {trying}\n"
+        f"Dilewati : {skipped}\nError : {failed}"
     )
+    if faileds:
+        click.echo("Baris yang gagal : " + ",".join(faileds))
