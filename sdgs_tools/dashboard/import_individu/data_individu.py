@@ -1,7 +1,7 @@
 import attr
 import cattr
 from typing import Any, Dict, List, Optional
-from sdgs_tools.dashboard.import_individu.enums import (
+from .enums import (
     Agama,
     AksesInternet,
     JenisKelamin,
