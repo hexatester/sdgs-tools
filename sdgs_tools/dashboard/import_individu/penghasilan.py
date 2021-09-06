@@ -20,7 +20,7 @@ class Penghasilan:
             "diekspor": str(self.penghasilan_diekspor.value),
             "jumlah": str(self.penghasilan_jumlah),
             "penghasilan": str(self.penghasilan_setahun),
-            "sumber_penghasilan": str(SumberPenghasilan.value),
+            "sumber_penghasilan": str(self.sumber_penghasilan.value),
         }
         if self.sumber_penghasilan == "other":
             if not self.penghasilan_comment:
