@@ -6,7 +6,9 @@ from . import AuthToken
 
 
 class BaseAuth(BaseSdgs):
-    def login(self, username: str, password: str, userType: str = "enumerator") -> AuthToken:
+    def login(
+        self, username: str, password: str, userType: str = "enumerator"
+    ) -> AuthToken:
         res = self.session.get("https://dashboard-sdgs.kemendesa.go.id/")
         # AuthToken
         if not res.ok:

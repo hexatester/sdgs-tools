@@ -6,6 +6,7 @@ MAPPING = {
     "WNA": "2",
 }
 
+
 class Warganegara(Enum):
     WNI = "1"
     WNA = "2"

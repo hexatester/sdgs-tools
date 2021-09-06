@@ -3,6 +3,7 @@ from openpyxl import Workbook
 from typing import Any, Dict
 
 from sdgs_tools.utils import parse_range
+
 # from .disabilitas import Disabilitas
 from .fasilitas_kesehatan import FasilitasKesehatan
 from .penghasilan import Penghasilan

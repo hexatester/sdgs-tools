@@ -14,7 +14,7 @@ from ..form import TextForm
 class ImportIndividuWindow(tk.Toplevel):
     def __init__(self, master=None):
         super().__init__(master=master)
-        self.geometry('230x250')
+        self.geometry("230x250")
         self.sdgs: Optional[Sdgs] = None
         self.user_label: Optional[tk.Label] = None
         self.title("Import Individu")
@@ -68,8 +68,8 @@ class ImportIndividuWindow(tk.Toplevel):
             showerror("Gagal", f"Gagal login, alasan: {e}")
 
     def start_import(self):
-        rt=self.rt_form.value.get()
-        rw=self.rw_form.value.get()
+        rt = self.rt_form.value.get()
+        rw = self.rw_form.value.get()
         if len(rt) != 3:
             showerror("Gagal", "Rt harus 3 digit, misal 001")
             return

@@ -22,4 +22,3 @@ class Agama(Enum):
     LAINNYA = "other"
 
     from_str = classmethod(make_str_to_enum(MAPPING))
-
