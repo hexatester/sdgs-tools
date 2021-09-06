@@ -21,7 +21,7 @@ class Penghasilan:
             "penghasilan": str(self.penghasilan_setahun),
             "sumber_penghasilan": str(self.sumber_penghasilan.value),
         }
-        if self.sumber_penghasilan == "other":
+        if self.sumber_penghasilan.value == "other":
             if not self.penghasilan_comment:
                 raise ValueError("comment harus diisi jika sumber_penghasilan = other")
             data["sumber_penghasilan-Comment"] = self.penghasilan_comment
