@@ -8,6 +8,7 @@ from .fasilitas_mck import FasilitasBab
 from .jendela import Jendela
 from .lantai import Lantai
 from .pembuangan_limbah_cair import PembuanganLimbahCair
+from .pembuangan_sampah import PembuanganSampah
 
 cattr.register_structure_hook(Atap, Atap.from_str)  # type: ignore
 cattr.register_structure_hook(Dinding, Dinding.from_str)  # type: ignore
@@ -17,6 +18,7 @@ cattr.register_structure_hook(FasilitasBab, FasilitasBab.from_str)  # type: igno
 cattr.register_structure_hook(Jendela, Jendela.from_str)  # type: ignore
 cattr.register_structure_hook(Lantai, Lantai.from_str)  # type: ignore
 cattr.register_structure_hook(PembuanganLimbahCair, PembuanganLimbahCair.from_str)  # type: ignore
+cattr.register_structure_hook(PembuanganSampah, PembuanganSampah.from_str)  # type: ignore
 
 __all__ = [
     "Atap",
@@ -27,4 +29,5 @@ __all__ = [
     "Jendela",
     "Lantai",
     "PembuanganLimbahCair",
+    "PembuanganSampah",
 ]
