@@ -3,8 +3,8 @@ import cattr
 from openpyxl.worksheet.worksheet import Worksheet
 from typing import Any, Dict, List, Optional
 
-from sdgs_tools.dashboard.enums import Diekspor
-from sdgs_tools.dashboard.enums import SumberPenghasilan
+from sdgs_tools.dashboard.import_individu.enums import Diekspor
+from sdgs_tools.dashboard.import_individu.enums import SumberPenghasilan
 
 
 @attr.dataclass

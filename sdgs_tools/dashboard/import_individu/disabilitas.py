@@ -2,7 +2,7 @@ import attr
 import cattr
 from typing import Dict
 
-from sdgs_tools.dashboard.enums import YaTidak
+from sdgs_tools.dashboard.import_individu.enums import YaTidak
 
 
 MAPPING = {
