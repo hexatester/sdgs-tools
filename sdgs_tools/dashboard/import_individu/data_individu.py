@@ -26,7 +26,7 @@ from . import (
 from .mapping import MAPPING
 
 
-@attr.dataclass
+@attr.dataclass(kw_only=True)
 class DataIndividu:
     no_kk: str
     nik: str
@@ -35,59 +35,78 @@ class DataIndividu:
     tempat_lahir: str
     tanggal_lahir: date
     usia: str
-    status_pernikahan: StatusPernikahan
+    status_pernikahan: StatusPernikahan = StatusPernikahan.BELUM_KAWIN
     usia_menikah: str
     agama: Agama
     suku_bangsa: str
-    warga_negara: Warganegara
+    warga_negara: Warganegara = Warganegara.WNI
     nomor_hp: str
-    nomor_whatsapp: Optional[str]
-    alamat_email: Optional[str]
-    alamat_facebook: Optional[str]
-    alamat_twitter: Optional[str]
-    alamat_instagram: Optional[str]
+    nomor_whatsapp: Optional[str] = None
+    alamat_email: Optional[str] = None
+    alamat_facebook: Optional[str] = None
+    alamat_twitter: Optional[str] = None
+    alamat_instagram: Optional[str] = None
     aktif_internet: YaTidak
-    akses_melalui: Optional[AksesInternet]
+    akses_melalui: Optional[AksesInternet] = None
     kecepatan_internet: KecepatanInternet
     # Pekerjaan
     kondisi_pekerjaan: KondisiPekerjaan
-    pekerjaan_utama: Optional[PekerjaanUtama]
-    pekerjaan_utama_comment: Optional[str]
-    jamsos_ketenagakerjaan: Optional[YaTidak]
-    penghasilan: List[Penghasilan]
-    pekerjaan_penghasilan: Optional[str]
+    pekerjaan_utama: Optional[PekerjaanUtama] = None
+    pekerjaan_utama_comment: Optional[str] = None
+    jamsos_ketenagakerjaan: Optional[YaTidak] = None
+    penghasilan: List[Penghasilan] = attr.field(factory=list)
+    pekerjaan_penghasilan: Optional[str] = None
     # Kesehatan
     penyakit_diderita: PenyakitDiderita
     fasilitas_kesehatan: FasilitasKesehatan
     jamsos_kesehatan: YaTidak
     disabilitas: Disabilitas
-    setahun_melahirkan: Optional[YaTidak]
-    mendapat_asi: Optional[YaTidak]
+    setahun_melahirkan: Optional[YaTidak] = None
+    mendapat_asi: Optional[YaTidak] = None
     # Pendidikan
     pendidikan_tertinggi: Pendidikan
-    tahun_pendidikan: Optional[str]
-    pendidikan_diikuti: Optional[Pendidikan]
-    pelatihan_diikuti: Optional[str]
+    tahun_pendidikan: Optional[str] = None
+    pendidikan_diikuti: Optional[Pendidikan] = None
+    pelatihan_diikuti: Optional[str] = None
     bahasa_permukiman: str
     bahasa_formal: str
-    kerja_bakti: str
-    siskamling: str
-    pesta_rakyat: str
-    menolong_kematian: str
-    menolong_sakit: str
-    menolong_kecelakaan: str
+    kerja_bakti: str = "0"
+    siskamling: str = "0"
+    pesta_rakyat: str = "0"
+    menolong_kematian: str = "0"
+    menolong_sakit: str = "0"
+    menolong_kecelakaan: str = "0"
     memperoleh_pelayanan_desa: YaTidak
-    pelayanan_desa: Optional[PelayananDesa]
+    pelayanan_desa: Optional[PelayananDesa] = None
     saran_desa: YaTidak
-    keterbukaan_desa: Optional[KeterbukaanDesa]
+    keterbukaan_desa: Optional[KeterbukaanDesa] = None
     terjadi_bencana: YaTidak
-    terdampak_bencana: Optional[YaTidak]
+    terdampak_bencana: Optional[YaTidak] = None
 
     def __attrs_post_init(self):
         if self.terjadi_bencana and self.terdampak_bencana is None:
             raise ValueError(
                 "Jika Terjadi bencana mohon diisi terdampak bencana atau tidak"
             )
+        if self.kondisi_pekerjaan == KondisiPekerjaan.BEKERJA:
+            if not self.pekerjaan_utama:
+                raise ValueError(
+                    "Jika bekerja, mohon diisi pekerjaan utama dan penghasilan"
+                )
+            if (
+                self.pekerjaan_utama == PekerjaanUtama.LAINNYA
+                and not self.pekerjaan_utama_comment
+            ):
+                raise ValueError(
+                    "Jika pekerjaan utama Lainnya, mohon diisi Nama Pekerjaan Lainnya"
+                )
+            if not self.penghasilan:
+                raise ValueError("Jika bekerja mohon diisi Baris Penghasilan")
+            if not self.pekerjaan_penghasilan:
+                raise ValueError("Jika bekerja mohon diisi Penghasilan Setahun")
+        else:
+            self.pekerjaan_utama = None
+            self.pekerjaan_utama_comment = None
 
     def make_data(self, desa: str, rt: str, rw: str):
         raw_data: Dict[str, Any] = cattr.unstructure(self)
