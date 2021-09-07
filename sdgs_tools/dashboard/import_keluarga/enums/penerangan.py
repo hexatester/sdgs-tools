@@ -5,7 +5,7 @@ MAPPING = {
     "Listrik PLN": "1",
     "Listrik non PLN": "2",
     "Lampu minyak/lilin": "3",
-    "Sumber penerangan lainnya": "4",
+    "Lainnya": "4",
     "Tidak ada": "5",
 }
 
