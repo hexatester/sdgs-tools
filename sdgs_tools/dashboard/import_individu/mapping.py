@@ -265,7 +265,7 @@ class MappingIndividu:
                 cols=self._penghasilan_cols,
             )
         else:
-            data["penghasilan"] = Penghasilan.default()
+            data["penghasilan"] = [Penghasilan.default()]
         # fasilitas_kesehatan: str = "AC-AR"  # TODO Parse From Range
         data["fasilitas_kesehatan"] = FasilitasKesehatan.make_row(
             ws=individu,
