@@ -16,8 +16,11 @@ class SarprasTransport:
     kemudahan: YaTidak
 
     def __attrs_post_init__(self):
-        waktu = int(self.waktu) / 60
-        self.waktu = str(waktu)
+        if self.waktu in (None, "None"):
+            self.waktu = "0"
+        if self.waktu != "0.0":
+            waktu = int(self.waktu) / 60
+            self.waktu = str(round(waktu, 3))
 
     @staticmethod
     def from_cols(
