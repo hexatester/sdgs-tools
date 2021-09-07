@@ -33,7 +33,7 @@ MAPPING_VALUE = {
 
 
 @attr.dataclass
-class AksesFasilitasPekerjaan:
+class AksesFasilitasKesehatan:
     rs: Akses
     bersalin: Akses
     poliklinik: Akses
