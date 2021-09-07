@@ -1,4 +1,10 @@
 import cattr
+import click
+from openpyxl import load_workbook
+from typing import List, Optional, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from sdgs_tools.dashboard.sdgs import Sdgs
 
 from .akses import Akses
 from .sarpras_transport import SarprasTransport
@@ -32,3 +38,40 @@ __all__ = [
     "Luas",
     "SarprasTransport",
 ]
+
+
+def import_keluarga(
+    sdgs: "Sdgs",
+    filepath: str,
+    rows: List[int],
+    rt: str,
+    rw: str,
+):
+    click.echo(f"Membuka {filepath}")
+    wb = load_workbook(filepath, read_only=True)
+    keluarga = wb["Keluarga"]
+    for row in rows:
+        if row < 4:
+            raise ValueError(f"Tidak dapat memproses baris < 4")
+        no_kk, nik = DataKeluarga.get_kk_nik(keluarga, row)
+        if not no_kk:
+            raise ValueError(f"Nomor KK kosong di baris {row}. Membatalkan operasi!")
+        elif not nik:
+            raise ValueError(
+                f"NIK kepala keluarga kosong di baris {row}. Membatalkan operasi!"
+            )
+        if not sdgs.token.token.is_valid():
+            sdgs.token = sdgs.token_refresh(sdgs.token)
+        if not sdgs.validateNikKepalaKeluarga(nik, no_kk):
+            click.echo(f"Melewati KK {no_kk}, karena data sudah diinput")
+            continue
+        click.echo(f"Mempersiapkan data keluarga {no_kk}")
+        data = DataKeluarga.make_data(keluarga, row)
+        data_keluarga: DataKeluarga = cattr.structure(data, DataKeluarga)
+        if not sdgs.token.token.is_valid():
+            sdgs.token = sdgs.token_refresh(sdgs.token)
+        try:
+            click.echo(f"Berhasil mengirim data {no_kk}")
+        except Exception as e:
+            click.echo(f"Gagal menyimpan keluarga {no_kk} karena {e}")
+
