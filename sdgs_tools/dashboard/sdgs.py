@@ -2,6 +2,7 @@ from typing import List
 
 from .auth import BaseAuth
 from .import_individu import DataIndividu
+from .import_keluarga import DataKeluarga
 
 
 class Sdgs(BaseAuth):
@@ -42,6 +43,16 @@ class Sdgs(BaseAuth):
         json_data = {"jsonResult": data_individu}
         res = self.api_post_raw(
             filename="surveyIndividu/save",
+            cl=str,
+            json=json_data,
+        )
+        return res
+
+    def save_keluarga(self, keluarga: DataKeluarga, rt: str, rw: str):
+        data_keluarga = keluarga.make_json(desa=self.token.wilayah, rt=rt, rw=rw)
+        json_data = {"jsonResult": data_keluarga}
+        res = self.api_post_raw(
+            filename="surveyKeluarga/save",
             cl=str,
             json=json_data,
         )
