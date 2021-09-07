@@ -9,7 +9,7 @@ MAPPING = {
 }
 
 
-class FasilitasBab(Enum):
+class FasilitasMck(Enum):
     SENDIRI = "1"
     BERKELOMPOK = "2"
     UMUM = "3"
