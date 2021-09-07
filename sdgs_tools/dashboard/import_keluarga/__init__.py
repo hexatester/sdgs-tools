@@ -78,7 +78,12 @@ def import_keluarga(
             sdgs.token = sdgs.token_refresh(sdgs.token)
         try:
             click.echo(f"Berhasil mengirim data {no_kk}")
-            success += 1
+            res = sdgs.save_keluarga(data_keluarga, rt, rw)
+            if res:
+                click.echo(f"Berhasil mengirim data {no_kk}")
+                success += 1
+            else:
+                click.echo(f"Gagal mengirim data {no_kk}")
         except Exception as e:
             faileds.append(str(row))
             click.echo(f"Gagal menyimpan keluarga {no_kk} karena {e}")
@@ -89,4 +94,3 @@ def import_keluarga(
     )
     if faileds:
         click.echo("Baris yang gagal : " + ",".join(faileds))
-
