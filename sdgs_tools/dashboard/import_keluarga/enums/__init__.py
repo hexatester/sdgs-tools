@@ -6,6 +6,7 @@ from .energi_memasak import EnergiMemasak
 from .fasilitas_bab import FasilitasBab
 from .fasilitas_mck import FasilitasMck
 from .jendela import Jendela
+from .jenis_transportasi import JenisTransportasi
 from .lantai import Lantai
 from .pembuangan_limbah_cair import PembuanganLimbahCair
 from .pembuangan_sampah import PembuanganSampah
@@ -22,6 +23,7 @@ cattr.register_structure_hook(EnergiMemasak, EnergiMemasak.from_str)  # type: ig
 cattr.register_structure_hook(FasilitasBab, FasilitasBab.from_str)  # type: ignore
 cattr.register_structure_hook(FasilitasMck, FasilitasMck.from_str)  # type: ignore
 cattr.register_structure_hook(Jendela, Jendela.from_str)  # type: ignore
+cattr.register_structure_hook(JenisTransportasi, JenisTransportasi.from_str)  # type: ignore
 cattr.register_structure_hook(Lantai, Lantai.from_str)  # type: ignore
 cattr.register_structure_hook(PembuanganLimbahCair, PembuanganLimbahCair.from_str)  # type: ignore
 cattr.register_structure_hook(PembuanganSampah, PembuanganSampah.from_str)  # type: ignore
@@ -39,6 +41,7 @@ __all__ = [
     "FasilitasMck",
     "FasilitasBab",
     "Jendela",
+    "JenisTransportasi",
     "Lantai",
     "PembuanganLimbahCair",
     "PembuanganSampah",
