@@ -26,11 +26,12 @@ MAPPING_VALUE = {
 
 @attr.dataclass
 class AksesSarprasTransport:
-    spesialis: SarprasTransport
-    dokter: SarprasTransport
-    bidan: SarprasTransport
-    nakes: SarprasTransport
-    dukun: SarprasTransport
+    pekerjaan: SarprasTransport
+    pertanian: SarprasTransport
+    sekolah: SarprasTransport
+    berobat: SarprasTransport
+    ibadah: SarprasTransport
+    rekreasi: SarprasTransport
 
     def todict(self) -> Dict[str, Dict[str, str]]:
         data: Dict[str, Dict[str, str]] = dict()
