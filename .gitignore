@@ -139,4 +139,5 @@ dmypy.json
 
 # Tests
 *.test.py
+*.test.js
 *.test.json
