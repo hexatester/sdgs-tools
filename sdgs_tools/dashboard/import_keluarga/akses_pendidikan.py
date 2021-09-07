@@ -17,6 +17,18 @@ MAPPING = {
     "K.P421_9lainnya": "lainnya",
 }
 
+MAPPING_VALUE = {
+    "paud": ("AK", "AL", "AM"),
+    "tk": ("AN", "AO", "AP"),
+    "sd": ("AQ", "AR", "AS"),
+    "smp": ("AT", "AU", "AV"),
+    "sma": ("AW", "AX", "AY"),
+    "pt": ("AZ", "BA", "BB"),
+    "pesantren": ("BC", "BD", "BE"),
+    "seminari": ("BF", "BG", "BH"),
+    "lainnya": ("BI", "BJ", "BK"),
+}
+
 
 @attr.dataclass
 class AksesPendidikan:
@@ -31,8 +43,15 @@ class AksesPendidikan:
     lainnya: Akses
 
     def todict(self) -> Dict[str, Dict[str, str]]:
-        data: Dict[str, Dict[str, str]]
+        data: Dict[str, Dict[str, str]] = dict()
         for key, name in MAPPING.items():
             value: Akses = getattr(self, name)
             data[key] = cattr.unstructure(value)
+        return data
+
+    @staticmethod
+    def make(ws: Worksheet, row: int) -> Dict[str, Dict[str, str]]:
+        data: Dict[str, Dict[str, str]] = dict()
+        for name, args in MAPPING_VALUE.items():
+            data[name] = Akses.from_cols(ws, row, *args)
         return data
