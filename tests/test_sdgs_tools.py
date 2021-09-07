@@ -2,4 +2,4 @@ from sdgs_tools import __version__
 
 
 def test_version():
-    assert __version__ == "0.6.4"
+    assert __version__ == "0.7.0"
