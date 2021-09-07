@@ -50,6 +50,11 @@ def import_keluarga(
     click.echo(f"Membuka {filepath}")
     wb = load_workbook(filepath, read_only=True)
     keluarga = wb["Keluarga"]
+    faileds: List[str] = list()
+    failed = 0
+    trying = 0
+    success = 0
+    skipped = 0
     for row in rows:
         if row < 4:
             raise ValueError(f"Tidak dapat memproses baris < 4")
@@ -64,6 +69,7 @@ def import_keluarga(
             sdgs.token = sdgs.token_refresh(sdgs.token)
         if not sdgs.validateNikKepalaKeluarga(nik, no_kk):
             click.echo(f"Melewati KK {no_kk}, karena data sudah diinput")
+            skipped += 1
             continue
         click.echo(f"Mempersiapkan data keluarga {no_kk}")
         data = DataKeluarga.make_data(keluarga, row)
@@ -72,6 +78,15 @@ def import_keluarga(
             sdgs.token = sdgs.token_refresh(sdgs.token)
         try:
             click.echo(f"Berhasil mengirim data {no_kk}")
+            success += 1
         except Exception as e:
+            faileds.append(str(row))
             click.echo(f"Gagal menyimpan keluarga {no_kk} karena {e}")
+            failed += 1
+    click.echo(
+        f"Berhasil : {success}\nMencoba : {trying}\n"
+        f"Dilewati : {skipped}\nError : {failed}"
+    )
+    if faileds:
+        click.echo("Baris yang gagal : " + ",".join(faileds))
 
