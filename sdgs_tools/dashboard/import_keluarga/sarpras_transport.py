@@ -30,9 +30,9 @@ class SarprasTransport:
         k: str,
     ):
         return {
-            "jenis": ws[f"{j}{row}"],
-            "transport_umum": ws[f"{t}{row}"],
-            "waktu": ws[f"{w}{row}"],
-            "biaya": ws[f"{b}{row}"],
-            "kemudahan": ws[f"{k}{row}"],
+            "jenis": ws[f"{j}{row}"].value,
+            "transport_umum": ws[f"{t}{row}"].value,
+            "waktu": ws[f"{w}{row}"].value,
+            "biaya": ws[f"{b}{row}"].value,
+            "kemudahan": ws[f"{k}{row}"].value,
         }
