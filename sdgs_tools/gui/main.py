@@ -30,5 +30,8 @@ class MainApp(tk.Tk):
         showinfo(
             "Tentang",
             f"SDGS-Tools versi{__version__} dibuat oleh Habib Rohman\n"
-            "Donasi : https://saweria.co/hexatester",
+            "Donasi : https://saweria.co/hexatester\n"
+            "Error? chat : https://t.me/hexatester\n"
+            "Aplikasi ini sama sekali tidak berafiliasi dengan, diizinkan, dipelihara, disponsori atau didukung oleh Kemendesa atau afiliasi atau anak organisasinya.\n"
+            "Ini adalah perangkat lunak yang independen dan tidak resmi. Gunakan dengan risiko Anda sendiri.",
         )

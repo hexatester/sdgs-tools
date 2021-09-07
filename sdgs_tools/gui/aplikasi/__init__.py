@@ -9,9 +9,6 @@ from uiautomator2.init import Initer
 from sdgs_tools.aplikasi_sdgs.excel import make_template_individu
 from sdgs_tools.aplikasi_sdgs.excel import make_template_keluarga
 
-# from sdgs_tools.aplikasi_sdgs.export import export_individu as _export_individu
-# from sdgs_tools.aplikasi_sdgs.export import export_keluarga as _export_keluarga
-
 from .export_individu import ExportIndividuWindow
 from .export_keluarga import ExportKeluargaWindow
 

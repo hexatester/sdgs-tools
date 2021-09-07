@@ -18,7 +18,7 @@ class DashboardTab(tk.Frame):
         self.grid(row=0, column=0, sticky="nsew")
         self.label_info = tk.Label(
             self,
-            text="Fitur ini untuk meng import data ke dashboard-sdgs (MASIH DALAM PENGERJAAN)",
+            text="Fitur ini untuk meng import data ke dashboard-sdgs",
         )
         self.label_info.grid(row=0, column=0, columnspan=2)
         # Individu
@@ -47,6 +47,8 @@ class DashboardTab(tk.Frame):
             command=ImportKeluargaWindow,
         )
         self.import_keluarga_button.grid(row=2, column=1)
+        self.donate_label = tk.Label(self, text="Donasi : https://saweria.co/hexatester")
+        self.donate_label.grid(row=3, column=0, columnspan=3)
 
     def download_template_individu(self):
         files = [
