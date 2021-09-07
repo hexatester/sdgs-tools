@@ -10,6 +10,8 @@ from .akses_tenaga_kesehatan import AksesTenagaKesehatan
 from .bantuam_pemerintah import BantuanPemerintah
 from .luas import Luas
 
+from .data_keluarga import DataKeluarga
+
 cattr.register_unstructure_hook(AksesFasilitasKesehatan, AksesFasilitasKesehatan.todict)
 cattr.register_unstructure_hook(AksesPendidikan, AksesPendidikan.todict)
 cattr.register_unstructure_hook(AksesSarprasTransport, AksesSarprasTransport.todict)
@@ -26,6 +28,7 @@ __all__ = [
     "AksesTenagaKesehatan",
     "Akses",
     "BantuanPemerintah",
+    "DataKeluarga",
     "Luas",
     "SarprasTransport",
 ]
