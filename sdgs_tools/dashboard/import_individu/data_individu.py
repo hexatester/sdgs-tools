@@ -84,10 +84,8 @@ class DataIndividu:
     terdampak_bencana: Optional[YaTidak] = None
 
     def __attrs_post_init(self):
-        if self.terjadi_bencana and self.terdampak_bencana is None:
-            raise ValueError(
-                "Jika Terjadi bencana mohon diisi terdampak bencana atau tidak"
-            )
+        if self.status_pernikahan != StatusPernikahan.BELUM_KAWIN:
+            raise ValueError("Mohon diisi status pernikahan")
         if self.kondisi_pekerjaan == KondisiPekerjaan.BEKERJA:
             if not self.pekerjaan_utama:
                 raise ValueError(
@@ -107,6 +105,10 @@ class DataIndividu:
         else:
             self.pekerjaan_utama = None
             self.pekerjaan_utama_comment = None
+        if self.terjadi_bencana and self.terdampak_bencana is None:
+            raise ValueError(
+                "Jika Terjadi bencana mohon diisi terdampak bencana atau tidak"
+            )
 
     def make_data(self, desa: str, rt: str, rw: str):
         raw_data: Dict[str, Any] = cattr.unstructure(self)
