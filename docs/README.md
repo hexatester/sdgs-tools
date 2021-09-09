@@ -50,7 +50,7 @@ Karena alat ini tidak memiliki tampilan (hanya perintah / CLI), maka semua perin
 Penginstallan dilakukan **satu kali** untuk setiap laptop / komputer (selanjutnya disebut PC). Disarankan menggunakan pc dengan RAM minimal 4GB dengan Sistem Operasi Windows 10 atau Linux. Berikut langkah-langkahnya :
 
 1. [Download](https://androiddatahost.com/uq6us "Link Download ADB") dan [Install](https://androidmtk.com/install-minimal-adb-and-fastboot-tool "Cara Install ADB") ADB
-2. [Download](https://github.com/hexatester/sdgs-tools/releases/download/v0.7.3/sdgs-tools.exe "Aplikasi SDGS Tools") aplikasi sdgs tools
+2. [Download](https://github.com/hexatester/sdgs-tools/releases/download/v0.7.4/sdgs-tools.exe "Aplikasi SDGS Tools") aplikasi sdgs tools
 3. Masukkan aplikasi tersebut ke dalam folder yang sudah disiapkan
 4. Jika aplikasi hilang, matikan antivirus atau buat pengecualian untuk folder yang disiapkan.
 
