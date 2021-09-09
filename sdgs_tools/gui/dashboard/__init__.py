@@ -47,7 +47,9 @@ class DashboardTab(tk.Frame):
             command=ImportKeluargaWindow,
         )
         self.import_keluarga_button.grid(row=2, column=1)
-        self.donate_label = tk.Label(self, text="Donasi : https://saweria.co/hexatester")
+        self.donate_label = tk.Label(
+            self, text="Donasi : https://saweria.co/hexatester"
+        )
         self.donate_label.grid(row=3, column=0, columnspan=3)
 
     def download_template_individu(self):
