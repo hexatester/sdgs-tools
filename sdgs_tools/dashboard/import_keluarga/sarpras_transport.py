@@ -1,10 +1,7 @@
 import attr
 from openpyxl.worksheet.worksheet import Worksheet
 
-from .enums import (
-    JenisTransportasi,
-    YaTidak,
-)
+from .enums import JenisTransportasi, YaTidak
 
 
 @attr.dataclass
@@ -18,9 +15,14 @@ class SarprasTransport:
     def __attrs_post_init__(self):
         if self.waktu in (None, "None"):
             self.waktu = "0"
-        if self.waktu != "0.0":
+        elif self.waktu.isdigit():
             waktu = int(self.waktu) / 60
-            self.waktu = str(round(waktu, 3))
+            self.waktu = str(round(waktu, 4))
+        elif self.waktu.isdecimal():
+            waktu = float(self.waktu) / 60
+            self.waktu = str(round(waktu, 4))
+        if not self.biaya:
+            self.biaya = 0
 
     @staticmethod
     def from_cols(
