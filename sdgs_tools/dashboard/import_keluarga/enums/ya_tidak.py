@@ -4,6 +4,8 @@ from sdgs_tools.dashboard.utils import make_str_to_enum
 MAPPING = {
     "Ya": "1",
     "Tidak": "2",
+    "Mudah": "1",
+    "Susah": "2",
 }
 
 
