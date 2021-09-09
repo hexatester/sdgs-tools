@@ -154,7 +154,7 @@ class DataKeluarga:
     pembuangan_sampah: PembuanganSampah
     fasilitas_mck: FasilitasMck
     sumber_air_mandi: SumberAirMandi
-    sumber_air_mandi_comment: Optional[str]
+    sumber_air_mandi_comment: Optional[str] = None
     fasilitas_bab: FasilitasBab
     fasilitas_bab_comment: Optional[str] = None
     pembuangan_limbah_cair: PembuanganLimbahCair
