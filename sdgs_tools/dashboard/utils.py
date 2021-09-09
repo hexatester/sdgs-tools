@@ -45,10 +45,16 @@ def isequal(a: Any, b: str) -> bool:
 
 def make_str_to_enum(mapping: Dict[str, Any], default_value: Union[str, int] = "1"):
     def str_to_enum(cls: Type[E], val: Union[str, int], t: Type[E] = None) -> E:
-        if isinstance(val, int):
-            if str(val) in cls:
-                return cls(str(val))
+        if val is None:
+            click.echo(f"Kolom kosong, akan diisi {cls(default_value)}")
             return cls(default_value)
+        elif isinstance(val, int):
+            try:
+                return cls(val)
+            except ValueError:
+                return cls(str(val))
+        elif val.isdigit():
+            return cls(val)
         for key, enum_val in mapping.items():
             if isequal(val, key):
                 return cls(enum_val)
