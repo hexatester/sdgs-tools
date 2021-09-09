@@ -207,7 +207,7 @@ class DataKeluarga:
             clean_data[key] = value
         clean_data.update(self.akses_pendidikan.todict())
         clean_data.update(self.akses_tenaga_kesehatan.todict())
-        clean_data.update(self.akses_tenaga_kesehatan.todict())
+        clean_data.update(self.akses_fasilitas_kesehatan.todict())
         clean_data.update(self.akses_sarpras_transport.todict())
         clean_data.update(
             {
