@@ -1,7 +1,5 @@
 import cattr
 
-from .util import make_str_to_enum
-
 from .agama import Agama
 from .akses_internet import AksesInternet
 from .diekspor import Diekspor
@@ -34,7 +32,6 @@ cattr.register_structure_hook(Warganegara, Warganegara.from_str)  # type: ignore
 cattr.register_structure_hook(YaTidak, YaTidak.from_str)  # type: ignore
 
 __all__ = [
-    "make_str_to_enum",
     "Agama",
     "AksesInternet",
     "Diekspor",

@@ -1,5 +1,5 @@
 from enum import Enum
-from . import make_str_to_enum
+from sdgs_tools.dashboard.utils import make_str_to_enum
 
 MAPPING = {
     "Baik": "1",
