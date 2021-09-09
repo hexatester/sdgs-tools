@@ -35,6 +35,14 @@ def register_cattr_hooks():
 E = TypeVar("E", bound=Enum)
 
 
+def isequal(a: Any, b: str) -> bool:
+    if a is None:
+        return False
+    elif isinstance(a, str) and a.strip().lower() == b.lower():
+        return True
+    return a == b
+
+
 def make_str_to_enum(mapping: Dict[str, Any], default_value: Union[str, int] = "1"):
     def str_to_enum(cls: Type[E], val: Union[str, int], t: Type[E] = None) -> E:
         if isinstance(val, int):
@@ -42,8 +50,11 @@ def make_str_to_enum(mapping: Dict[str, Any], default_value: Union[str, int] = "
                 return cls(str(val))
             return cls(default_value)
         for key, enum_val in mapping.items():
-            if key == val:
+            if isequal(val, key):
                 return cls(enum_val)
-        click.echo(f"Isian tidak cocok dengan Referensi : {val}! Akan diisi {cls(default_value)}!")
+        click.echo(
+            f"Isian tidak cocok dengan Referensi : {val}! Akan diisi {cls(default_value)}!"
+        )
         return cls(default_value)
+
     return str_to_enum
