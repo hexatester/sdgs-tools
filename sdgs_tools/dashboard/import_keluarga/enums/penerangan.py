@@ -2,11 +2,11 @@ from enum import Enum
 from sdgs_tools.dashboard.utils import make_str_to_enum
 
 MAPPING = {
-    "Listrik PLN": 1,
-    "Listrik non PLN": 2,
-    "Lampu minyak/lilin": 3,
-    "Lainnya": 4,
-    "Tidak ada": 5,
+    "Listrik PLN": "1",
+    "Listrik non PLN": "2",
+    "Lampu minyak/lilin": "3",
+    "Lainnya": "4",
+    "Tidak ada": "5",
 }
 
 
