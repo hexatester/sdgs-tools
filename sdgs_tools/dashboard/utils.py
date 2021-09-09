@@ -41,7 +41,7 @@ def make_str_to_enum(mapping: Dict[str, Any], default_value: Union[str, int] = "
                 return cls(str(val))
             return cls(default_value)
         for key, enum_val in mapping.items():
-            if key == val:
+            if key.lower() == val.lower():
                 return cls(enum_val)
         return cls(default_value)
 
