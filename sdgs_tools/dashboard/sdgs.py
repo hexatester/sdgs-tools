@@ -23,7 +23,7 @@ class Sdgs(BaseAuth):
             json=json_data,
             ignore=True,
         )
-        return bool(res) or res.message == "NIK Kepala Keluarga Sudah Ada"
+        return res.message != "NIK Kepala Keluarga Sudah Ada"
 
     def validateNik(
         self,
@@ -36,7 +36,7 @@ class Sdgs(BaseAuth):
             json=json_data,
             ignore=True,
         )
-        return bool(res) or res.message == "NIK Sudah Ada"
+        return res.message != "NIK Sudah Ada"
 
     def save_individu(self, individu: DataIndividu, rt: str, rw: str):
         data_individu = individu.make_data(desa=self.token.wilayah, rt=rt, rw=rw)
