@@ -27,6 +27,7 @@ uiautomator2 = "^2.16.7"
 beautifulsoup4 = "^4.9.3"
 attrs = "^21.2.0"
 cattrs = "^1.8.0"
+ujson = {version = "^4.1.0", optional = true}
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
@@ -36,6 +37,9 @@ pyinstaller = "^4.5.1"
 weditor = "^0.6.4"
 types-python-dateutil = "^0.1.6"
 types-requests = "^2.25.6"
+
+[tool.poetry.extras]
+ujson = ["ujson"]
 
 [tool.poetry.scripts]
 sdgs-tools = 'sdgs_tools.__main__:main'
