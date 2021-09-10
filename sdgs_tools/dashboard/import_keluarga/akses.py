@@ -1,14 +1,15 @@
 import attr
 from openpyxl.worksheet.worksheet import Worksheet
+from typing import Optional
 
 from .enums import YaTidak
 
 
 @attr.dataclass
 class Akses:
-    jarak: str = "0"
-    waktu: str = "0"
-    kemudahan: YaTidak = YaTidak.YA
+    jarak: Optional[str] = None
+    waktu: Optional[str] = None
+    kemudahan: Optional[YaTidak] = None
 
     def __attrs_post_init__(self):
         if self.jarak in (None, "None"):
