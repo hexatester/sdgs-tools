@@ -174,7 +174,7 @@ class DataKeluarga:
     # LAIN-LAIN
     transport_umum: str = "0"
     transport_umum_bulan_sebelumnya: str = "0"
-    penerima_program_pemerintah: Optional[BantuanPemerintah] = None
+    penerima_program_pemerintah: BantuanPemerintah
     pengeluaran_bulanan: str = "0"
 
     @staticmethod
