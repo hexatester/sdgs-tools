@@ -53,8 +53,6 @@ def make_str_to_enum(mapping: Dict[str, Any], default_value: Union[str, int] = "
                 return cls(val)
             except ValueError:
                 return cls(str(val))
-        elif val.isdigit():
-            return cls(val)
         for key, enum_val in mapping.items():
             if isequal(val, key):
                 return cls(enum_val)
