@@ -1,16 +1,17 @@
 import attr
 from openpyxl.worksheet.worksheet import Worksheet
+from typing import Optional
 
 from .enums import JenisTransportasi, YaTidak
 
 
 @attr.dataclass
 class SarprasTransport:
-    jenis: JenisTransportasi
-    transport_umum: YaTidak
-    waktu: str
-    biaya: str
-    kemudahan: YaTidak
+    jenis: Optional[JenisTransportasi] = None
+    transport_umum: Optional[YaTidak] = None
+    waktu: Optional[str] = None
+    biaya: Optional[str] = None
+    kemudahan: Optional[YaTidak] = None
 
     def __attrs_post_init__(self):
         if self.waktu in (None, "None"):
