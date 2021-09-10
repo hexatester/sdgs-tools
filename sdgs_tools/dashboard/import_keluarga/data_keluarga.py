@@ -150,7 +150,7 @@ class DataKeluarga:
     atap_comment: Optional[str] = None
     penerangan: Penerangan
     energi_memasak: EnergiMemasak
-    sumber_kayu_bakar: SumberKayuBakar
+    sumber_kayu_bakar: Optional[SumberKayuBakar] = None
     pembuangan_sampah: PembuanganSampah
     fasilitas_mck: FasilitasMck
     sumber_air_mandi: SumberAirMandi
@@ -172,10 +172,10 @@ class DataKeluarga:
     # AKSES PRASARANA DAN SARANA TRANSPORTASI
     akses_sarpras_transport: AksesSarprasTransport
     # LAIN-LAIN
-    transport_umum: str
-    transport_umum_bulan_sebelumnya: str
-    penerima_program_pemerintah: BantuanPemerintah
-    pengeluaran_bulanan: str
+    transport_umum: str = "0"
+    transport_umum_bulan_sebelumnya: str = "0"
+    penerima_program_pemerintah: Optional[BantuanPemerintah] = None
+    pengeluaran_bulanan: str = "0"
 
     @staticmethod
     def make_data(ws: Worksheet, row: int):
