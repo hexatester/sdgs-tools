@@ -8,32 +8,44 @@ from .enums import SumberPenghasilan
 
 @attr.dataclass
 class Penghasilan:
-    penghasilan_diekspor: Diekspor
-    penghasilan_jumlah: str
-    penghasilan_setahun: str
-    sumber_penghasilan: SumberPenghasilan
+    penghasilan_diekspor: Optional[Diekspor] = None
+    penghasilan_jumlah: Optional[str] = None
+    penghasilan_setahun: Optional[str] = None
+    sumber_penghasilan: Optional[SumberPenghasilan] = None
     penghasilan_comment: Optional[str] = None
 
-    def todict(self) -> Dict[str, str]:
-        data: Dict[str, str] = {
-            "diekspor": str(self.penghasilan_diekspor.value),
-            "jumlah": str(self.penghasilan_jumlah),
-            "penghasilan": str(self.penghasilan_setahun),
-            "sumber_penghasilan": str(self.sumber_penghasilan.value),
+    def todict(self) -> Dict[str, Optional[str]]:
+        data: Dict[str, Optional[str]] = {
+            "diekspor": None,
+            "jumlah": None,
+            "penghasilan": None,
+            "sumber_penghasilan": None,
         }
-        if self.sumber_penghasilan.value == "other":
+        if self.penghasilan_diekspor is not None:
+            data["diekspor"] = str(self.penghasilan_diekspor.value)
+        if self.penghasilan_jumlah is not None:
+            data["jumlah"] = str(self.penghasilan_jumlah)
+        if self.penghasilan_setahun is not None:
+            data["penghasilan"] = str(self.penghasilan_setahun)
+        if self.sumber_penghasilan is not None:
+            data["sumber_penghasilan"] = str(self.sumber_penghasilan.value)
+        if self.sumber_penghasilan is None:
+            pass
+        elif self.sumber_penghasilan.value == "other":
             if not self.penghasilan_comment:
-                raise ValueError("comment harus diisi jika sumber_penghasilan = other")
+                raise ValueError(
+                    "comment harus diisi jika sumber_penghasilan = Lainnya"
+                )
             data["sumber_penghasilan-Comment"] = self.penghasilan_comment
         return data
 
     @classmethod
     def default(
         cls,
-        penghasilan_diekspor: Diekspor = Diekspor.TIDAK,
-        penghasilan_jumlah: str = "0",
-        penghasilan_setahun: str = "0",
-        sumber_penghasilan: SumberPenghasilan = SumberPenghasilan.LAINNYA,
+        penghasilan_diekspor: Diekspor = None,
+        penghasilan_jumlah: str = None,
+        penghasilan_setahun: str = None,
+        sumber_penghasilan: SumberPenghasilan = None,
         penghasilan_comment: str = None,
     ):
         return attr.asdict(
