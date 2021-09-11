@@ -72,7 +72,7 @@ def import_keluarga(
             skipped += 1
             continue
         click.echo(f"Mempersiapkan data keluarga {no_kk}")
-        data = DataKeluarga.make_data(keluarga, row)
+        data = DataKeluarga.make(keluarga, row)
         data_keluarga: DataKeluarga = cattr.structure(data, DataKeluarga)
         if not sdgs.token.token.is_valid():
             sdgs.token = sdgs.token_refresh(sdgs.token)

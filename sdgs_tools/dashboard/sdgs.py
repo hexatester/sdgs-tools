@@ -49,7 +49,7 @@ class Sdgs(BaseAuth):
         return res
 
     def save_keluarga(self, keluarga: DataKeluarga, rt: str, rw: str):
-        data_keluarga = keluarga.make_json(desa=self.token.wilayah, rt=rt, rw=rw)
+        data_keluarga = keluarga.make_data(desa=self.token.wilayah, rt=rt, rw=rw)
         json_data = {"jsonResult": data_keluarga}
         res = self.api_post_raw(
             filename="surveyKeluarga/save",
