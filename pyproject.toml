@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sdgs-tools"
-version = "0.7.5"
+version = "0.7.6"
 description = ""
 authors = ["hexatester <hexatester@protonmail.com>"]
 license = "GPL-3.0-only"
