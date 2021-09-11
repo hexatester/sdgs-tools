@@ -1,14 +1,7 @@
-import attr
-from openpyxl import Workbook
-from typing import Any, Dict
+from typing import Dict
 
-from sdgs_tools.utils import parse_range
 
-# from .disabilitas import Disabilitas
-from .fasilitas_kesehatan import FasilitasKesehatan
-from .penghasilan import Penghasilan
-
-MAPPING = {
+MAPPING: Dict[str, str] = {
     "desa": "desa",
     "I.P103": "nama",
     "I.P104": "jenis_kelamin",
@@ -68,219 +61,56 @@ MAPPING = {
     "rw": "rw",
 }
 
-NORMAL_DATA = [
-    "no_kk",
-    "nik",
-    "nama",
-    "jenis_kelamin",
-    "tempat_lahir",
-    "tanggal_lahir",
-    "usia",
-    "status_pernikahan",
-    "usia_menikah",
-    "agama",
-    "suku_bangsa",
-    "warga_negara",
-    "nomor_hp",
-    "nomor_whatsapp",
-    "alamat_email",
-    "alamat_facebook",
-    "alamat_twitter",
-    "alamat_instagram",
-    "aktif_internet",
-    "akses_melalui",
-    "kecepatan_internet",
-    "kondisi_pekerjaan",
-    "pekerjaan_utama",
-    "pekerjaan_utama_comment",
-    "jamsos_ketenagakerjaan",
-    "pekerjaan_penghasilan",
-    "penyakit_diderita",
-    "jamsos_kesehatan",
-    "setahun_melahirkan",
-    "mendapat_asi",
-    "pendidikan_tertinggi",
-    "tahun_pendidikan",
-    "pendidikan_diikuti",
-    "pelatihan_diikuti",
-    "bahasa_permukiman",
-    "bahasa_formal",
-    "kerja_bakti",
-    "siskamling",
-    "pesta_rakyat",
-    "menolong_kematian",
-    "menolong_sakit",
-    "menolong_kecelakaan",
-    "memperoleh_pelayanan_desa",
-    "pelayanan_desa",
-    "saran_desa",
-    "keterbukaan_desa",
-    "terjadi_bencana",
-    "terdampak_bencana",
-]
-
-PENGHASILAN_DATA = [
-    "sumber_penghasilan",
-    "penghasilan_comment",
-    "penghasilan_jumlah",
-    "penghasilan_setahun",
-    "penghasilan_diekspor",
-]
-
-FASILITAS_KESEHATAN_DATA = [
-    "rumah_sakit",
-    "rumah_sakit_bersalin",
-    "puskesmas_rawat_inap",
-    "puskesmas_tanpa_inap",
-    "puskesmas_pembantu",
-    "poliklinik",
-    "tempat_praktik_dokter",
-    "rumah_bersalin",
-    "tempat_praktik_bidan",
-    "poskesdes",
-    "polindes",
-    "apotik",
-    "toko_obat_jamu",
-    "posyandu",
-    "posbindu",
-    "tempat_praktik_dukun",
-]
-
-
-@attr.dataclass
-class MappingIndividu:
-    no_kk: str = "A"
-    nik: str = "B"
-    nama: str = "C"
-    jenis_kelamin: str = "D"
-    tempat_lahir: str = "E"
-    tanggal_lahir: str = "F"
-    usia: str = "G"
-    status_pernikahan: str = "H"
-    usia_menikah: str = "I"
-    agama: str = "J"
-    suku_bangsa: str = "K"
-    warga_negara: str = "L"
-    nomor_hp: str = "M"
-    nomor_whatsapp: str = "N"
-    alamat_email: str = "O"
-    alamat_facebook: str = "P"
-    alamat_twitter: str = "Q"
-    alamat_instagram: str = "R"
-    aktif_internet: str = "S"
-    akses_melalui: str = "T"
-    kecepatan_internet: str = "U"
-    kondisi_pekerjaan: str = "V"
-    pekerjaan_utama: str = "W"
-    pekerjaan_utama_comment: str = "X"
-    jamsos_ketenagakerjaan: str = "Y"
-    penghasilan: str = "Z"  # TODO Penghasilan Dari Sheet Penghasilan
-    pekerjaan_penghasilan: str = "AA"
-    penyakit_diderita: str = "AB"
-    fasilitas_kesehatan: str = "AC-AR"  # TODO Parse From Range
-    jamsos_kesehatan: str = "AS"
-    disabilitas: str = "AT"  # TODO Parse Multi-Select
-    setahun_melahirkan: str = "AU"
-    mendapat_asi: str = "AV"
-    pendidikan_tertinggi: str = "AW"
-    tahun_pendidikan: str = "AX"
-    pendidikan_diikuti: str = "AY"
-    pelatihan_diikuti: str = "AZ"
-    bahasa_permukiman: str = "BA"
-    bahasa_formal: str = "BB"
-    kerja_bakti: str = "BC"
-    siskamling: str = "BD"
-    pesta_rakyat: str = "BE"
-    menolong_kematian: str = "BF"
-    menolong_sakit: str = "BG"
-    menolong_kecelakaan: str = "BH"
-    memperoleh_pelayanan_desa: str = "BI"
-    pelayanan_desa: str = "BJ"
-    saran_desa: str = "BK"
-    keterbukaan_desa: str = "BL"
-    terjadi_bencana: str = "BM"
-    terdampak_bencana: str = "BN"
-    # Sheet Penghasilan
-    sumber_penghasilan: str = "A"
-    penghasilan_comment: str = "B"
-    penghasilan_jumlah: str = "C"
-    penghasilan_setahun: str = "D"
-    penghasilan_diekspor: str = "E"
-    # Fasilitas Kesehatan
-    rumah_sakit: str = "AC"
-    rumah_sakit_bersalin: str = "AD"
-    puskesmas_rawat_inap: str = "AE"
-    puskesmas_tanpa_inap: str = "AF"
-    puskesmas_pembantu: str = "AG"
-    poliklinik: str = "AH"
-    tempat_praktik_dokter: str = "AI"
-    rumah_bersalin: str = "AJ"
-    tempat_praktik_bidan: str = "AK"
-    poskesdes: str = "AL"
-    polindes: str = "AM"
-    apotik: str = "AN"
-    toko_obat_jamu: str = "AO"
-    posyandu: str = "AP"
-    posbindu: str = "AQ"
-    tempat_praktik_dukun: str = "AR"
-    _normal_cols: Dict[str, str] = attr.field(factory=dict)
-    _penghasilan_cols: Dict[str, str] = attr.field(factory=dict)
-    _fasilitas_kesehatan_cols: Dict[str, str] = attr.field(factory=dict)
-
-    def __attrs_post_init__(self):
-        # Name : Column
-        self._normal_cols: Dict[str, str] = dict()
-        for name in NORMAL_DATA:
-            col = getattr(self, name)
-            assert col
-            self._normal_cols[name] = col
-        self._penghasilan_cols: Dict[str, str] = dict()
-        for name in PENGHASILAN_DATA:
-            col = getattr(self, name)
-            assert col
-            self._penghasilan_cols[name] = col
-        self._fasilitas_kesehatan_cols: Dict[str, str] = dict()
-        for name in FASILITAS_KESEHATAN_DATA:
-            col = getattr(self, name)
-            assert col
-            self._fasilitas_kesehatan_cols[name] = col
-
-    def make_individu(
-        self,
-        wb: Workbook,
-        row: int,
-        individu_ws: str = "Individu",
-        penghasilan_ws: str = "Penghasilan",
-    ) -> Dict[str, Any]:
-        data: Dict[str, Any] = dict()
-        individu = wb[individu_ws]
-        for name, col in self._normal_cols.items():
-            data[name] = individu[f"{col}{row}"].value
-        # penghasilan: str = "Z"  # TODO Penghasilan Dari Sheet Penghasilan
-        penghasilans = individu[f"{self.penghasilan}{row}"].value
-        if penghasilans:
-            data["penghasilan"] = Penghasilan.make_range(
-                ws=wb[penghasilan_ws],
-                rows=parse_range(penghasilans),
-                cols=self._penghasilan_cols,
-            )
-        else:
-            data["penghasilan"] = [Penghasilan.default()]
-        # fasilitas_kesehatan: str = "AC-AR"  # TODO Parse From Range
-        data["fasilitas_kesehatan"] = FasilitasKesehatan.make_row(
-            ws=individu,
-            row=row,
-            cols=self._fasilitas_kesehatan_cols,
-        )
-        # disabilitas: str = "AT"  # TODO Parse Multi-Select
-        data["disabilitas"] = individu[f"{self.disabilitas}{row}"].value
-        return data
-
-    def get_nik(
-        self,
-        wb: Workbook,
-        row: int,
-        individu_ws: str = "Individu",
-    ):
-        individu = wb[individu_ws]
-        return individu[f"{self.nik}{row}"].value
+MAPPING_COLS: Dict[str, str] = {
+    "no_kk": "A",
+    "nik": "B",
+    "nama": "C",
+    "jenis_kelamin": "D",
+    "tempat_lahir": "E",
+    "tanggal_lahir": "F",
+    "usia": "G",
+    "status_pernikahan": "H",
+    "usia_menikah": "I",
+    "agama": "J",
+    "suku_bangsa": "K",
+    "warga_negara": "L",
+    "nomor_hp": "M",
+    "nomor_whatsapp": "N",
+    "alamat_email": "O",
+    "alamat_facebook": "P",
+    "alamat_twitter": "Q",
+    "alamat_instagram": "R",
+    "aktif_internet": "S",
+    "akses_melalui": "T",
+    "kecepatan_internet": "U",
+    "kondisi_pekerjaan": "V",
+    "pekerjaan_utama": "W",
+    "pekerjaan_utama_comment": "X",
+    "jamsos_ketenagakerjaan": "Y",
+    # penghasilan: str = "Z"
+    "pekerjaan_penghasilan": "AA",
+    "penyakit_diderita": "AB",
+    # fasilitas_kesehatan: str = "AC-AR"
+    "jamsos_kesehatan": "AS",
+    # disabilitas: str = "AT"
+    "setahun_melahirkan": "AU",
+    "mendapat_asi": "AV",
+    "pendidikan_tertinggi": "AW",
+    "tahun_pendidikan": "AX",
+    "pendidikan_diikuti": "AY",
+    "pelatihan_diikuti": "AZ",
+    "bahasa_permukiman": "BA",
+    "bahasa_formal": "BB",
+    "kerja_bakti": "BC",
+    "siskamling": "BD",
+    "pesta_rakyat": "BE",
+    "menolong_kematian": "BF",
+    "menolong_sakit": "BG",
+    "menolong_kecelakaan": "BH",
+    "memperoleh_pelayanan_desa": "BI",
+    "pelayanan_desa": "BJ",
+    "saran_desa": "BK",
+    "keterbukaan_desa": "BL",
+    "terjadi_bencana": "BM",
+    "terdampak_bencana": "BN",
+}

@@ -3,6 +3,27 @@ from openpyxl.worksheet.worksheet import Worksheet
 from typing import Dict
 
 
+MAPPING_COLS = {
+    # Fasilitas Kesehatan
+    "rumah_sakit": "AC",
+    "rumah_sakit_bersalin": "AD",
+    "puskesmas_rawat_inap": "AE",
+    "puskesmas_tanpa_inap": "AF",
+    "puskesmas_pembantu": "AG",
+    "poliklinik": "AH",
+    "tempat_praktik_dokter": "AI",
+    "rumah_bersalin": "AJ",
+    "tempat_praktik_bidan": "AK",
+    "poskesdes": "AL",
+    "polindes": "AM",
+    "apotik": "AN",
+    "toko_obat_jamu": "AO",
+    "posyandu": "AP",
+    "posbindu": "AQ",
+    "tempat_praktik_dukun": "AR",
+}
+
+
 @attr.dataclass
 class FasilitasKesehatan:
     rumah_sakit: int = 0
@@ -43,8 +64,8 @@ class FasilitasKesehatan:
         }
 
     @staticmethod
-    def make_row(ws: Worksheet, row: int, cols: Dict[str, str]):
+    def make(ws: Worksheet, row: int):
         data: Dict[str, str] = dict()
-        for nama, col in cols.items():
+        for nama, col in MAPPING_COLS.items():
             data[nama] = ws[f"{col}{row}"].value
         return data

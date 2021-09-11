@@ -1,7 +1,11 @@
 import attr
 import cattr
 from datetime import date
+from openpyxl import Workbook
+from openpyxl.worksheet.worksheet import Worksheet
 from typing import Any, Dict, List, Optional
+
+from sdgs_tools.utils import parse_range
 from .enums import (
     Agama,
     AksesInternet,
@@ -23,7 +27,7 @@ from . import (
     Penghasilan,
     PenyakitDiderita,
 )
-from .mapping import MAPPING
+from .mapping import MAPPING, MAPPING_COLS
 
 
 @attr.dataclass(kw_only=True)
@@ -130,3 +134,35 @@ class DataIndividu:
             }
         )
         return clean_data
+
+    @staticmethod
+    def make(wb: Workbook, row: int):
+        data: Dict[str, Any] = dict()
+        individu: Worksheet = wb["Individu"]
+        for name, col in MAPPING_COLS.items():
+            data[name] = individu[f"{col}{row}"].value
+        # Penghasilan
+        penghasilans = individu[f"Z{row}"].value
+        if penghasilans:
+            data["penghasilan"] = Penghasilan.make(
+                ws=wb["Penghasilan"],
+                rows=parse_range(penghasilans),
+            )
+        else:
+            data["penghasilan"] = [Penghasilan.default()]
+        # Fasilitas kesehatan
+        data["fasilitas_kesehatan"] = FasilitasKesehatan.make(
+            ws=individu,
+            row=row,
+        )
+        data["disabilitas"] = individu[f"AT{row}"].value
+        return data
+
+    @staticmethod
+    def get_nik(
+        wb: Workbook,
+        row: int,
+        individu_ws: str = "Individu",
+    ):
+        individu = wb[individu_ws]
+        return individu[f"B{row}"].value

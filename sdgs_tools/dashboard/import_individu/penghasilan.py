@@ -6,6 +6,16 @@ from .enums import Diekspor
 from .enums import SumberPenghasilan
 
 
+MAPPING_COLS = {
+    # Sheet Penghasilan
+    "sumber_penghasilan": "A",
+    "penghasilan_comment": "B",
+    "penghasilan_jumlah": "C",
+    "penghasilan_setahun": "D",
+    "penghasilan_diekspor": "E",
+}
+
+
 @attr.dataclass
 class Penghasilan:
     penghasilan_diekspor: Optional[Diekspor] = None
@@ -59,11 +69,11 @@ class Penghasilan:
         )
 
     @staticmethod
-    def make_range(ws: Worksheet, rows: List[int], cols: Dict[str, str]):
+    def make(ws: Worksheet, rows: List[int]):
         results: List[Any] = list()
         for row in rows:
             data: Dict[str, Any] = dict()
-            for name, col in cols.items():
+            for name, col in MAPPING_COLS.items():
                 data[name] = ws[f"{col}{row}"].value
             results.append(data)
         return results

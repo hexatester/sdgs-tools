@@ -13,7 +13,6 @@ from .penghasilan import Penghasilan
 from .penyakit_diderita import PenyakitDiderita
 
 from .data_individu import DataIndividu
-from .mapping import MappingIndividu
 
 
 cattr.register_structure_hook(Disabilitas, Disabilitas.from_str)
@@ -28,7 +27,6 @@ __all__ = [
     "DataIndividu",
     "Disabilitas",
     "FasilitasKesehatan",
-    "MappingIndividu",
     "Penghasilan",
     "PenyakitDiderita",
 ]
@@ -40,9 +38,7 @@ def import_individu(
     rows: List[int],
     rt: str,
     rw: str,
-    mapping: MappingIndividu = None,
 ):
-    mapping = mapping or MappingIndividu()
     click.echo(f"Membuka {filepath}")
     wb = load_workbook(filepath, read_only=True)
     faileds: List[str] = list()
@@ -53,7 +49,7 @@ def import_individu(
     for row in rows:
         if row < 4:
             raise ValueError(f"Tidak dapat memproses baris < 4")
-        nik: Optional[str] = mapping.get_nik(wb, row, "Individu")
+        nik: Optional[str] = DataIndividu.get_nik(wb, row, "Individu")
         if not nik:
             raise ValueError(f"Nik kosong di baris {row}. Membatalkan operasi!")
         if not sdgs.token.token.is_valid():
@@ -63,12 +59,7 @@ def import_individu(
             skipped += 1
             continue
         click.echo(f"Mempersiapkan data nik {nik}")
-        data = mapping.make_individu(
-            wb=wb,
-            row=row,
-            individu_ws="Individu",
-            penghasilan_ws="Penghasilan",
-        )
+        data = DataIndividu.make(wb, row)
         individu: DataIndividu = cattr.structure(data, DataIndividu)
         if not sdgs.token.token.is_valid():
             sdgs.token = sdgs.token_refresh(sdgs.token)
