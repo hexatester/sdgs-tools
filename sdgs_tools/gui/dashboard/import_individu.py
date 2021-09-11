@@ -7,7 +7,6 @@ from typing import Optional
 from sdgs_tools.utils import parse_range
 from sdgs_tools.dashboard.sdgs import Sdgs
 from sdgs_tools.dashboard.import_individu import import_individu
-from sdgs_tools.dashboard.import_individu import MappingIndividu
 from ..form import TextForm
 
 
