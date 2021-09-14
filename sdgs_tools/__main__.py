@@ -2,6 +2,7 @@ import click
 
 from sdgs_tools import __version__
 from sdgs_tools.cli import aplikasi
+from sdgs_tools.cli import dashboard
 from sdgs_tools.cli import exporter
 from sdgs_tools.gui import MainApp
 
@@ -16,6 +17,7 @@ def cli(ctx: click.Context):
 
 
 cli.add_command(aplikasi, "aplikasi")
+cli.add_command(dashboard, "dashboard")
 cli.add_command(exporter, "exporter")
 
 
