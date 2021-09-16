@@ -24,7 +24,7 @@ class ImportIndividuWindow(tk.Toplevel):
         self.label_info.grid(row=0, column=0, columnspan=3)
         # Autentikasi
         self.username_form = TextForm(self, "Username", 1)
-        self.password_form = TextForm(self, "Password", 2)
+        self.password_form = TextForm(self, "Password", 2, password=True)
         self.login_button = tk.Button(
             self,
             text="Login",
