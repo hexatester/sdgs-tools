@@ -85,6 +85,41 @@ class DataKeluarga:
     penerima_program_pemerintah: BantuanPemerintah
     pengeluaran_bulanan: str = "0"
 
+    def __attrs_post_init__(self) -> None:
+        if (
+            self.tempat_tinggal == TempatTinggal.LAINNYA
+            and not self.tempat_tinggal_comment
+        ):
+            raise ValueError("Tempat Tinggal Lainnya harus diisi")
+        if self.status_lahan == StatusLahan.LAINNYA and not self.status_lahan_comment:
+            raise ValueError("Status Lahan Lainnya harus diisi")
+        if self.lantai == Lantai.LAINNYA and not self.lantai_other:
+            raise ValueError("Lantai Lainnya harus diisi")
+        if self.dinding == Dinding.LAINNYA and not self.dinding_other:
+            raise ValueError("Dinding Lainnya harus diisi")
+        if self.atap == Atap.LAINNYA and not self.atap_comment:
+            raise ValueError("Atap Lainnya harus diisi")
+        if (
+            self.sumber_air_mandi == SumberAirMandi.LAINNYA
+            and not self.sumber_air_mandi_comment
+        ):
+            raise ValueError("Sumber Air Mandi Lainnya harus diisi")
+        if (
+            self.fasilitas_bab == FasilitasBab.LAINNYA
+            and not self.fasilitas_bab_comment
+        ):
+            raise ValueError("Fasilitas BAB Lainnya harus diisi")
+        if (
+            self.sumber_air_minum == SumberAirMinum.LAINNYA
+            and not self.sumber_air_minum_comment
+        ):
+            raise ValueError("Sumber Air Minum Lainnya harus diisi")
+        if (
+            self.pembuangan_limbah_cair == PembuanganLimbahCair.LAINNYA
+            and not self.pembuangan_limbah_cair_comment
+        ):
+            raise ValueError("Pembuangan Limbah Cair Lainnya harus diisi")
+
     @staticmethod
     def make(ws: Worksheet, row: int):
         data: Dict[str, Any] = dict()

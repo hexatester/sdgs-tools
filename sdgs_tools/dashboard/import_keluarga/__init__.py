@@ -73,15 +73,26 @@ def import_keluarga(
             continue
         click.echo(f"Mempersiapkan data keluarga {no_kk}")
         data = DataKeluarga.make(keluarga, row)
-        data_keluarga: DataKeluarga = cattr.structure(data, DataKeluarga)
+        try:
+            data_keluarga: DataKeluarga = cattr.structure(data, DataKeluarga)
+        except ValueError as e:
+            click.echo(f"Baris {row} dilewati karena : {e}")
+            skipped += 1
+            continue
+        except Exception as e:
+            click.echo(f"Eror ketika membuat DataKeluarga baris {row}")
+            failed += 1
+            continue
         if not sdgs.token.token.is_valid():
             sdgs.token = sdgs.token_refresh(sdgs.token)
         try:
             click.echo(f"Berhasil mengirim data {no_kk}")
             res = sdgs.save_keluarga(data_keluarga, rt, rw)
             if res:
-                click.echo(f"Berhasil mengirim data {no_kk}")
+                click.echo(f"{row}. {no_kk} : {res.message}")
                 success += 1
+            elif res.message:
+                click.echo(f"Gagal mengirim data {no_kk} : {res.message}")
             else:
                 click.echo(f"Gagal mengirim data {no_kk}")
         except Exception as e:
