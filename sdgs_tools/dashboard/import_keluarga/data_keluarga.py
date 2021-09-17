@@ -86,6 +86,16 @@ class DataKeluarga:
     pengeluaran_bulanan: str = "0"
 
     def __attrs_post_init__(self) -> None:
+        if self.no_kk in (None, "None"):
+            raise ValueError("Nomor KK harus diisi")
+        elif len(self.no_kk) != 16:
+            raise ValueError("Nomor KK harus 16 digit")
+        if self.nik in (None, "None"):
+            raise ValueError("NIK Kepala Keluarga harus diisi")
+        elif len(self.nik) != 16:
+            raise ValueError("NIK Kepala Keluarga harus 16 digit")
+        if self.nama in (None, "None"):
+            raise ValueError("Nama keluarga harus diisi")
         if (
             self.tempat_tinggal == TempatTinggal.LAINNYA
             and not self.tempat_tinggal_comment
