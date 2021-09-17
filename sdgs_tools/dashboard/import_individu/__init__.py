@@ -60,7 +60,16 @@ def import_individu(
             continue
         click.echo(f"Mempersiapkan data nik {nik}")
         data = DataIndividu.make(wb, row)
-        individu: DataIndividu = cattr.structure(data, DataIndividu)
+        try:
+            individu: DataIndividu = cattr.structure(data, DataIndividu)
+        except ValueError as e:
+            click.echo(f"Baris {row} dilewati karena : {e}")
+            skipped += 1
+            continue
+        except Exception as e:
+            click.echo(f"Error ketika membuat DataKeluarga baris {row} : {e}")
+            failed += 1
+            continue
         if not sdgs.token.token.is_valid():
             sdgs.token = sdgs.token_refresh(sdgs.token)
         try:
