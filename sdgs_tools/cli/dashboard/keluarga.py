@@ -16,12 +16,7 @@ from sdgs_tools.dashboard.import_keluarga import import_keluarga as _import_kelu
     type=str,
     help="Baris yang akan diinputkan dari excel",
 )
-@click.argument(
-    "nama-file",
-    type=click.Path(exists=True),
-    required=True,
-    help="File excel / template yang terdapat data yang akan diimport",
-)
+@click.argument("nama-file", type=click.Path(exists=True), required=True)
 def import_keluarga(
     username: str,
     password: str,

@@ -16,12 +16,7 @@ from sdgs_tools.dashboard.import_individu import import_individu as _import_indi
     type=str,
     help="Baris yang akan diinputkan dari excel",
 )
-@click.argument(
-    "nama-file",
-    type=click.Path(exists=True),
-    required=True,
-    help="File excel / template yang terdapat data yang akan diimport",
-)
+@click.argument("nama-file", type=click.Path(exists=True), required=True)
 def import_individu(
     username: str,
     password: str,
