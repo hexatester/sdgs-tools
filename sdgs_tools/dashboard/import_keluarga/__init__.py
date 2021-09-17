@@ -22,6 +22,7 @@ cattr.register_unstructure_hook(AksesFasilitasKesehatan, AksesFasilitasKesehatan
 cattr.register_unstructure_hook(AksesPendidikan, AksesPendidikan.todict)
 cattr.register_unstructure_hook(AksesSarprasTransport, AksesSarprasTransport.todict)
 cattr.register_unstructure_hook(AksesTenagaKesehatan, AksesTenagaKesehatan.todict)
+cattr.register_unstructure_hook(Akses, Akses.todict)
 cattr.register_unstructure_hook(BantuanPemerintah, BantuanPemerintah.todict)
 cattr.register_unstructure_hook(AksesTenagaKesehatan, AksesTenagaKesehatan.todict)
 
