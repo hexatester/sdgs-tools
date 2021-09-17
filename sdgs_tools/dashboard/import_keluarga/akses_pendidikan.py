@@ -18,15 +18,15 @@ MAPPING = {
 }
 
 MAPPING_VALUE = {
-    "paud": ("AK", "AL", "AM"),
-    "tk": ("AN", "AO", "AP"),
-    "sd": ("AQ", "AR", "AS"),
-    "smp": ("AT", "AU", "AV"),
-    "sma": ("AW", "AX", "AY"),
-    "pt": ("AZ", "BA", "BB"),
-    "pesantren": ("BC", "BD", "BE"),
-    "seminari": ("BF", "BG", "BH"),
-    "lainnya": ("BI", "BJ", "BK"),
+    "paud": ("AL", "AM", "AN"),
+    "tk": ("AO", "AP", "AQ"),
+    "sd": ("AR", "AS", "AT"),
+    "smp": ("AU", "AV", "AW"),
+    "sma": ("AX", "AY", "AZ"),
+    "pt": ("BA", "BB", "BC"),
+    "pesantren": ("BD", "BE", "BF"),
+    "seminari": ("BG", "BH", "BI"),
+    "lainnya": ("BJ", "BK", "BL"),
 }
 
 

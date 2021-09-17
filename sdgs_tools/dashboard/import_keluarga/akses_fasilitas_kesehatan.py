@@ -19,16 +19,16 @@ MAPPING = {
 }
 
 MAPPING_VALUE = {
-    "rs": ("BL", "BM", "BN"),
-    "bersalin": ("BO", "BP", "BQ"),
-    "poliklinik": ("BR", "BS", "BT"),
-    "puskesmas": ("BU", "BV", "BW"),
-    "pustu": ("BX", "BY", "BZ"),
-    "polindes": ("CA", "CB", "CC"),
-    "poskesdes": ("CD", "CE", "CF"),
-    "posyandu": ("CG", "CH", "CI"),
-    "apotik": ("CJ", "CK", "CL"),
-    "toko": ("CM", "CN", "CO"),
+    "rs": ("BM", "BN", "BO"),
+    "bersalin": ("BP", "BQ", "BR"),
+    "poliklinik": ("BS", "BT", "BU"),
+    "puskesmas": ("BV", "BW", "BX"),
+    "pustu": ("BY", "BZ", "CA"),
+    "polindes": ("CB", "CC", "CD"),
+    "poskesdes": ("CE", "CF", "CG"),
+    "posyandu": ("CH", "CI", "CJ"),
+    "apotik": ("CK", "CL", "CM"),
+    "toko": ("CN", "CO", "CP"),
 }
 
 

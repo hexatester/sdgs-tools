@@ -15,12 +15,12 @@ MAPPING = {
 }
 
 MAPPING_VALUE = {
-    "pekerjaan": ("DE", "DF", "DG", "DH", "DI"),
-    "pertanian": ("DJ", "DK", "DL", "DM", "DN"),
-    "sekolah": ("DO", "DP", "DQ", "DR", "DS"),
-    "berobat": ("DT", "DU", "DV", "DW", "DX"),
-    "ibadah": ("DY", "DZ", "EA", "EB", "EC"),
-    "rekreasi": ("ED", "EE", "EF", "EG", "EH"),
+    "pekerjaan": ("DF", "DG", "DH", "DI", "DJ"),
+    "pertanian": ("DK", "DL", "DM", "DN", "DO"),
+    "sekolah": ("DP", "DQ", "DR", "DS", "DT"),
+    "berobat": ("DU", "DV", "DW", "DX", "DY"),
+    "ibadah": ("DZ", "EA", "EB", "EC", "ED"),
+    "rekreasi": ("EE", "EF", "EG", "EH", "EI"),
 }
 
 

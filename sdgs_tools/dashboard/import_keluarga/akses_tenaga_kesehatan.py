@@ -14,11 +14,11 @@ MAPPING = {
 }
 
 MAPPING_VALUE = {
-    "spesialis": ("CP", "CQ", "CR"),
-    "dokter": ("CS", "CT", "CU"),
-    "bidan": ("CV", "CW", "CX"),
-    "nakes": ("CY", "CZ", "DA"),
-    "dukun": ("DB", "DC", "DD"),
+    "spesialis": ("CQ", "CR", "CS"),
+    "dokter": ("CT", "CU", "CV"),
+    "bidan": ("CW", "CX", "CY"),
+    "nakes": ("CZ", "DA", "DB"),
+    "dukun": ("DC", "DD", "DE"),
 }
 
 

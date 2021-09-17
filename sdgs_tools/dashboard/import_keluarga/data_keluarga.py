@@ -24,6 +24,7 @@ from .enums import (
     Penerangan,
     StatusLahan,
     SumberAirMandi,
+    SumberAirMinum,
     SumberKayuBakar,
     TempatTinggal,
     YaTidak,
@@ -62,6 +63,8 @@ class DataKeluarga:
     sumber_air_mandi_comment: Optional[str] = None
     fasilitas_bab: FasilitasBab
     fasilitas_bab_comment: Optional[str] = None
+    sumber_air_minum: SumberAirMinum
+    sumber_air_minum_comment: Optional[str] = None
     pembuangan_limbah_cair: PembuanganLimbahCair
     pembuangan_limbah_cair_comment: Optional[str] = None
     bawah_sutet: YaTidak
