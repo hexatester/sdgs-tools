@@ -174,7 +174,8 @@ class DataIndividu:
         row_individu: int,
         row_penghasilan: int,
         individu_ws: str = "Individu",
-    ):
+        penghasilan_ws: str = "Penghasilan",
+    ) -> int:
         individu: Worksheet = wb[individu_ws]
         for name, col in MAPPING_COLS.items():
             value = getattr(self, name)
@@ -183,3 +184,11 @@ class DataIndividu:
             if isinstance(value, Enum):
                 value = str(value)
             individu[f"{col}{row_individu}"] = value
+        for penghasilan in self.penghasilan:
+            if not penghasilan:
+                continue
+            penghasilan.save(wb[penghasilan_ws], row_penghasilan)
+            row_penghasilan += 1
+        self.fasilitas_kesehatan.save(individu, row_individu)
+        individu[f"AT{row_individu}"] = str(self.disabilitas)
+        return row_penghasilan
