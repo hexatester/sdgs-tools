@@ -62,3 +62,13 @@ def make_str_to_enum(mapping: Dict[str, Any], default_value: Union[str, int] = "
         return cls(default_value)
 
     return str_to_enum
+
+
+def make_dunder_str(mapping: Dict[str, Any], default: Any = None):
+    def dunder_str(self: Type[E]):
+        for name, enum_val in mapping.items():
+            if self.value == enum_val:
+                return name
+        return default
+
+    return dunder_str
