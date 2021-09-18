@@ -1,5 +1,5 @@
 import attr
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 
 from .enums import YaTidak
 
@@ -65,3 +65,14 @@ class Disabilitas:
             else:
                 data[name] = YaTidak.TIDAK
         return cls(**data)
+
+    def __str__(self):
+        values: List[str] = list()
+        for key, name in MAPPING.items():
+            value = getattr(self, name)
+            if value is None:
+                continue
+            values.append(key)
+        if values:
+            return ", ".join(values)
+        return ""
