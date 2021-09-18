@@ -69,3 +69,7 @@ class FasilitasKesehatan:
         for nama, col in MAPPING_COLS.items():
             data[nama] = ws[f"{col}{row}"].value
         return data
+
+    def save(self, ws: Worksheet, row):
+        for nama, col in MAPPING_COLS.items():
+            ws[f"{col}{row}"] = getattr(self, nama)
