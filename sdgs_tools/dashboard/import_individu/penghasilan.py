@@ -1,4 +1,5 @@
 import attr
+from enum import Enum
 from openpyxl.worksheet.worksheet import Worksheet
 from typing import Any, Dict, List, Optional
 
@@ -23,6 +24,9 @@ class Penghasilan:
     penghasilan_setahun: Optional[str] = None
     sumber_penghasilan: Optional[SumberPenghasilan] = None
     penghasilan_comment: Optional[str] = None
+
+    def __bool__(self):
+        return self.sumber_penghasilan is not None
 
     def todict(self) -> Dict[str, Optional[str]]:
         data: Dict[str, Optional[str]] = {
@@ -77,3 +81,12 @@ class Penghasilan:
                 data[name] = ws[f"{col}{row}"].value
             results.append(data)
         return results
+
+    def save(self, ws: Worksheet, row: int):
+        for name, col in MAPPING_COLS.items():
+            value = getattr(self, name)
+            if value is None:
+                continue
+            elif isinstance(value, Enum):
+                value = str(value)
+            ws[f"{col}{row}"] = value
