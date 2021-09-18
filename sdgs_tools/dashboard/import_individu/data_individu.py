@@ -1,6 +1,7 @@
 import attr
 import cattr
 from datetime import date
+from enum import Enum
 from openpyxl import Workbook
 from openpyxl.worksheet.worksheet import Worksheet
 from typing import Any, Dict, List, Optional
@@ -166,3 +167,19 @@ class DataIndividu:
     ):
         individu = wb[individu_ws]
         return individu[f"B{row}"].value
+
+    def save(
+        self,
+        wb: Workbook,
+        row_individu: int,
+        row_penghasilan: int,
+        individu_ws: str = "Individu",
+    ):
+        individu: Worksheet = wb[individu_ws]
+        for name, col in MAPPING_COLS.items():
+            value = getattr(self, name)
+            if value is None:
+                continue
+            if isinstance(value, Enum):
+                value = str(value)
+            individu[f"{col}{row_individu}"] = value

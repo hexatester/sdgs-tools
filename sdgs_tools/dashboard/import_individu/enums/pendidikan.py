@@ -1,5 +1,5 @@
 from enum import Enum
-from sdgs_tools.dashboard.utils import make_str_to_enum
+from sdgs_tools.dashboard.utils import make_str_to_enum, make_dunder_str
 
 MAPPING = {
     "Tidak Sekolah": "1",
@@ -28,3 +28,4 @@ class Pendidikan(Enum):
     LAINNYA = "10"
 
     from_str = classmethod(make_str_to_enum(MAPPING, "1"))
+    __str__ = make_dunder_str(MAPPING)
