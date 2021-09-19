@@ -13,6 +13,7 @@ from sdgs_tools.dashboard.import_individu.mapping import MAPPING_COLS
 from .individu import get_data_individu
 from .kesehatan import get_data_kesehatan
 from .pekerjaan import get_data_pekerjaan
+from .pendidikan import get_data_pendidikan
 from .penghasilan import get_data_penghasilan
 
 
@@ -20,6 +21,7 @@ __all__ = [
     "get_data_individu",
     "get_data_kesehatan",
     "get_data_pekerjaan",
+    "get_data_pendidikan",
     "get_data_penghasilan",
 ]
 
@@ -83,6 +85,9 @@ def export_individu(
         # Kesehatan
         if not skip_kesehatan:
             data.update(get_data_kesehatan(d))
+        # Pendidikan
+        if not skip_pendidikan:
+            data.update(get_data_pendidikan(d))
         try:
             individu: DataIndividu = cattr.structure(data, DataIndividu)
             row_penghasilan = individu.save(wb, row, row_penghasilan)
