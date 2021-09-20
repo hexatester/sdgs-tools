@@ -4,16 +4,15 @@ from uiautomator2 import Device, UiObject
 from sdgs_tools.aplikasi_sdgs.utils import d_get_text, menu_to, swipe_box
 
 AKSES_SARPRAS = {
-    "PEKERJAAN": "pekerjaan",
-    "PERTANIAN": "pertanian",
-    "SEKOLAH": "sekolah",
-    "BEROBAT": "berobat",
-    "IBADAH": "ibadah",
-    "REKREASI": "rekreasi",
+    "Lokasi pekerjaan utama": "pekerjaan",
+    "Lahan pertanian yang sedang diusahakan": "pertanian",
+    "Sekolah": "sekolah",
+    "Berobat": "berobat",
+    "Beribadah Mingguan/Bulanan/Tahunan": "ibadah",
+    "Rekreasi Terdekat": "rekreasi",
 }
 
 SARPRAS_COL = {
-    # "B": ("com.kemendes.survey:id/txtNIK", ""),
     # "C": ("com.kemendes.survey:id/txtNama", "Tujuan : Lokasi pekerjaan utama Jenis Transportasi : Darat"),
     # "D": ("com.kemendes.survey:id/txtAlamat", "Waktu Tempuh :0.25 jam, Biaya : 5000"),
     "kemudahan": ("com.kemendes.survey:id/txtTelpon", "Kemudahan :"),
@@ -53,7 +52,6 @@ def get_data_sarpras(d: Device) -> Dict[str, Dict[str, Any]]:
         data["waktu"] = waktu.strip()
         data["biaya"] = biaya.strip()
         swipe_box(d, survey_box)
-        # TODO Find The Key
         sarpras[AKSES_SARPRAS[nama]] = data
     d(className="android.widget.ScrollView").fling.vert.backward()
     return sarpras
