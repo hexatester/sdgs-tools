@@ -1,8 +1,10 @@
 import tkinter as tk
 from tkinter.filedialog import askopenfilename
 from tkinter.messagebox import showerror, showinfo, showwarning
+from uiautomator2 import connect
 
-from sdgs_tools.aplikasi_sdgs.export import export_keluarga as _export_keluarga
+from sdgs_tools.utils import parse_range
+from sdgs_tools.aplikasi_sdgs.export_keluarga import export_keluarga as _export_keluarga
 
 
 class ExportKeluargaWindow(tk.Toplevel):
@@ -119,12 +121,9 @@ class ExportKeluargaWindow(tk.Toplevel):
             return
         try:
             _export_keluarga(
+                d=connect(),
                 filepath=filepath,
-                ranges=self.baris.get(),
-                row_pendidikan=2,
-                row_kesehatan=2,
-                row_tenaga_kesehatan=2,
-                row_sarpras=2,
+                rows=parse_range(self.baris.get()),
                 skip_lokasi=not self.lokasi.get(),
                 skip_pendidikan=not self.pendidikan.get(),
                 skip_kesehatan=not self.kesehatan.get(),
