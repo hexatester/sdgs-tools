@@ -46,3 +46,8 @@ class AksesSarprasTransport:
         for name, args in MAPPING_VALUE.items():
             data[name] = SarprasTransport.from_cols(ws, row, *args)
         return data
+
+    def save(self, ws: Worksheet, row: int):
+        for name, args in MAPPING_VALUE.items():
+            sarpras: SarprasTransport = getattr(self, name)
+            sarpras.save(ws, row, *args)
