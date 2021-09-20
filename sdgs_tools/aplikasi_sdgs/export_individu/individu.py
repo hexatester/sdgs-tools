@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Any, Dict
 from uiautomator2 import Device, UiObjectNotFoundError
 
@@ -37,7 +38,13 @@ def get_data_individu(d: Device) -> Dict[str, Any]:
             continue
     if data["aktif_internet"] == "Ya":
         # Internet = Ya
-        data["akses_melalui"] = d_get_text(d, "com.kemendes.survey:id/cbAksesInternetLewat")
-        data["kecepatan_internet"] = d_get_text(d, "com.kemendes.survey:id/cbKecepatanInternet")
+        data["akses_melalui"] = d_get_text(
+            d, "com.kemendes.survey:id/cbAksesInternetLewat"
+        )
+        data["kecepatan_internet"] = d_get_text(
+            d, "com.kemendes.survey:id/cbKecepatanInternet"
+        )
+    tanggal, bulan, tahun = data["tanggal_lahir"].split("/")
+    data["tanggal_lahir"] = datetime(int(tahun), int(bulan), int(tanggal)).date()
     d(className="android.widget.ScrollView").fling.vert.backward()
     return data
