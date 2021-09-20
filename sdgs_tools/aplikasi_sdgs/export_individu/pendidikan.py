@@ -3,6 +3,19 @@ from uiautomator2 import Device
 
 from sdgs_tools.aplikasi_sdgs.utils import d_get_text, menu_to
 
+PENDIDIKAN_SUBTITUTE = {
+    "Tidak Sekolah": "Tidak Sekolah",
+    "SD dan sederajat": "SD",
+    "SMP dan sederajat": "SMP",
+    "SMA dan sederajat": "SMA",
+    "Diploma 1-3": "Diploma",
+    "S1 dan sederajat": "S1",
+    "S2 dan sederajat": "S2",
+    "S3 dan sederajat": "S3",
+    "Pesanteren, seminari, wihara dan sejenisnya": "Pesantren / Seminari",
+    "Lainnya": "Lainnya",
+}
+
 # resourceId
 PENDIDIKAN_COL = {
     "pendidikan_tertinggi": "com.kemendes.survey:id/cbPendidikanTertinggi",
@@ -33,4 +46,5 @@ def get_data_pendidikan(d: Device) -> Dict[str, Any]:
     for name, resourceId in PENDIDIKAN_COL.items():
         data[name] = d_get_text(d, resourceId)
     d(className="android.widget.ScrollView").fling.vert.backward()
+    data["pendidikan_tertinggi"] = PENDIDIKAN_SUBTITUTE[data["pendidikan_tertinggi"]]
     return data
