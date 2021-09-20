@@ -13,23 +13,19 @@ __all__ = [
 ]
 
 
-# resourceId
-KESEHATAN_COL = {
-    # Kesehatan
-    "jamsos_kesehatan": "com.kemendes.survey:id/cbJaminanKesehatanIndividu",
-    "setahun_melahirkan": "com.kemendes.survey:id/cbMelahirkan",
-}
-
-
 def get_data_kesehatan(d: Device) -> Dict[str, Any]:
     menu_to(d, "KESEHATAN")
     data: Dict[str, Any] = dict()
     # d(text="KESEHATAN").click()
     data["penyakit_diderita"] = get_data_penyakit(d)
     data["fasilitas_kesehatan"] = get_data_fasilitas_kesehatan(d)
-    for name, resourceId in KESEHATAN_COL.items():
-        value = d_get_text(d, resourceId)
-        if value != "Jumlah":
-            data[name] = value
+    jamsos_kesehatan = d_get_text(
+        d, "com.kemendes.survey:id/cbJaminanKesehatanIndividu"
+    )
+    if jamsos_kesehatan == "Peserta":
+        data["jamsos_kesehatan"] = "Ya"
+    else:
+        data["jamsos_kesehatan"] = "Tidak"
+    data["setahun_melahirkan"] = d_get_text(d, "com.kemendes.survey:id/cbMelahirkan")
     d(className="android.widget.ScrollView").fling.vert.backward()
     return data
