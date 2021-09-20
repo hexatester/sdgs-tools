@@ -4,15 +4,16 @@ from uiautomator2 import Device, UiObject
 from sdgs_tools.aplikasi_sdgs.utils import d_get_text, menu_to, swipe_box
 
 AKSES_TENKES = {
-    "SPESIALIS": "spesialis",
-    "DOKTER": "dokter",
-    "BIDAN": "bidan",
-    "NAKES": "nakes",
-    "DUKUN": "dukun",
+    "Dokter Spesialis": "spesialis",
+    "Dokter Umum": "dokter",
+    "Bidan": "bidan",
+    "Tenaga Kesehatan": "nakes",
+    "Dukun": "dukun",
 }
 
 TENAGA_KESEHATAN_COL = {
     # "B": ("com.kemendes.survey:id/txtNIK", ""),
+    "nama": ("com.kemendes.survey:id/txtNIK", ""),
     "jarak": ("com.kemendes.survey:id/txtNama", "Jarak : "),
     "waktu": ("com.kemendes.survey:id/txtAlamat", "Waktu Tempuh :"),
     "kemudahan": ("com.kemendes.survey:id/txtTelpon", "Kemudahan :"),
@@ -37,7 +38,6 @@ def get_data_tenaga_kesehatan(d: Device):
             if isinstance(value, str):
                 data[name] = value.lstrip(lstrp)
         swipe_box(d, survey_box)
-        # TODO Find The Key
         key: str = data["nama"]
         tenkes[AKSES_TENKES[key]] = data
     d(className="android.widget.ScrollView").fling.vert.backward()
