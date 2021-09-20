@@ -4,20 +4,21 @@ from uiautomator2 import Device, UiObject
 from sdgs_tools.aplikasi_sdgs.utils import d_get_text, menu_to, swipe_box
 
 AKSES_KESEHATAN = {
-    "RS": "rs",
-    "BERSALIN": "bersalin",
-    "POLIKLINIK": "poliklinik",
-    "PUSKESMAS": "puskesmas",
-    "PUSTU": "pustu",
-    "POLINDES": "polindes",
-    "POSKESDES": "poskesdes",
-    "POSYANDU": "posyandu",
-    "APOTIK": "apotik",
-    "TOKO": "toko",
+    "Rumah Sakit": "rs",
+    "Rumah Sakit Bersalin": "bersalin",
+    "Poliklinik": "poliklinik",
+    "Puskesmas": "puskesmas",
+    "Puskesmas Pembantu": "pustu",
+    "Polindes": "polindes",
+    "Poskesdes": "poskesdes",
+    "Posyandu": "posyandu",
+    "Apotik": "apotik",
+    "Toko": "toko",
 }
 
 KESEHATAN_COL = {
     # "B": ("com.kemendes.survey:id/txtNIK", ""),
+    "nama": ("com.kemendes.survey:id/txtNIK", ""),
     "jarak": ("com.kemendes.survey:id/txtNama", "Jarak : "),
     "waktu": ("com.kemendes.survey:id/txtAlamat", "Waktu Tempuh :"),
     "kemudahan": ("com.kemendes.survey:id/txtTelpon", "Kemudahan :"),
@@ -42,7 +43,6 @@ def get_data_kesehatan(d: Device) -> Dict[str, Dict[str, Any]]:
             if isinstance(value, str):
                 data[name] = value.lstrip(lstrp)
         swipe_box(d, survey_box)
-        # TODO Find The Key
         key: str = data["nama"]
         kesehatan[AKSES_KESEHATAN[key]] = data
     d(className="android.widget.ScrollView").fling.vert.backward()
