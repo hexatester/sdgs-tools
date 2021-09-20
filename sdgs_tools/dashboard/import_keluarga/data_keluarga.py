@@ -1,5 +1,7 @@
 import attr
 import cattr
+from enum import Enum
+from openpyxl import Workbook
 from openpyxl.worksheet.worksheet import Worksheet
 from typing import Any, Dict, Optional, Tuple
 
@@ -173,3 +175,25 @@ class DataKeluarga:
             }
         )
         return clean_data
+
+    def save(
+        self,
+        wb: Workbook,
+        row: int,
+        keluarga_ws: str = "Keluarga",
+    ):
+        keluarga: Worksheet = wb[keluarga_ws]
+        for name, col in MAPPING_COLS.items():
+            value = getattr(self, name)
+            if value is None:
+                continue
+            if isinstance(value, Enum):
+                value = str(value)
+            keluarga[f"{col}{row}"] = value
+        # Luas
+        keluarga[f"L{row}"] = self.luas.lantai
+        keluarga[f"M{row}"] = self.luas.lahan
+        self.akses_pendidikan.save(keluarga, row)
+        self.akses_fasilitas_kesehatan.save(keluarga, row)
+        self.akses_tenaga_kesehatan.save(keluarga, row)
+        self.akses_sarpras_transport.save(keluarga, row)
