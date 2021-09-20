@@ -3,6 +3,12 @@ from uiautomator2 import Device
 
 from sdgs_tools.aplikasi_sdgs.utils import d_get_text, menu_to
 
+SUBTITUTE = {
+    "Nelayan Pemilik Kapal/Perahu": "Nelayan Pemilik Kapal",
+    "Nelayan Penyewa Kapal/Perahu": "Nelayan Penyewa Kapal",
+    "Pensiunan": "Lainnya",
+}
+
 # EXCEL COL : d(resourceId="{}")
 PEKERJAAN_COL = {
     "kondisi_pekerjaan": "com.kemendes.survey:id/cbKondisiPekerjaan",
@@ -19,4 +25,7 @@ def get_data_pekerjaan(d: Device) -> Dict[str, Any]:
     for name, resourceId in PEKERJAAN_COL.items():
         data[name] = d_get_text(d, resourceId)
     d(className="android.widget.ScrollView").fling.vert.backward()
+    for old, new in SUBTITUTE.items():
+        if data["pekerjaan_utama"] == old:
+            data["pekerjaan_utama"] = new
     return data
