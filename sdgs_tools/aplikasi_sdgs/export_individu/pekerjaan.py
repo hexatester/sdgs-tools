@@ -25,7 +25,7 @@ def get_data_pekerjaan(d: Device) -> Dict[str, Any]:
     for name, resourceId in PEKERJAAN_COL.items():
         data[name] = d_get_text(d, resourceId)
     d(className="android.widget.ScrollView").fling.vert.backward()
-    for old, new in SUBTITUTE.items():
-        if data["pekerjaan_utama"] == old:
-            data["pekerjaan_utama"] = new
+    old_pekerjaan = data["pekerjaan_utama"]
+    if old_pekerjaan in SUBTITUTE:
+        data["pekerjaan_utama"] = SUBTITUTE[old_pekerjaan]
     return data
