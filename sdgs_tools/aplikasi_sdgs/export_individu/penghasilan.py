@@ -59,7 +59,7 @@ def get_data_penghasilan(d: Device) -> List[Dict[str, Any]]:
         data: Dict[str, Any] = dict()
         for name, resourceId_lstrip in PENGHASILAN_COL.items():
             data[name] = get_text(box_penghasilan, *resourceId_lstrip)
-        old_pekerjaan = data["pekerjaan_utama"]
+        old_pekerjaan = data["sumber_penghasilan"]
         if old_pekerjaan in SUBTITUTE:
             data["pekerjaan_utama"] = SUBTITUTE[old_pekerjaan]
         results.append(data)
