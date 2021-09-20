@@ -5,18 +5,19 @@ from sdgs_tools.aplikasi_sdgs.utils import d_get_text, menu_to, swipe_box
 
 AKSES_PENDIDIKAN = {
     "PAUD": "paud",
-    "TK": "tk",
-    "SD": "sd",
-    "SMP": "smp",
-    "SMA": "sma",
-    "PT": "pt",
-    "PESANTREN": "pesantren",
-    "SEMINARI": "seminari",
-    "LAINNYA": "lainnya",
+    "TK/RA": "tk",
+    "SD/MI atau sederajat": "sd",
+    "SMP/MTs atau sederajat": "smp",
+    "SMA/MA atau sederajat": "sma",
+    "Perguruan Tinggi": "pt",
+    "Pesantren": "pesantren",
+    "Seminari": "seminari",
+    "Pendidikan Keagamaan Lain": "lainnya",
 }
 
 PENDIDIKAN_COL = {
     # "B": ("com.kemendes.survey:id/txtNIK", ""),
+    "nama": ("com.kemendes.survey:id/txtNIK", ""),
     "jarak": ("com.kemendes.survey:id/txtNama", "Jarak : "),
     "waktu": ("com.kemendes.survey:id/txtAlamat", "Waktu Tempuh :"),
     "kemudahan": ("com.kemendes.survey:id/txtTelpon", "Kemudahan :"),
@@ -43,7 +44,6 @@ def get_data_pendidikan(d: Device) -> Dict[str, Dict[str, Any]]:
             if isinstance(value, str):
                 data[name] = value.lstrip(lstrp)
         swipe_box(d, survey_box)
-        # TODO Find The Key
         pend: str = data["nama"]
         pendidikan[AKSES_PENDIDIKAN[pend]] = data
     d(className="android.widget.ScrollView").fling.vert.backward()
