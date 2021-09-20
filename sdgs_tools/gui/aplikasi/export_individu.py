@@ -1,8 +1,10 @@
 import tkinter as tk
 from tkinter.filedialog import askopenfilename
 from tkinter.messagebox import showerror, showinfo, showwarning
+from uiautomator2 import connect
 
-from sdgs_tools.aplikasi_sdgs.export import export_individu as _export_individu
+from sdgs_tools.utils import parse_range
+from sdgs_tools.aplikasi_sdgs.export_individu import export_individu as _export_individu
 
 
 class ExportIndividuWindow(tk.Toplevel):
@@ -117,10 +119,10 @@ class ExportIndividuWindow(tk.Toplevel):
             return
         try:
             _export_individu(
+                d=connect(),
                 filepath=filepath,
-                ranges=self.baris.get(),
-                row_penghasilan=2,
-                row_start=2,
+                rows=parse_range(self.baris.get()),
+                start_row_penghasilan=2,
                 skip_individu=not self.individu.get(),
                 skip_pekerjaan=not self.pekerjaan.get(),
                 skip_penghasilan=not self.penghasilan.get(),
