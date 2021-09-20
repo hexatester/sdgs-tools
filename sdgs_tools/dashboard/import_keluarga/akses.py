@@ -43,3 +43,8 @@ class Akses:
             data["waktu"] = str(round(waktu, 4))
         data["kemudahan"] = self.kemudahan.value
         return data
+
+    def save(self, ws: Worksheet, row: int, j: str, w: str, k: str):
+        ws[f"{j}{row}"] = self.jarak
+        ws[f"{w}{row}"] = self.waktu
+        ws[f"{k}{row}"] = self.kemudahan.value
