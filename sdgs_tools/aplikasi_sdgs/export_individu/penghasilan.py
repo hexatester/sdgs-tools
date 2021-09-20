@@ -59,9 +59,9 @@ def get_data_penghasilan(d: Device) -> List[Dict[str, Any]]:
         data: Dict[str, Any] = dict()
         for name, resourceId_lstrip in PENGHASILAN_COL.items():
             data[name] = get_text(box_penghasilan, *resourceId_lstrip)
-        for old, new in SUBTITUTE.items():
-            if data["pekerjaan_utama"] == old:
-                data["pekerjaan_utama"] = new
+        old_pekerjaan = data["pekerjaan_utama"]
+        if old_pekerjaan in SUBTITUTE:
+            data["pekerjaan_utama"] = SUBTITUTE[old_pekerjaan]
         results.append(data)
     d(className="android.widget.ScrollView").fling.vert.backward()
     return results
