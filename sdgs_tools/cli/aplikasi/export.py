@@ -1,10 +1,13 @@
 import click
+from uiautomator2 import connect
 
-from sdgs_tools.aplikasi_sdgs.export import export_individu as _export_individu
+from sdgs_tools.utils import parse_range
+from sdgs_tools.aplikasi_sdgs.export_individu import export_individu as _export_individu
 from sdgs_tools.aplikasi_sdgs.export import export_keluarga as _export_keluarga
 
 
 @click.command("export-individu")
+@click.option("--rt-rw", type=str, help="RT/RW")
 @click.option("--ranges", type=str, help='Baris yang diambil datanya misal "2-100"')
 @click.option(
     "--baris-penghasilan",
@@ -25,6 +28,7 @@ from sdgs_tools.aplikasi_sdgs.export import export_keluarga as _export_keluarga
 )
 def export_individu(
     nama_file: str,
+    rt_rw: str,
     ranges: str = None,
     baris_penghasilan: int = 2,
     individu: bool = True,
@@ -36,10 +40,11 @@ def export_individu(
 ):
     try:
         _export_individu(
+            d=connect(),
             filepath=nama_file,
-            ranges=ranges,
-            row_penghasilan=baris_penghasilan,
-            row_start=2,
+            rt_rw=rt_rw,
+            rows=parse_range(ranges),
+            start_row_penghasilan=baris_penghasilan,
             skip_individu=not individu,
             skip_pekerjaan=not pekerjaan,
             skip_penghasilan=not pengasilan,
