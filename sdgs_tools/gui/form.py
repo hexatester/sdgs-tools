@@ -24,3 +24,6 @@ class TextForm:
 
     def __str__(self):
         return self.value.get()
+
+    def get(self):
+        return self.value.get()
