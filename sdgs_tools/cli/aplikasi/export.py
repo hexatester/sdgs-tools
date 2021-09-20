@@ -3,7 +3,7 @@ from uiautomator2 import connect
 
 from sdgs_tools.utils import parse_range
 from sdgs_tools.aplikasi_sdgs.export_individu import export_individu as _export_individu
-from sdgs_tools.aplikasi_sdgs.export import export_keluarga as _export_keluarga
+from sdgs_tools.aplikasi_sdgs.export_keluarga import export_keluarga as _export_keluarga
 
 
 @click.command("export-individu")
@@ -59,13 +59,10 @@ def export_individu(
 
 
 @click.command("export-keluarga")
+@click.option("--rt-rw", type=str, help="RT/RW")
 @click.option(
     "--ranges", type=str, required=True, help='Baris yang diambil datanya misal "2-100"'
 )
-@click.option("--baris-pendidikan", type=int, default=2)
-@click.option("--baris-kesehatan", type=int, default=2)
-@click.option("--baris-tenaga_kesehatan", type=int, default=2)
-@click.option("--baris-sarpras", type=int, default=2)
 @click.option("--lokasi/--no-lokasi", default=True)
 @click.option("--pendidikan/--no-pendidikan", default=True)
 @click.option("--kesehatan/--no-kesehatan", default=True)
@@ -79,11 +76,8 @@ def export_individu(
 )
 def export_keluarga(
     nama_file: str,
+    rt_rw: str,
     ranges: str,
-    baris_pendidikan: int = 2,
-    baris_kesehatan: int = 2,
-    baris_tenaga_kesehatan: int = 2,
-    baris_sarpras: int = 2,
     lokasi: bool = True,
     pendidikan: bool = True,
     kesehatan: bool = True,
@@ -93,12 +87,9 @@ def export_keluarga(
 ):
     try:
         _export_keluarga(
+            d=connect(),
             filepath=nama_file,
-            ranges=ranges,
-            row_pendidikan=baris_pendidikan,
-            row_kesehatan=baris_kesehatan,
-            row_tenaga_kesehatan=baris_tenaga_kesehatan,
-            row_sarpras=baris_sarpras,
+            rows=parse_range(ranges),
             skip_lokasi=not lokasi,
             skip_pendidikan=not pendidikan,
             skip_kesehatan=not kesehatan,
