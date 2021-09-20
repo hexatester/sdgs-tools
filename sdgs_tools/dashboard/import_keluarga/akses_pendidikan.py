@@ -55,3 +55,8 @@ class AksesPendidikan:
         for name, args in MAPPING_VALUE.items():
             data[name] = Akses.from_cols(ws, row, *args)
         return data
+
+    def save(self, ws: Worksheet, row: int):
+        for name, args in MAPPING_VALUE.items():
+            akses: Akses = getattr(self, name)
+            akses.save(ws, row, *args)
