@@ -27,7 +27,7 @@ __all__ = [
 
 
 def get_param(
-    ws: Worksheet, row: int, kk: str = "rt_rw", nik: str = "nik"
+    ws: Worksheet, row: int, kk: str = "no_kk", nik: str = "nik"
 ) -> Tuple[str, str]:
     kk_col = MAPPING_COLS[kk]
     nik_col = MAPPING_COLS[nik]
