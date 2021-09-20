@@ -68,12 +68,12 @@ def export_keluarga(
         if not skip_lokasi:
             data.update(get_data_lokasi(d))
         if not skip_kesehatan:
-            pass
+            data["akses_fasilitas_kesehatan"] = get_data_kesehatan(d)
         if not skip_tenaga_kesehatan:
-            pass
+            data["akses_tenaga_kesehatan"] = get_data_tenaga_kesehatan(d)
         if not skip_sarpras:
-            pass
+            data["akses_sarpras_transport"] = get_data_sarpras(d)
         if not skip_lain_lain:
-            pass
+            data.update(get_data_lain_lain(d))
         keluarga: DataKeluarga = cattr.structure(data, DataKeluarga)
-        # TODO SAVE!
+        keluarga.save(keluarga, row)
