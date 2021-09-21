@@ -11,8 +11,8 @@ KELUARGA_COL = {
     "nik": "com.kemendes.survey:id/txtNIKKepalaKeluarga",
     "tempat_tinggal": "com.kemendes.survey:id/cbTempatTinggal",
     "status_lahan": "com.kemendes.survey:id/cbStatusLahan",
-    "lantai": "com.kemendes.survey:id/txtLuasLantaiTempatTinggal",
-    "lahan": "com.kemendes.survey:id/txtLuasLahanTempatTinggal",
+    "luas_lantai": "com.kemendes.survey:id/txtLuasLantaiTempatTinggal",
+    "luas_lahan": "com.kemendes.survey:id/txtLuasLahanTempatTinggal",
     "lantai": "com.kemendes.survey:id/cbJenisLantai",
     "dinding": "com.kemendes.survey:id/cbDinding",
     "jendela": "com.kemendes.survey:id/cbJendela",
@@ -37,6 +37,10 @@ def get_data_lokasi(d: Device) -> Dict[str, Any]:
     data: Dict[str, Any] = dict()
     for name, resourceId in KELUARGA_COL.items():
         data[name] = d_get_text(d, resourceId)
-    data["luas"] = {"lantai": data.pop("lantai"), "lahan": data.pop("lahan")}
+    data["luas"] = {
+        "lantai": data.pop("luas_lantai"),
+        "lahan": data.pop("luas_lahan"),
+    }
     d(className="android.widget.ScrollView").fling.vert.backward()
+    data["kumuh"] = "Ya" if data["kumuh"] == "Kumuh" else "Tidak"
     return data
