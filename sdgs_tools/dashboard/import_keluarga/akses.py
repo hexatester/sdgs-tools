@@ -51,4 +51,4 @@ class Akses:
         if self.waktu is not None:
             ws[f"{w}{row}"] = self.waktu
         if self.kemudahan is not None:
-            ws[f"{k}{row}"] = self.kemudahan.value
+            ws[f"{k}{row}"] = str(self.kemudahan)
