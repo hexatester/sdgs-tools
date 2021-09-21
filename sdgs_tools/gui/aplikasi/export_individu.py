@@ -51,6 +51,7 @@ class ExportIndividuWindow(tk.Toplevel):
 
     def export(self):
         files = [
+            ("Excel 2010+", "*.xlsx"),
             ("Excel + Macro", "*.xlsm"),
         ]
         filepath = askopenfilename(filetypes=files, defaultextension=files)
