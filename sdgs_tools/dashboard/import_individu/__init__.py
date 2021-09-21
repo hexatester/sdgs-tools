@@ -76,9 +76,9 @@ def import_individu(
             trying += 1
             res = sdgs.save_individu(individu=individu, rt=rt, rw=rw)
             if not res:
-                click.echo(f"Gagal menyimpan individu {nik} karena {res}")
+                click.echo(f"Gagal mengirim {individu} karena {res}")
             else:
-                click.echo(f"Berhasil mengirim data {nik}")
+                click.echo(f"Berhasil mengirim {individu}")
                 success += 1
         except Exception as e:
             faileds.append(str(row))
