@@ -6,6 +6,7 @@ MAPPING = {
     "Tidak": "2",
     "Mudah": "1",
     "Susah": "2",
+    "Sulit": "2",
 }
 
 
