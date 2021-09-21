@@ -32,15 +32,15 @@ MAPPING_VALUE = {
 
 @attr.dataclass
 class AksesPendidikan:
-    paud: Akses
-    tk: Akses
-    sd: Akses
-    smp: Akses
-    sma: Akses
-    pt: Akses
-    pesantren: Akses
-    seminari: Akses
-    lainnya: Akses
+    paud: Akses = attr.field(default=attr.Factory(Akses))
+    tk: Akses = attr.field(default=attr.Factory(Akses))
+    sd: Akses = attr.field(default=attr.Factory(Akses))
+    smp: Akses = attr.field(default=attr.Factory(Akses))
+    sma: Akses = attr.field(default=attr.Factory(Akses))
+    pt: Akses = attr.field(default=attr.Factory(Akses))
+    pesantren: Akses = attr.field(default=attr.Factory(Akses))
+    seminari: Akses = attr.field(default=attr.Factory(Akses))
+    lainnya: Akses = attr.field(default=attr.Factory(Akses))
 
     def todict(self) -> Dict[str, Dict[str, str]]:
         data: Dict[str, Dict[str, str]] = dict()

@@ -24,11 +24,11 @@ MAPPING_VALUE = {
 
 @attr.dataclass
 class AksesTenagaKesehatan:
-    spesialis: Akses
-    dokter: Akses
-    bidan: Akses
-    nakes: Akses
-    dukun: Akses
+    spesialis: Akses = attr.field(default=attr.Factory(Akses))
+    dokter: Akses = attr.field(default=attr.Factory(Akses))
+    bidan: Akses = attr.field(default=attr.Factory(Akses))
+    nakes: Akses = attr.field(default=attr.Factory(Akses))
+    dukun: Akses = attr.field(default=attr.Factory(Akses))
 
     def todict(self) -> Dict[str, Dict[str, str]]:
         data: Dict[str, Dict[str, str]] = dict()
