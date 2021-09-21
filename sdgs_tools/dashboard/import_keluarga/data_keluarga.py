@@ -43,7 +43,7 @@ class DataKeluarga:
     alamat: str
     nomor_hp: str
     telepon_rumah: str
-    anggota_keluarga: str
+    anggota_keluarga: Optional[str] = None
     tempat_tinggal: TempatTinggal
     tempat_tinggal_comment: Optional[str] = None
     status_lahan: StatusLahan
