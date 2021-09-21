@@ -65,7 +65,7 @@ class BantuanPemerintah:
 
     @classmethod
     def from_dict(cls, val: Dict[str, str]) -> "BantuanPemerintah":
-        data: Dict[str, YaTidak]
+        data: Dict[str, YaTidak] = dict()
         for name, value in val.items():
             if value == "Ya":
                 data[name] = YaTidak.YA
