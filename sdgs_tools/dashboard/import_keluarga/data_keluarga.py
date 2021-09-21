@@ -87,6 +87,9 @@ class DataKeluarga:
     penerima_program_pemerintah: BantuanPemerintah
     pengeluaran_bulanan: str = "0"
 
+    def __str__(self):
+        return f"{self.nama} ({self.no_kk})"
+
     def __attrs_post_init__(self) -> None:
         if self.no_kk in (None, "None"):
             raise ValueError("Nomor KK harus diisi")
