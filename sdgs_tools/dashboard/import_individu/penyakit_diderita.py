@@ -1,7 +1,9 @@
 import attr
-from typing import Dict, Optional
+from openpyxl.worksheet.worksheet import Worksheet
+from typing import Dict, List, Optional
 
 from .enums import YaTidak
+from .mapping import MAPPING_COLS
 
 
 MAPPING = {
@@ -77,11 +79,34 @@ class PenyakitDiderita:
     @classmethod
     def from_str(cls, value: Optional[str], t=None):
         if not value:
-            return attr.asdict(cls())
+            return cls()
+        elif isinstance(value, dict):
+            return cls.from_dict(value)
         data: Dict[str, YaTidak] = dict()
         for key, name in MAPPING.items():
             if value in key:
                 data[name] = YaTidak.YA
             else:
                 data[name] = YaTidak.TIDAK
-        return data
+        return cls(**data)
+
+    @classmethod
+    def from_dict(cls, val: Dict[str, str]):
+        data: Dict[str, YaTidak] = dict()
+        for name, value in val.items():
+            if value == "Ya":
+                data[name] = YaTidak.YA
+            else:
+                data[name] = YaTidak.TIDAK
+        return cls(**data)
+
+    def save(self, ws: Worksheet, row: int):
+        results: List[str] = list()
+        for key, name in MAPPING.items():
+            value = getattr(self, name)
+            if value == "Ya":
+                results.append(key)
+        if not results:
+            return
+        col: str = MAPPING_COLS["penyakit_diderita"]
+        ws[f"{col}{row}"] = ", ".join(results)
