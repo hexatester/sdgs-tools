@@ -177,18 +177,28 @@ class DataIndividu:
         penghasilan_ws: str = "Penghasilan",
     ) -> int:
         individu: Worksheet = wb[individu_ws]
-        for name, col in MAPPING_COLS.items():
+        MAPPING = dict(MAPPING_COLS)
+        MAPPING.pop("penyakit_diderita")
+        for name, col in MAPPING.items():
             value = getattr(self, name)
             if value is None:
                 continue
             if isinstance(value, Enum):
                 value = str(value)
             individu[f"{col}{row_individu}"] = value
+        if self.penghasilan:
+            end = row_penghasilan + len(self.penghasilan) - 1
+            if row_penghasilan == end:
+                individu[f"Z{row_individu}"] = row_individu
+            else:
+                baris_penghasilan = f"{row_penghasilan}-{end}"
+                individu[f"Z{row_individu}"] = baris_penghasilan
         for penghasilan in self.penghasilan:
             if not penghasilan:
                 continue
             penghasilan.save(wb[penghasilan_ws], row_penghasilan)
             row_penghasilan += 1
         self.fasilitas_kesehatan.save(individu, row_individu)
+        self.penyakit_diderita.save(individu, row_individu)
         individu[f"AT{row_individu}"] = str(self.disabilitas)
         return row_penghasilan
