@@ -47,9 +47,12 @@ def export_keluarga(
             "Mohon aktifkan GPS, buka aplikasi, dan masuk menu Entri Survey Keluarga!"
         )
         sleep(1)
+    skipped = 0
+    failed = 0
+    success = 0
     no_kk_col: str = MAPPING_COLS["no_kk"]
     for row in rows:
-        no_kk = keluarga_ws[f"{no_kk_col}{row}"].values
+        no_kk = keluarga_ws[f"{no_kk_col}{row}"].value
         if not no_kk:
             click.echo(f"Kolom nomor kk kosong di baris {row}, membatalkan operasi")
             return False
@@ -64,9 +67,11 @@ def export_keluarga(
         if not d(resourceId="com.kemendes.survey:id/txtNama").info.get("text"):
             click.echo(f"Lewati data kosong untuk rtrw {rt_rw} no kk {no_kk}")
             return False
-        data: Dict[str, Any] = dict()
+        data: Dict[str, Any] = {"no_kk": no_kk}
         if not skip_lokasi:
             data.update(get_data_lokasi(d))
+        if not skip_pendidikan:
+            data["akses_pendidikan"] = get_data_pendidikan(d)
         if not skip_kesehatan:
             data["akses_fasilitas_kesehatan"] = get_data_kesehatan(d)
         if not skip_tenaga_kesehatan:
@@ -75,5 +80,17 @@ def export_keluarga(
             data["akses_sarpras_transport"] = get_data_sarpras(d)
         if not skip_lain_lain:
             data.update(get_data_lain_lain(d))
-        keluarga: DataKeluarga = cattr.structure(data, DataKeluarga)
-        keluarga.save(keluarga, row)
+        try:
+            keluarga: DataKeluarga = cattr.structure(data, DataKeluarga)
+            keluarga.save(keluarga_ws, row)
+            click.echo(f"Berhasil mengekspor baris {row} : {keluarga}")
+            success += 1
+        except ValueError as e:
+            click.echo(f"Baris {row} dilewati karena : {e}")
+            skipped += 1
+            continue
+        except Exception as e:
+            click.echo(f"Error ketika membuat DataKeluarga baris {row} : {e}")
+            failed += 1
+            continue
+    wb.save(filepath)

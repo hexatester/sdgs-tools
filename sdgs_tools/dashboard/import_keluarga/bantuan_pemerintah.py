@@ -53,9 +53,21 @@ class BantuanPemerintah:
     def from_str(cls, val: Optional[str], t=None) -> "BantuanPemerintah":
         if not val:
             return cls()
+        elif isinstance(val, dict):
+            return cls.from_dict(val)
         data: Dict[str, YaTidak] = dict()
         for key, name in MAPPING.items():
             if key in val:
+                data[name] = YaTidak.YA
+            else:
+                data[name] = YaTidak.TIDAK
+        return cls(**data)
+
+    @classmethod
+    def from_dict(cls, val: Dict[str, str]) -> "BantuanPemerintah":
+        data: Dict[str, YaTidak]
+        for name, value in val.items():
+            if value == "Ya":
                 data[name] = YaTidak.YA
             else:
                 data[name] = YaTidak.TIDAK
