@@ -10,9 +10,9 @@ def get_text(ui: UiObject) -> Optional[str]:
     return ui.info.get("text")
 
 
-def d_get_text(d: Device, resourceId: str):
+def d_get_text(d: Device, resourceId: str, scroll: bool = True):
     current = d(resourceId=resourceId)
-    if not current.exists:
+    if scroll and not current.exists:
         d.xpath("//android.widget.ScrollView").scroll()
     if resourceId.startswith("com.kemendes.survey:id/txt"):
         if not current.exists:
