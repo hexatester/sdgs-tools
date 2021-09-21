@@ -1,5 +1,6 @@
 from typing import Any, Dict
 from uiautomator2 import Device
+from uiautomator2.exceptions import UiObjectNotFoundError
 
 from sdgs_tools.aplikasi_sdgs.utils import d_get_text, menu_to
 
@@ -31,11 +32,11 @@ PENDIDIKAN_COL = {
     "menolong_sakit": "com.kemendes.survey:id/txtMenolongSakit",
     "menolong_kecelakaan": "com.kemendes.survey:id/txtMenolongKecelakaan",
     "memperoleh_pelayanan_desa": "com.kemendes.survey:id/cbPerolehPelayananDesa",
-    # pelayanan_desa?
+    "pelayanan_desa": "com.kemendes.survey:id/cbPelayananDesa",
     "saran_desa": "com.kemendes.survey:id/cbMasukan",
-    # keterbukaan_desa?
+    "keterbukaan_desa": "com.kemendes.survey:id/cbKeterbukaan",
     "terjadi_bencana": "com.kemendes.survey:id/cbBencana",
-    # terdampak_bencana?
+    "terdampak_bencana": "com.kemendes.survey:id/cbTerkenaBencana",
 }
 
 
@@ -44,7 +45,10 @@ def get_data_pendidikan(d: Device) -> Dict[str, Any]:
     data: Dict[str, Any] = dict()
     d(text="PENDIDIKAN").click()
     for name, resourceId in PENDIDIKAN_COL.items():
-        data[name] = d_get_text(d, resourceId)
+        try:
+            data[name] = d_get_text(d, resourceId)
+        except UiObjectNotFoundError:
+            pass
     d(className="android.widget.ScrollView").fling.vert.backward()
     data["pendidikan_tertinggi"] = PENDIDIKAN_SUBTITUTE[data["pendidikan_tertinggi"]]
     return data
