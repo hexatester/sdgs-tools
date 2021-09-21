@@ -180,7 +180,9 @@ class DataKeluarga:
         return clean_data
 
     def save(self, ws: Worksheet, row: int):
-        for name, col in MAPPING_COLS.items():
+        MAPPING = dict(MAPPING_COLS)
+        MAPPING.pop("penerima_program_pemerintah")
+        for name, col in MAPPING.items():
             value = getattr(self, name)
             if value is None:
                 continue
@@ -194,3 +196,4 @@ class DataKeluarga:
         self.akses_fasilitas_kesehatan.save(ws, row)
         self.akses_tenaga_kesehatan.save(ws, row)
         self.akses_sarpras_transport.save(ws, row)
+        ws[f"EL{row}"] = str(self.penerima_program_pemerintah)
