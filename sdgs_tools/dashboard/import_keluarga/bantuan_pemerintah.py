@@ -1,5 +1,5 @@
 import attr
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 
 from .enums import YaTidak
 
@@ -26,6 +26,16 @@ class BantuanPemerintah:
     bantuan_pekerja: YaTidak = YaTidak.TIDAK
     bantuan_pendidikan_anak: YaTidak = YaTidak.TIDAK
     lainnya: YaTidak = YaTidak.TIDAK
+
+    def __str__(self):
+        values: List[str] = list()
+        for key, name in MAPPING.items():
+            value = getattr(self, name)
+            if value == YaTidak.YA:
+                values.append(key)
+        if not values:
+            return ""
+        return ", ".join(values)
 
     def todict(self) -> Dict[str, str]:
         return {
