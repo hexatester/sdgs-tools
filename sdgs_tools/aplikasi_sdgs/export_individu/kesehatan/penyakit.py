@@ -1,6 +1,5 @@
 from uiautomator2 import Device, UiObject
-from openpyxl.worksheet.worksheet import Worksheet
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 from sdgs_tools.aplikasi_sdgs.utils import d_get_text, menu_to
 
