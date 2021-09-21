@@ -8,6 +8,7 @@ MAPPING = {
     "Sungai, danau, embung": "4",
     "Tadah air hujan ": "5",
     "Lainnya": "other",
+    "Ledeng/perpipaan berbayar/air isi ulang/kemasa": "1",
 }
 
 
