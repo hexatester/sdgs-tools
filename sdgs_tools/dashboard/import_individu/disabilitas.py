@@ -84,7 +84,8 @@ class Disabilitas:
             value = getattr(self, name)
             if value is None:
                 continue
-            values.append(key)
+            if value == YaTidak.YA:
+                values.append(key)
         if values:
             return ", ".join(values)
         return ""
