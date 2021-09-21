@@ -49,7 +49,7 @@ def get_data_sarpras(d: Device) -> Dict[str, Dict[str, Any]]:
         waktu_biaya = waktu_biaya.lstrip("Waktu Tempuh :")
         waktu_biaya = waktu_biaya.replace(", Biaya", "")
         waktu, biaya = waktu_biaya.split(":")
-        data["waktu"] = waktu.strip()
+        data["waktu"] = waktu.strip().rstrip(" jam")
         data["biaya"] = biaya.strip()
         swipe_box(d, survey_box)
         sarpras[AKSES_SARPRAS[nama]] = data
