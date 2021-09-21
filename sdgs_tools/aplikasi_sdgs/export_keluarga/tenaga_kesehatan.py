@@ -38,7 +38,7 @@ def get_data_tenaga_kesehatan(d: Device):
             if isinstance(value, str):
                 data[name] = value.lstrip(lstrp)
         swipe_box(d, survey_box)
-        key: str = data["nama"]
+        key: str = data.pop("nama")
         tenkes[AKSES_TENKES[key]] = data
     d(className="android.widget.ScrollView").fling.vert.backward()
     return tenkes

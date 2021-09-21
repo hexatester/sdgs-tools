@@ -44,7 +44,7 @@ def get_data_pendidikan(d: Device) -> Dict[str, Dict[str, Any]]:
             if isinstance(value, str):
                 data[name] = value.lstrip(lstrp)
         swipe_box(d, survey_box)
-        pend: str = data["nama"]
+        pend: str = data.pop("nama")
         pendidikan[AKSES_PENDIDIKAN[pend]] = data
     d(className="android.widget.ScrollView").fling.vert.backward()
     return pendidikan

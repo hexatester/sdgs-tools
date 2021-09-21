@@ -43,7 +43,7 @@ def get_data_kesehatan(d: Device) -> Dict[str, Dict[str, Any]]:
             if isinstance(value, str):
                 data[name] = value.lstrip(lstrp)
         swipe_box(d, survey_box)
-        key: str = data["nama"]
+        key: str = data.pop("nama")
         kesehatan[AKSES_KESEHATAN[key]] = data
     d(className="android.widget.ScrollView").fling.vert.backward()
     return kesehatan
