@@ -28,4 +28,8 @@ def get_data_pekerjaan(d: Device) -> Dict[str, Any]:
     old_pekerjaan = data["pekerjaan_utama"]
     if old_pekerjaan in SUBTITUTE:
         data["pekerjaan_utama"] = SUBTITUTE[old_pekerjaan]
+    if data["jamsos_ketenagakerjaan"] == "Peserta":
+        data["jamsos_ketenagakerjaan"] = "Ya"
+    else:
+        data["jamsos_ketenagakerjaan"] = "Tidak"
     return data
