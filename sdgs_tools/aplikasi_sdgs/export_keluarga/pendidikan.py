@@ -17,10 +17,10 @@ AKSES_PENDIDIKAN = {
 
 PENDIDIKAN_COL = {
     # "B": ("com.kemendes.survey:id/txtNIK", ""),
-    "nama": ("com.kemendes.survey:id/txtNIK", ""),
-    "jarak": ("com.kemendes.survey:id/txtNama", "Jarak : "),
-    "waktu": ("com.kemendes.survey:id/txtAlamat", "Waktu Tempuh :"),
-    "kemudahan": ("com.kemendes.survey:id/txtTelpon", "Kemudahan :"),
+    "nama": ("com.kemendes.survey:id/txtNIK", "", ""),
+    "jarak": ("com.kemendes.survey:id/txtNama", "Jarak : ", " km"),
+    "waktu": ("com.kemendes.survey:id/txtAlamat", "Waktu Tempuh :", " jam"),
+    "kemudahan": ("com.kemendes.survey:id/txtTelpon", "Kemudahan :", ""),
     # "F": ("com.kemendes.survey:id/txtStatus", ""),
 }
 
@@ -36,13 +36,14 @@ def get_data_pendidikan(d: Device) -> Dict[str, Dict[str, Any]]:
     )
     for survey_box in survey_boxes:
         data: Dict[str, Any] = dict()
-        for name, (resourceId, lstrp) in PENDIDIKAN_COL.items():
+        for name, (resourceId, lstrp, rstrp) in PENDIDIKAN_COL.items():
             current = survey_box.child(resourceId=resourceId)
             # if not current.exists:
             #     continue
             value: str = current.info.get("text")
             if isinstance(value, str):
-                data[name] = value.lstrip(lstrp)
+                value = value.lstrip(lstrp)
+                data[name] = value.rstrip(rstrp)
         swipe_box(d, survey_box)
         pend: str = data.pop("nama")
         pendidikan[AKSES_PENDIDIKAN[pend]] = data
