@@ -1,5 +1,5 @@
 from enum import Enum
-from sdgs_tools.dashboard.utils import make_str_to_enum
+from sdgs_tools.dashboard.utils import make_str_to_enum, make_dunder_str
 
 MAPPING = {
     "Ya": "1",
@@ -18,3 +18,4 @@ class YaTidak(Enum):
         return self.value == self.YA
 
     from_str = classmethod(make_str_to_enum(MAPPING, "2"))
+    __str__ = make_dunder_str(MAPPING)
