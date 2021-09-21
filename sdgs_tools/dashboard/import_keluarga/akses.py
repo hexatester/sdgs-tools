@@ -9,7 +9,7 @@ from .enums import YaTidak
 class Akses:
     jarak: Optional[float] = None
     waktu: Optional[float] = None
-    kemudahan: YaTidak = YaTidak.TIDAK
+    kemudahan: Optional[YaTidak] = None
 
     @staticmethod
     def from_cols(ws: Worksheet, row: int, j: str, w: str, k: str):
@@ -41,10 +41,14 @@ class Akses:
         elif isinstance(self.waktu, int):
             waktu = self.waktu / 60
             data["waktu"] = str(round(waktu, 4))
-        data["kemudahan"] = self.kemudahan.value
+        if self.kemudahan is not None:
+            data["kemudahan"] = self.kemudahan.value
         return data
 
     def save(self, ws: Worksheet, row: int, j: str, w: str, k: str):
-        ws[f"{j}{row}"] = self.jarak
-        ws[f"{w}{row}"] = self.waktu
-        ws[f"{k}{row}"] = self.kemudahan.value
+        if self.jarak is not None:
+            ws[f"{j}{row}"] = self.jarak
+        if self.waktu is not None:
+            ws[f"{w}{row}"] = self.waktu
+        if self.kemudahan is not None:
+            ws[f"{k}{row}"] = self.kemudahan.value
