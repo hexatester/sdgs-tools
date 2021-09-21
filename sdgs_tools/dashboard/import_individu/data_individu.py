@@ -88,6 +88,9 @@ class DataIndividu:
     terjadi_bencana: YaTidak
     terdampak_bencana: Optional[YaTidak] = None
 
+    def __str__(self):
+        return f"{self.nama} ({self.nik})"
+
     def __attrs_post_init(self):
         if self.status_pernikahan != StatusPernikahan.BELUM_KAWIN:
             raise ValueError("Mohon diisi status pernikahan")
