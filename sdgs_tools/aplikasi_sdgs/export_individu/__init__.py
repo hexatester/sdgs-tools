@@ -10,6 +10,7 @@ from sdgs_tools.aplikasi_sdgs.utils import menu_to
 from sdgs_tools.dashboard.import_individu import DataIndividu
 from sdgs_tools.dashboard.import_individu.mapping import MAPPING_COLS
 
+from .disabilitas import get_data_disabilitas
 from .individu import get_data_individu
 from .kesehatan import get_data_kesehatan
 from .pekerjaan import get_data_pekerjaan
@@ -18,6 +19,7 @@ from .penghasilan import get_data_penghasilan
 
 
 __all__ = [
+    "get_data_disabilitas",
     "get_data_individu",
     "get_data_kesehatan",
     "get_data_pekerjaan",
@@ -72,7 +74,7 @@ def export_individu(
         d(resourceId="com.kemendes.survey:id/btnCariRT").click()
         menu_to(d, "DATA INDIVIDU")
         # Get Data
-        data: Dict[str, Any] = dict()
+        data: Dict[str, Any] = {"no_kk": no_kk, "nik": nik}
         # Individu
         if not skip_individu:
             data.update(get_data_individu(d))
@@ -85,18 +87,23 @@ def export_individu(
         # Kesehatan
         if not skip_kesehatan:
             data.update(get_data_kesehatan(d))
+        # Disabilitas
+        if not skip_disabilitas:
+            data["disabilitas"] = get_data_disabilitas(d)
         # Pendidikan
         if not skip_pendidikan:
             data.update(get_data_pendidikan(d))
         try:
             individu: DataIndividu = cattr.structure(data, DataIndividu)
             row_penghasilan = individu.save(wb, row, row_penghasilan)
+            click.echo(f"Berhasil mengekspor baris {row} : {individu}")
             success += 1
         except ValueError as e:
             click.echo(f"Baris {row} dilewati karena : {e}")
             skipped += 1
             continue
         except Exception as e:
-            click.echo(f"Error ketika membuat DataKeluarga baris {row} : {e}")
+            click.echo(f"Error ketika membuat DataIndividu baris {row} : {e}")
             failed += 1
             continue
+    wb.save(filepath)
