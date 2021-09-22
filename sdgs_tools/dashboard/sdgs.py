@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 
 from .auth import BaseAuth
 from .import_individu import DataIndividu
@@ -53,6 +53,18 @@ class Sdgs(BaseAuth):
         json_data = {"jsonResult": data_keluarga}
         res = self.api_post_raw(
             filename="surveyKeluarga/save",
+            cl=str,
+            json=json_data,
+        )
+        return res
+
+    def update_individu(
+        self, id_individu: Union[str, int], individu: DataIndividu, rt: str, rw: str
+    ):
+        data_individu = individu.make_data(desa=self.token.wilayah, rt=rt, rw=rw)
+        json_data = {"id": id_individu, "jsonResult": data_individu}
+        res = self.api_post_raw(
+            filename="surveyIndividu/update",
             cl=str,
             json=json_data,
         )
