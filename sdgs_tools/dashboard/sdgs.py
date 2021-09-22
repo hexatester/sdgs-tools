@@ -69,3 +69,25 @@ class Sdgs(BaseAuth):
             json=json_data,
         )
         return res
+
+    def get_individu(
+        self,
+        search: str = "",
+        page: int = 1,
+        pageSize: int = 10,
+        kodeDesa: str = None,
+        isSortAsc: bool = True,
+    ):
+        json_data = {
+            "search": search,
+            "page": page,
+            "pageSize": pageSize,
+            "kodeDesa": kodeDesa,
+            "isSortAsc": isSortAsc,
+        }
+        res = self.api_post_raw(
+            filename="surveyIndividu/getSurveyPagedData",
+            cl=str,
+            json=json_data,
+        )
+        return res
