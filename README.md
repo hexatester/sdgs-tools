@@ -3,7 +3,6 @@
 [![sdgs-tools - PyPi](https://img.shields.io/pypi/v/sdgs-tools)](https://pypi.org/project/sdgs-tools/)
 [![Supported Python versions](https://img.shields.io/pypi/pyversions/sdgs-tools)](https://pypi.org/project/sdgs-tools/)
 [![Donate Saweria](https://img.shields.io/badge/Donasi-Saweria-blue)](https://saweria.co/hexatester)
-[![Cara Penggunaan](https://img.shields.io/badge/Cara-Penggunaan-blue)](https://hexatester.github.io/sdgs-tools/)
 [![LISENSI](https://img.shields.io/github/license/hexatester/sdgs-tools)](https://github.com/hexatester/sdgs-tools/blob/main/LICENSE)
 
 sdgs-tools adalah alat bantu pendataan SDGs Kemendesa buatan [Habib Rohman](https://github.com/hexatester)
@@ -17,12 +16,19 @@ Jika Anda merasa terbantu dengan kreasi saya, Anda dapat melakukan donasi di <ht
 
 - [SDGs Tools](#sdgs-tools)
   - [Daftar Isi](#daftar-isi)
+  - [Video Tutorial](#video-tutorial)
   - [Download](#download)
   - [Fungsi](#fungsi)
     - [Memasukkan data individu dari excel](#memasukkan-data-individu-dari-excel)
     - [Memasukkan data keluarga dari excel](#memasukkan-data-keluarga-dari-excel)
     - [Mengeluarkan data individu dari aplikasi sdgs android](#mengeluarkan-data-individu-dari-aplikasi-sdgs-android)
     - [Mengeluarkan data keluarga dari aplikasi sdgs android](#mengeluarkan-data-keluarga-dari-aplikasi-sdgs-android)
+
+## Video Tutorial
+
+[![Import Dashboard SDGs](docs/img/Import-Individu-SDGs-Tools.png)](https://www.youtube.com/watch?v=rXU0YYDwNj0 "Memasukkan Data Excel ke Dashboard SDGs Kemendesa")
+
+[Memasukkan Data Excel ke Dashboard SDGs Kemendesa](https://www.youtube.com/watch?v=rXU0YYDwNj0)
 
 ## Download
 
