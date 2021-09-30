@@ -6,6 +6,7 @@ from typing import List, Optional, TYPE_CHECKING
 if TYPE_CHECKING:
     from sdgs_tools.dashboard.sdgs import Sdgs
 
+from sdgs_tools.dashboard.edit_individu import edit_individu
 
 from .disabilitas import Disabilitas
 from .fasilitas_kesehatan import FasilitasKesehatan
@@ -38,6 +39,7 @@ def import_individu(
     rows: List[int],
     rt: str,
     rw: str,
+    edit: bool = False,
 ):
     click.echo(f"Membuka {filepath}")
     wb = load_workbook(filepath, read_only=True)
@@ -55,6 +57,12 @@ def import_individu(
         if not sdgs.token.token.is_valid():
             sdgs.token = sdgs.token_refresh(sdgs.token)
         if not sdgs.validateNik(nik):
+            if edit:
+                data = DataIndividu.make(wb, row)
+                edit_individu(
+                    sdgs=sdgs,
+                    individu=cattr.structure(data, DataIndividu),
+                )
             click.echo(f"NIK {nik} sudah diinput, melewati baris {row} ...")
             skipped += 1
             continue
