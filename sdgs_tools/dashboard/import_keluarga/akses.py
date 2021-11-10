@@ -29,7 +29,8 @@ class Akses:
             if self.waktu == 0:
                 data["jarak"] = "0"
             else:
-                data["jarak"] = str(self.jarak)
+                jarak = self.jarak / 1000
+                data["jarak"] = str(round(jarak, 4))
         elif isinstance(self.jarak, int):
             data["jarak"] = str(self.jarak)
         if isinstance(self.waktu, float):
