@@ -46,7 +46,7 @@ def isequal(a: Any, b: str) -> bool:
 def make_str_to_enum(mapping: Dict[str, Any], default_value: Union[str, int] = "1"):
     def str_to_enum(cls: Type[E], val: Union[str, int], t: Type[E] = None) -> E:
         if val is None:
-            click.echo(f"Kolom kosong, akan diisi {cls(default_value)}")
+            click.echo(f"Kolom kosong, {cls.__name__} akan diisi {cls(default_value)}")
             return cls(default_value)
         elif isinstance(val, int):
             try:
@@ -57,7 +57,8 @@ def make_str_to_enum(mapping: Dict[str, Any], default_value: Union[str, int] = "
             if isequal(val, key):
                 return cls(enum_val)
         click.echo(
-            f"Isian tidak cocok dengan Referensi : {val}! Akan diisi {cls(default_value)}!"
+            f"Isian tidak cocok dengan Referensi : {val}! "
+            f"{cls.__name__} akan diisi {cls(default_value)}!"
         )
         return cls(default_value)
 
