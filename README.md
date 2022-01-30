@@ -33,7 +33,7 @@ Jika Anda merasa terbantu dengan kreasi saya, Anda dapat melakukan donasi di <ht
 
 ## Download
 
-Download aplikasi sdgs-tools.exe [klik di sini](https://github.com/hexatester/sdgs-tools/releases/download/v0.8.2/sdgs-tools.exe)
+Download aplikasi sdgs-tools.exe [klik di sini](https://github.com/hexatester/sdgs-tools/releases/download/v0.8.3/sdgs-tools.exe)
 
 ## Fungsi
 
@@ -45,7 +45,7 @@ Download aplikasi sdgs-tools.exe [klik di sini](https://github.com/hexatester/sd
 ### Memasukan data individu dari excel ke dashboard-sdgs
 
 1. [Download aplikasi](#download)
-2. Downlaod [template individu dashboard](https://github.com/hexatester/sdgs-tools/releases/download/v0.8.2/Template_Individu-Import-Dashboard_SDGS.xlsm)
+2. Downlaod [template individu dashboard](https://github.com/hexatester/sdgs-tools/releases/download/v0.8.3/Template_Individu-Import-Dashboard_SDGS.xlsm)
 3. Salin dan rubah nama file template tersebut sesuai dengan RT / RW.
 4. Isi masing-masing file dengan data sesuai dengan RT / RW, pengisian dapat dilakukan secara offline.
 5. Jika data sudah siap, sambungkan PC / Laptop ke internet dan buka aplikasi `sdgs-tools.exe`
@@ -63,7 +63,7 @@ Ketika melakukan pengisian template sebaiknya menggunakan microsoft excel di pc 
 ### Memasukan data keluarga dari excel ke dashboard-sdgs
 
 1. [Download aplikasi](#download)
-2. Downlaod [template keluarga dashboard](https://github.com/hexatester/sdgs-tools/releases/download/v0.8.2/Template_Keluarga-Import-Dashboard_SDGS.xlsm)
+2. Downlaod [template keluarga dashboard](https://github.com/hexatester/sdgs-tools/releases/download/v0.8.3/Template_Keluarga-Import-Dashboard_SDGS.xlsm)
 3. Salin dan rubah nama file template tersebut sesuai dengan RT / RW.
 4. Isi masing-masing file dengan data sesuai dengan RT / RW, pengisian dapat dilakukan secara offline.
 5. Jika data sudah siap, sambungkan PC / Laptop ke internet dan buka aplikasi `sdgs-tools.exe`
